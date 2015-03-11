@@ -1,3 +1,2 @@
 before_build:
-- cd Xml2Markdown
-- nuget restore
+- nuget restore Xml2Markdown\Xml2Markdown.sln
