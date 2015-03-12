@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Xml2Markdown
+namespace Gesetzesentwicklung.Markdown
 {
-    class MarkdownGenerator
+    public class MarkdownGenerator
     {
         public string InputFile { get; private set; }
         public string OutputFolder { get; private set; }
@@ -17,7 +17,7 @@ namespace Xml2Markdown
             this.OutputFolder = outputFolder;
         }
 
-        internal void buildMarkdown()
+        public void buildMarkdown()
         {
             throw new NotImplementedException();
         }

@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Xml2Markdown.Tests</RootNamespace>
     <AssemblyName>Xml2Markdown.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -55,6 +56,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Gesetzesentwicklung.GII\Gesetzesentwicklung.GII.csproj">
+      <Project>{add3f50e-9eb1-48a0-afae-436455c68acd}</Project>
+      <Name>Gesetzesentwicklung.GII</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Gesetzesentwicklung.Models\Gesetzesentwicklung.Models.csproj">
+      <Project>{73252edc-8549-4a75-aa6d-4b24d0ea9158}</Project>
+      <Name>Gesetzesentwicklung.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

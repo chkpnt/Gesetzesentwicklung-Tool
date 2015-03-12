@@ -1,15 +1,15 @@
-﻿using System;
+﻿using Gesetzesentwicklung.GII;
+using Gesetzesentwicklung.Markdown;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Serialization;
-using Xml2Markdown.Models;
 
-namespace Xml2Markdown
+namespace Gesetzesentwicklung.CLI
 {
-    class Xml2Markdown
+    class Program
     {
         static void Main(string[] args)
         {
@@ -22,7 +22,8 @@ namespace Xml2Markdown
             var inputFile = args[1];
             var outputFolder = args[2];
 
-            if (! File.Exists(inputFile)) {
+            if (!File.Exists(inputFile))
+            {
                 DisplayHelp();
                 Console.WriteLine(string.Format("File not found: {0}", inputFile));
                 Environment.Exit(1);

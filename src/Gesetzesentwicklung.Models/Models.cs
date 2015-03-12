@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Xml2Markdown.Models
+namespace Gesetzesentwicklung.Models
 {
     public class Gesetz
     {

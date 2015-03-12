@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Xml2Markdown.Models;
+using Gesetzesentwicklung.Models;
 
-namespace Xml2Markdown
+namespace Gesetzesentwicklung.GII
 {
-    class ModelConverter
+    public class ModelConverter
     {
         enum XmlNormenTyp
         {
@@ -16,7 +16,7 @@ namespace Xml2Markdown
             Gesetzesname
         }
 
-        internal Gesetz Convert(XmlGesetz xmlGesetz)
+        public Gesetz Convert(XmlGesetz xmlGesetz)
         {
             var artikel = convertNormen2Artikel(xmlGesetz.Normen);
 

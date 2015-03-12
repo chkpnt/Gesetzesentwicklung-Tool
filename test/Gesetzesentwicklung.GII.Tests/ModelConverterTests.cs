@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Xml2Markdown.Models;
+using Gesetzesentwicklung.Models;
 
-namespace Xml2Markdown.Tests
+namespace Gesetzesentwicklung.GII.Tests
 {
     [TestFixture]
     class ModelConverterTests

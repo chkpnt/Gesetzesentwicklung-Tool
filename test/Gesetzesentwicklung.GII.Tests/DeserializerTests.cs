@@ -6,9 +6,10 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
-using Xml2Markdown.Models;
+using Gesetzesentwicklung.Models;
+using Gesetzesentwicklung.GII;
 
-namespace Xml2Markdown.Tests
+namespace Gesetzesentwicklung.Tests
 {
     [TestFixture]
     public class DeserializerTests

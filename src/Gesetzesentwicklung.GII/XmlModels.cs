@@ -7,7 +7,7 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
-namespace Xml2Markdown.Models
+namespace Gesetzesentwicklung.GII
 {
     [XmlRoot("dokumente")]
     public class XmlGesetz
@@ -69,14 +69,5 @@ namespace Xml2Markdown.Models
                 throw new NotImplementedException();
             }
         }
-
-        
-        //public class Text
-        //{
-        //    [XmlElement("Content")]
-        //    public string Content;
-        //}
     }
-
-
 }
