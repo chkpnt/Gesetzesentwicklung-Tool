@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xml2Markdown", "src\Xml2Markdown\Xml2Markdown.csproj", "{F26A0439-EE89-4FCE-BCA7-F08CA6623C70}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1D147B2C-3606-4AD7-B393-8C06338BBF88}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xml2Markdown.Tests", "test\Xml2Markdown.Tests\Xml2Markdown.Tests.csproj", "{7530FE32-6DE4-4D8E-A412-69BDC4BFB774}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{5964245F-6F4A-48B9-A22C-58AD436122EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gesetzesentwicklung.GII", "src\Gesetzesentwicklung.GII\Gesetzesentwicklung.GII.csproj", "{F26A0439-EE89-4FCE-BCA7-F08CA6623C70}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gesetzesentwicklung.GII.Tests", "test\Gesetzesentwicklung.GII.Tests\Gesetzesentwicklung.GII.Tests.csproj", "{7530FE32-6DE4-4D8E-A412-69BDC4BFB774}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,5 +28,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F26A0439-EE89-4FCE-BCA7-F08CA6623C70} = {1D147B2C-3606-4AD7-B393-8C06338BBF88}
+		{7530FE32-6DE4-4D8E-A412-69BDC4BFB774} = {5964245F-6F4A-48B9-A22C-58AD436122EB}
 	EndGlobalSection
 EndGlobal

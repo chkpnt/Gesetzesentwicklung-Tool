@@ -51,12 +51,6 @@
     <EmbeddedResource Include="Resources\demo.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Xml2Markdown\Xml2Markdown.csproj">
-      <Project>{f26a0439-ee89-4fce-bca7-f08ca6623c70}</Project>
-      <Name>Xml2Markdown</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>

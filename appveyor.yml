@@ -2,4 +2,4 @@ init:
 - git config --global core.autocrlf true 
 
 before_build:
-- nuget restore Xml2Markdown\Xml2Markdown.sln
+- nuget restore
