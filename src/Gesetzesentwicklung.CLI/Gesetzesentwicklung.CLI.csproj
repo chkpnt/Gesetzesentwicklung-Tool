@@ -54,7 +54,7 @@
       <Name>Gesetzesentwicklung.GII</Name>
     </ProjectReference>
     <ProjectReference Include="..\Gesetzesentwicklung.Markdown\Gesetzesentwicklung.Markdown.csproj">
-      <Project>{f68462a2-b587-4b8a-8a46-637767e29f3a}</Project>
+      <Project>{e47fe18a-e251-4b06-ad5a-71308a2fb4d1}</Project>
       <Name>Gesetzesentwicklung.Markdown</Name>
     </ProjectReference>
   </ItemGroup>

@@ -28,9 +28,6 @@ namespace Gesetzesentwicklung.CLI
                 Console.WriteLine(string.Format("File not found: {0}", inputFile));
                 Environment.Exit(1);
             }
-
-            var generator = new MarkdownGenerator(inputFile, outputFolder);
-            generator.buildMarkdown();
         }
 
         private static void DisplayHelp()

@@ -55,9 +55,6 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\src\Gesetzesentwicklung.GII\Gesetzesentwicklung.GII.csproj">
       <Project>{add3f50e-9eb1-48a0-afae-436455c68acd}</Project>
       <Name>Gesetzesentwicklung.GII</Name>
@@ -66,6 +63,9 @@
       <Project>{73252edc-8549-4a75-aa6d-4b24d0ea9158}</Project>
       <Name>Gesetzesentwicklung.Models</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
