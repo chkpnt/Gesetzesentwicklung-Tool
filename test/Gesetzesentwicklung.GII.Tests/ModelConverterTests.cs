@@ -48,7 +48,7 @@ namespace Gesetzesentwicklung.GII.Tests
         {
             var gesetz = _converter.Convert(_xmlGesetz);
 
-            Assert.That(gesetz.Artikel.ElementAt(2).Abschnitt.Name, Is.EqualTo("I. Kapitel A"));
+            Assert.That(gesetz.Artikel.ElementAt(2).Abschnitt, Is.EqualTo("I. Kapitel A"));
         }
 
         [Test]
@@ -74,14 +74,14 @@ namespace Gesetzesentwicklung.GII.Tests
             Assert.That(artikelOhneAbschnitt, Has.Exactly(1).Matches<Artikel>(a => a.Inhalt == "Präambel-Text"));
 
             var artikelInAbschnitt1 = from artikel in gesetz.Artikel
-                                      where artikel.Abschnitt != null && artikel.Abschnitt.Name == "I. Kapitel A"
+                                      where artikel.Abschnitt == "I. Kapitel A"
                                       select artikel;
             Assert.That(artikelInAbschnitt1, Has.Exactly(1).Matches<Artikel>(a => a.Inhalt == "Kapitel A, Artikel 1"));
             Assert.That(artikelInAbschnitt1, Has.Exactly(1).Matches<Artikel>(a => a.Inhalt == "Kapitel A, Artikel 2"));
 
 
             var artikelInAbschnitt2 = from artikel in gesetz.Artikel
-                                      where artikel.Abschnitt != null && artikel.Abschnitt.Name == "II. Kapitel B"
+                                      where artikel.Abschnitt == "II. Kapitel B"
                                       select artikel;
             Assert.That(artikelInAbschnitt2, Has.Exactly(1).Matches<Artikel>(a => a.Inhalt == "Kapitel B, Artikel 3"));
         }

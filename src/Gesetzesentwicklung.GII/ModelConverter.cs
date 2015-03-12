@@ -30,7 +30,7 @@ namespace Gesetzesentwicklung.GII
 
         IEnumerable<Artikel> convertNormen2Artikel(List<XmlGesetz.Norm> normen)
         {
-            Abschnitt currentAbschnitt = null;
+            string currentAbschnitt = null;
 
             foreach (var norm in normen)
             {
@@ -39,12 +39,9 @@ namespace Gesetzesentwicklung.GII
                 switch (normTyp)
                 {
                     case XmlNormenTyp.Gliederungseinheit:
-                        currentAbschnitt = new Abschnitt
-                        {
-                            Name = string.Format("{0} {1}",
+                        currentAbschnitt = string.Format("{0} {1}",
                                 norm.Metadaten.Gliederungseinheit.Bezeichnung,
-                                norm.Metadaten.Gliederungseinheit.Titel)
-                        };
+                                norm.Metadaten.Gliederungseinheit.Titel);
                         break;
                     case XmlNormenTyp.Artikel:
                         yield return new Artikel

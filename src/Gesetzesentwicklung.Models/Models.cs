@@ -14,7 +14,7 @@ namespace Gesetzesentwicklung.Models
 
     public class Artikel
     {
-        public Abschnitt Abschnitt { get; set; }
+        public string Abschnitt { get; set; }
         public string Name { get; set; }
         public string Inhalt { get; set; }
     }
