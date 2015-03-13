@@ -54,6 +54,15 @@ namespace Gesetzesentwicklung.Markdown.Tests
             Assert.IsTrue(Directory.Exists(Path.Combine(OutputFolder, "GG", "I. Die Grundrechte")));
         }
 
+        [Test]
+        public void testProArtikelEineDatei()
+        {
+            _generator.buildMarkdown();
+
+            Assert.IsTrue(File.Exists(Path.Combine(OutputFolder, "GG", "Präambel.md")));
+            Assert.IsTrue(File.Exists(Path.Combine(OutputFolder, "GG", "I. Die Grundrechte", "Artikel 1.md")));
+        }
+
         private Artikel neuerArtikel(string titel, string inhalt)
         {
             return neuerArtikel(null, titel, inhalt);

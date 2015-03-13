@@ -22,13 +22,14 @@ namespace Gesetzesentwicklung.Markdown
         public void buildMarkdown()
         {
             buildDirectories();
+            createFiles();
         }
 
         private void buildDirectories()
         {
             _outputFolder.Create();
 
-            foreach(var verzeichnis in getDirectories())
+            foreach (var verzeichnis in getDirectories())
             {
                 _outputFolder.CreateSubdirectory(verzeichnis);
             }
@@ -43,6 +44,23 @@ namespace Gesetzesentwicklung.Markdown
             foreach(var abschnitt in abschnitte)
             {
                 yield return Path.Combine(_gesetz.Name, abschnitt);
+            }
+        }
+
+        private void createFiles()
+        {
+            foreach (var artikel in _gesetz.Artikel)
+            {
+                var dateiname = artikel.Name + ".md";
+
+                if (artikel.Abschnitt == null)
+                {
+                    File.Create(Path.Combine(_outputFolder.Name, _gesetz.Name, dateiname)).Close();
+                }
+                else
+                {
+                    File.Create(Path.Combine(_outputFolder.Name, _gesetz.Name, artikel.Abschnitt, dateiname)).Close();
+                }
             }
         }
     }
