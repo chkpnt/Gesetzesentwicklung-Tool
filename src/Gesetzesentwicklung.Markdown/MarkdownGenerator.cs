@@ -55,13 +55,29 @@ namespace Gesetzesentwicklung.Markdown
 
                 if (artikel.Abschnitt == null)
                 {
-                    File.Create(Path.Combine(_outputFolder.Name, _gesetz.Name, dateiname)).Close();
+                    File.WriteAllText(
+                        path: Path.Combine(_outputFolder.Name, _gesetz.Name, dateiname),
+                        contents: formatMarkdown(artikel),
+                        encoding: Encoding.UTF8
+                    );
                 }
                 else
                 {
-                    File.Create(Path.Combine(_outputFolder.Name, _gesetz.Name, artikel.Abschnitt, dateiname)).Close();
+                    File.WriteAllText(
+                        path: Path.Combine(_outputFolder.Name, _gesetz.Name, artikel.Abschnitt, dateiname),
+                        contents: formatMarkdown(artikel),
+                        encoding: Encoding.UTF8
+                    );
                 }
             }
+        }
+
+        private string formatMarkdown(Artikel artikel)
+        {
+            return string.Format(
+@"# {0}
+
+{1}", artikel.Name, artikel.Inhalt);
         }
     }
 }

@@ -27,7 +27,10 @@ namespace Gesetzesentwicklung.Markdown.Tests
                 Artikel = new List<Artikel>
                 {
                     neuerArtikel("Präambel", "Präambel-Text"),
-                    neuerArtikel("I. Die Grundrechte", "Artikel 1", "...")
+                    neuerArtikel("I. Die Grundrechte", "Artikel 1",
+@"(1) Absatz 1
+
+(2) Absatz 2")
                 }
             };
 
@@ -61,6 +64,25 @@ namespace Gesetzesentwicklung.Markdown.Tests
 
             Assert.IsTrue(File.Exists(Path.Combine(OutputFolder, "GG", "Präambel.md")));
             Assert.IsTrue(File.Exists(Path.Combine(OutputFolder, "GG", "I. Die Grundrechte", "Artikel 1.md")));
+        }
+
+        [Test]
+        public void testRichtigerInhaltInDenDateien()
+        {
+            _generator.buildMarkdown();
+
+            Assert.That(File.ReadAllText(Path.Combine(OutputFolder, "GG", "Präambel.md"), Encoding.UTF8),
+                Is.EqualTo(
+@"# Präambel
+
+Präambel-Text"));
+            Assert.That(File.ReadAllText(Path.Combine(OutputFolder, "GG", "I. Die Grundrechte", "Artikel 1.md"), Encoding.UTF8),
+                Is.EqualTo(
+@"# Artikel 1
+
+(1) Absatz 1
+
+(2) Absatz 2"));
         }
 
         private Artikel neuerArtikel(string titel, string inhalt)
