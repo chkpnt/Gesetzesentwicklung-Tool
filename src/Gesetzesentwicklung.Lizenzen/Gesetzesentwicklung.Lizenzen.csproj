@@ -43,7 +43,7 @@
     <EmbeddedResource Include="NuGet.YamlDotNet.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="NuGet.NUnit.txt" />
+    <EmbeddedResource Include="NuGet.NUnit.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
