@@ -61,7 +61,7 @@ Letzte Zeile"
         }
 
         [Test]
-        public void testAufRichtigeVerzeichnisstruktur()
+        public void Markdown_RichtigeVerzeichnisstruktur()
         {
             _generator.generate();
 
@@ -70,7 +70,7 @@ Letzte Zeile"
         }
 
         [Test]
-        public void testProArtikelEineDatei()
+        public void Markdown_ProArtikelEineDatei()
         {
             _generator.generate();
 
@@ -79,7 +79,7 @@ Letzte Zeile"
         }
 
         [Test]
-        public void testRichtigerInhaltInDenDateien()
+        public void Markdown_RichtigerInhaltInDenDateien()
         {
             _generator.generate();
 
@@ -98,7 +98,7 @@ Präambel-Text"));
         }
 
         [Test]
-        public void testSettingsDatei()
+        public void Markdown_SettingsDatei()
         {
             _generator.generate();
 

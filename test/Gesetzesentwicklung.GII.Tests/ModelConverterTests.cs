@@ -36,7 +36,7 @@ namespace Gesetzesentwicklung.GII.Tests
         }
 
         [Test]
-        public void testGesetzesnameVonErsterNorm()
+        public void GII_GesetzesnameVonErsterNorm()
         {
             var gesetz = _converter.Convert(_xmlGesetz);
 
@@ -44,7 +44,7 @@ namespace Gesetzesentwicklung.GII.Tests
         }
 
         [Test]
-        public void testAbschnittsnameIstRichtigZusammengesetz()
+        public void GII_AbschnittsnameIstRichtigZusammengesetz()
         {
             var gesetz = _converter.Convert(_xmlGesetz);
 
@@ -52,7 +52,7 @@ namespace Gesetzesentwicklung.GII.Tests
         }
 
         [Test]
-        public void testArtikelStattArt()
+        public void GII_ArtikelStattArt()
         {
             var gesetz = _converter.Convert(_xmlGesetz);
 
@@ -64,7 +64,7 @@ namespace Gesetzesentwicklung.GII.Tests
         }
 
         [Test]
-        public void testArtikelInRichtigenAbschnitten()
+        public void GII_ArtikelInRichtigenAbschnitten()
         {
             var gesetz = _converter.Convert(_xmlGesetz);
 

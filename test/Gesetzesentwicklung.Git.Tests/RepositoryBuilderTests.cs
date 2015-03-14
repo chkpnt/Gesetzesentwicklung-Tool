@@ -20,29 +20,23 @@ namespace Gesetzesentwicklung.Git.Tests
         {
             Console.WriteLine("SetUp: " + TestContext.CurrentContext.Test.Name);
             _sourceDir = new DirectoryInfo("TestData");
-            _destDir = new DirectoryInfo("Git-Repository");
-            if (_destDir.Exists)
-                Console.WriteLine("Verzeichnis existiert!");
-            
+            _destDir = new DirectoryInfo("Git-Repository");           
         }
 
         [TearDown]
         public void TearDown()
         {
-            Console.WriteLine("TearDown: " + TestContext.CurrentContext.Test.Name);
             if (_destDir.Exists)
             {
-                Console.WriteLine("TearDown: Verzeichnis löschen");
                 _destDir.Delete(recursive: true);
             }
-            Console.WriteLine();
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentException),
          ExpectedMessage=@"^Verzeichnis existiert nicht:.*\\TestDataNichtExistierend$",
          MatchType=MessageMatch.Regex)]
-        public void NichtExistierendesQuellVerzeichnis()
+        public void Git_NichtExistierendesQuellVerzeichnis()
         {
             _sourceDir = new DirectoryInfo("TestDataNichtExistierend");
 
@@ -52,7 +46,7 @@ namespace Gesetzesentwicklung.Git.Tests
         [Test]
         [ExpectedException(typeof(ArgumentException),
          ExpectedMessage="Quell- und Zielverzeichnisse dürfen nicht gleich sein")]
-        public void GleichesQuellUndZielverzeichnis()
+        public void Git_GleichesQuellUndZielverzeichnis()
         {
             var sourceDir = new DirectoryInfo("TestData");
             var destDir = new DirectoryInfo("TestData");
@@ -64,7 +58,7 @@ namespace Gesetzesentwicklung.Git.Tests
         [ExpectedException(typeof(ArgumentException),
          ExpectedMessage=@"^Verzeichnis existiert schon:.*\\Git-Repository$",
          MatchType=MessageMatch.Regex)]
-        public void ZielverzeichnisExistiertSchon()
+        public void Git_ZielverzeichnisExistiertSchon()
         {            
             _destDir.Create();
 
@@ -72,7 +66,7 @@ namespace Gesetzesentwicklung.Git.Tests
         }
 
         [Test]
-        public void ZielIstEinGitRepository()
+        public void Git_ZielIstEinGitRepository()
         {
             _repositoryBuilder = new RepositoryBuilder(_sourceDir, _destDir);
             _repositoryBuilder.build();

@@ -30,7 +30,7 @@ namespace Gesetzesentwicklung.Tests
         }
 
         [Test]
-        public void testDeserializer()
+        public void GII_Deserializer()
         {
             Assert.That(_gesetz.Normen, Has.Count.EqualTo(214));
             
