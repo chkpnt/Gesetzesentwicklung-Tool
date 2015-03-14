@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gesetzesentwicklung.Git", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gesetzesentwicklung.Git.Tests", "test\Gesetzesentwicklung.Git.Tests\Gesetzesentwicklung.Git.Tests.csproj", "{5858B232-EB49-40D3-BA62-B76E91F9D23A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gesetzesentwicklung.Models.Tests", "test\Gesetzesentwicklung.Models.Tests\Gesetzesentwicklung.Models.Tests.csproj", "{242FC44D-2EE8-4A84-B353-EEA1D9834E71}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,10 @@ Global
 		{5858B232-EB49-40D3-BA62-B76E91F9D23A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5858B232-EB49-40D3-BA62-B76E91F9D23A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5858B232-EB49-40D3-BA62-B76E91F9D23A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{242FC44D-2EE8-4A84-B353-EEA1D9834E71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{242FC44D-2EE8-4A84-B353-EEA1D9834E71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{242FC44D-2EE8-4A84-B353-EEA1D9834E71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{242FC44D-2EE8-4A84-B353-EEA1D9834E71}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -81,5 +87,6 @@ Global
 		{683C3CE6-E9A4-4050-842C-0DA307458280} = {1D147B2C-3606-4AD7-B393-8C06338BBF88}
 		{E37FECE3-0A32-4A05-8634-B94ABC835AD3} = {1D147B2C-3606-4AD7-B393-8C06338BBF88}
 		{5858B232-EB49-40D3-BA62-B76E91F9D23A} = {5964245F-6F4A-48B9-A22C-58AD436122EB}
+		{242FC44D-2EE8-4A84-B353-EEA1D9834E71} = {5964245F-6F4A-48B9-A22C-58AD436122EB}
 	EndGlobalSection
 EndGlobal

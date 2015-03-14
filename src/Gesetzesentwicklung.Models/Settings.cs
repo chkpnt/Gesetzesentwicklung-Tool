@@ -17,4 +17,15 @@ namespace Gesetzesentwicklung.Models
         // [YamlMember(ScalarStyle = ScalarStyle.Literal)]
         public string Beschreibung { get; set; }
     }
+
+    public class BranchesSettings
+    {
+        public enum BranchTyp
+        {
+            Feature,
+            Normal
+        }
+
+        public Dictionary<string, BranchTyp> Branches { get; set; }
+    }
 }
