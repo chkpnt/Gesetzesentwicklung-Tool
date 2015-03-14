@@ -5,24 +5,28 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using YamlDotNet.Serialization;
 
 namespace Gesetzesentwicklung.Markdown
 {
     public class MarkdownGenerator
     {
         private Gesetz _gesetz;
+        private GesetzesentwicklungSettings _settings;
         private DirectoryInfo _outputFolder;
 
-        public MarkdownGenerator(Gesetz gesetz, string outputFolder)
+        public MarkdownGenerator(Gesetz gesetz, GesetzesentwicklungSettings settings, string outputFolder)
         {
             this._gesetz = gesetz;
+            this._settings = settings;
             this._outputFolder = new DirectoryInfo(outputFolder);
         }
 
-        public void buildMarkdown()
+        public void generate()
         {
             buildDirectories();
             createFiles();
+            createSettingFile();
         }
 
         private void buildDirectories()
@@ -78,6 +82,18 @@ namespace Gesetzesentwicklung.Markdown
 @"# {0}
 
 {1}", artikel.Name, artikel.Inhalt);
+        }
+
+        private void createSettingFile()
+        {
+            using (TextWriter textWriter = new StreamWriter(
+                path: Path.Combine(_outputFolder.Name, _gesetz.Name, GesetzesentwicklungSettings.Filename),
+                append: false,
+                encoding: Encoding.UTF8))
+            {
+                textWriter.NewLine = Environment.NewLine;
+                new Serializer().Serialize(textWriter, _settings);
+            }
         }
     }
 }
