@@ -46,6 +46,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommitSettingsTest.cs" />
     <Compile Include="CommitSettingsTests.cs" />
     <Compile Include="BranchSettingsTests.cs" />
     <Compile Include="Commons.cs" />

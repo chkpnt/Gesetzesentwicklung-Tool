@@ -37,7 +37,7 @@ namespace Gesetzesentwicklung.Models.Tests
         }
 
         [Test]
-        public void Models_BranchSettingsSerialize()
+        public void Models_BranchSettings_Serialize()
         {
             var yaml = Commons.ToYaml(_branchSettings);
 
@@ -45,7 +45,7 @@ namespace Gesetzesentwicklung.Models.Tests
         }
 
         [Test]
-        public void Models_BranchSettingsDeserialize()
+        public void Models_BranchSettings_Deserialize()
         {
             var settings = Commons.FromYaml<BranchesSettings>(_serializedBranchSettings);
 

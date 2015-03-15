@@ -12,8 +12,8 @@ namespace Gesetzesentwicklung.Models.Tests
     [TestFixture]
     public class CommitSettingsTests
     {
-        CommitSettings _commitSettings;
-        string _serializedCommitSettings;
+        private CommitSettings _commitSettings;
+        private string _serializedCommitSettings;
 
         [SetUp]
         public void SetUp()
@@ -42,7 +42,7 @@ Zeile 2"}
         }
 
         [Test]
-        public void Models_CommitSettingsSerialize()
+        public void Models_CommitSettings_Serialize()
         {
             var yaml = Commons.ToYaml(_commitSettings);
 
@@ -50,7 +50,7 @@ Zeile 2"}
         }
 
         [Test]
-        public void Models_CommitSettingsDeserialize()
+        public void Models_CommitSettings_Deserialize()
         {
             var settings = Commons.FromYaml<CommitSettings>(_serializedCommitSettings);
 

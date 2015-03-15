@@ -112,7 +112,6 @@ Beschreibung: >-
   Commit-Message
 
 
-
   Letzte Zeile
 "));
         }
