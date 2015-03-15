@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibGit2Sharp;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -40,7 +41,19 @@ namespace Gesetzesentwicklung.Git
         {
             cleanUpDestDir();
 
-            _destDir.CreateSubdirectory(".git");
+            IEnumerable<string> branches;
+            inspectSourceDir(out branches);
+
+            Repository.Init(_destDir.FullName);
+
+
+        }
+
+        private void inspectSourceDir(out IEnumerable<string> branches)
+        {
+            branches = from dir in _sourceDir.GetDirectories()
+                       where !dir.Name.StartsWith(".")
+                       select dir.Name;
         }
 
         private void cleanUpDestDir()

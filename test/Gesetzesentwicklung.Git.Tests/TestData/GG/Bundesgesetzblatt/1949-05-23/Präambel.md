@@ -1,3 +1,0 @@
-# Präambel
-
-Präambel-Text
