@@ -55,66 +55,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="TestData\1. Lesung\2014-10-01\I. Die Grundrechte\Artikel 1.md">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\1. Lesung\2014-10-01\I. Die Grundrechte\Artikel 2.md">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\1. Lesung\2014-10-01\III. Der Bundestag\Artikel 38.md">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\1. Lesung\2014-10-01\III. Der Bundestag\Artikel 39.md">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\1. Lesung\2014-10-01\III. Der Bundestag\Artikel 40.md">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\1. Lesung\2014-10-01\IVa. Gemeinsamer Ausschuss\Artikel 53a.md">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\1. Lesung\2014-10-01\Präambel.md">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\Bundesgesetzblatt\1949-05-23\I. Die Grundrechte\Artikel 1.md">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\Bundesgesetzblatt\1949-05-23\I. Die Grundrechte\Artikel 2.md">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\Bundesgesetzblatt\1949-05-23\III. Der Bundestag\Artikel 38.md">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\Bundesgesetzblatt\1949-05-23\III. Der Bundestag\Artikel 39.md">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\Bundesgesetzblatt\1949-05-23\Präambel.md">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\Bundesgesetzblatt\2015-01-01\I. Die Grundrechte\Artikel 1.md">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\Bundesgesetzblatt\2015-01-01\I. Die Grundrechte\Artikel 2.md">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\Bundesgesetzblatt\2015-01-01\III. Der Bundestag\Artikel 38.md">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\Bundesgesetzblatt\2015-01-01\III. Der Bundestag\Artikel 39.md">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\Bundesgesetzblatt\2015-01-01\III. Der Bundestag\Artikel 40.md">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\Bundesgesetzblatt\2015-01-01\IVa. Gemeinsamer Ausschuss\Artikel 53a.md">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="TestData\Bundesgesetzblatt\2015-01-01\Präambel.md">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+    <Folder Include="TestData\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

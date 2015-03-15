@@ -56,7 +56,7 @@
       <Name>Gesetzesentwicklung.Markdown</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\Gesetzesentwicklung.Models\Gesetzesentwicklung.Models.csproj">
-      <Project>{73252edc-8549-4a75-aa6d-4b24d0ea9158}</Project>
+      <Project>{f7b91df7-d12c-439b-aedd-48f0e9eaee09}</Project>
       <Name>Gesetzesentwicklung.Models</Name>
     </ProjectReference>
   </ItemGroup>

@@ -50,7 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Gesetzesentwicklung.GII\Gesetzesentwicklung.GII.csproj">
-      <Project>{add3f50e-9eb1-48a0-afae-436455c68acd}</Project>
+      <Project>{2929f0b3-6303-4fce-a257-86ee6f30fd3f}</Project>
       <Name>Gesetzesentwicklung.GII</Name>
     </ProjectReference>
     <ProjectReference Include="..\Gesetzesentwicklung.Markdown\Gesetzesentwicklung.Markdown.csproj">
