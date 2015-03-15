@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Gesetzesentwicklung.Shared;
 
 namespace Gesetzesentwicklung.Models
 {
@@ -13,6 +14,8 @@ namespace Gesetzesentwicklung.Models
 
     public class CommitSetting
     {
+        private string _beschreibung;
+
         public string BranchFrom { get; set; }
         public string MergeInto { get; set; }
 
@@ -21,7 +24,11 @@ namespace Gesetzesentwicklung.Models
         public string Zeitzone { get; set; }
 
         // [YamlMember(ScalarStyle = ScalarStyle.Literal)]
-        public string Beschreibung { get; set; }
+        public string Beschreibung
+        {
+            get { return _beschreibung; }
+            set { _beschreibung = value.Replace("\r\n", "\n"); }
+        }
 
         public bool Equals(CommitSetting other)
         {
@@ -33,7 +40,7 @@ namespace Gesetzesentwicklung.Models
                 && string.Equals(MergeInto, other.MergeInto)
                 && string.Equals(Autor, other.Autor)
                 && string.Equals(Zeitzone, other.Zeitzone)
-          //      && DateTime.Equals(Datum, other.Datum)
+                && DateTime.Equals(Datum, other.Datum)
                 && string.Equals(Beschreibung, other.Beschreibung);
         }
 
@@ -67,7 +74,7 @@ namespace Gesetzesentwicklung.Models
         {
             return string.Format("CommitSetting [Autor: {0}, Datum: {1}, "
             + "Zeitzone: {2}, Beschreibung: {3}, BranchFrom: {4}, MergeInto: {5}",
-            Autor, Datum, Zeitzone, Beschreibung, BranchFrom, MergeInto);
+            Autor, Datum, Zeitzone, Beschreibung.ToLiteral(), BranchFrom, MergeInto);
         }
 
 

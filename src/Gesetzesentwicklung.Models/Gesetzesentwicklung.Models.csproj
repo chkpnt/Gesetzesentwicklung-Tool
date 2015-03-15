@@ -44,6 +44,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Gesetzesentwicklung.Shared\Gesetzesentwicklung.Shared.csproj">
+      <Project>{11c3b8e3-dc96-4cac-b1b1-88a8427da25c}</Project>
+      <Name>Gesetzesentwicklung.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
