@@ -10,6 +10,12 @@
     only:
       - coverity_scan
 
+  environment:
+    coverity_token:
+      secure: 7PGMsWzSkiLFkgLSio/rVWCUGDFWBY3no64BMmr3sq0=
+    coverity_email:
+      secure: KGjFoFTNOGBGQgS2D4f+m5bdUq5LJDoE38plBnK5EjY=
+
   init:
   - git config --global core.autocrlf true
 
@@ -21,6 +27,7 @@
 
   test: off
 
-  artifacts:
-  - path: cov-int
-    name: Coverity Scan Result
+  deploy_script:
+  - nuget install -ExcludeVersion PublishCoverity
+  - PublishCoverity/PublishCoverity.exe compress -o coverity.zip -i cov-int
+  - PublishCoverity/PublishCoverity.exe publish -t $(coverity_token) -e $(coverity_email) -r chkpnt/Gesetzesentwicklung-Tool -z coverity.zip --codeVersion $(APPVEYOR_BUILD_VERSION)
