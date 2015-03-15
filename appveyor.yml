@@ -1,5 +1,26 @@
-init:
-- git config --global core.autocrlf true 
+-
+  init:
+  - git config --global core.autocrlf true 
 
-before_build:
-- nuget restore
+  before_build:
+  - nuget restore
+
+-
+  branches:
+    only:
+      - coverity_scan
+
+  init:
+  - git config --global core.autocrlf true
+
+  before_build:
+  - nuget restore
+
+  build_script:
+  - cov-build --dir cov-int msbuild "Gesetzesentwicklung-Tool.sln" /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+
+  test: off
+
+  artifacts:
+  - path: cov-int
+    name: Coverity Scan Result
