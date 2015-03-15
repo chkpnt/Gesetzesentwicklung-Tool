@@ -29,6 +29,5 @@
 
   deploy_script:
   - nuget install -ExcludeVersion PublishCoverity
-  - dir
-  - PublishCoverity.exe compress -o coverity.zip -i cov-int
-  - PublishCoverity.exe publish -t $(coverity_token) -e $(coverity_email) -r chkpnt/Gesetzesentwicklung-Tool -z coverity.zip --codeVersion $(APPVEYOR_BUILD_VERSION)
+  - PublishCoverity\PublishCoverity.exe compress -o coverity.zip -i cov-int
+  - PublishCoverity\PublishCoverity.exe publish -t $(coverity_token) -e $(coverity_email) -r chkpnt/Gesetzesentwicklung-Tool -z coverity.zip --codeVersion $(APPVEYOR_BUILD_VERSION)
