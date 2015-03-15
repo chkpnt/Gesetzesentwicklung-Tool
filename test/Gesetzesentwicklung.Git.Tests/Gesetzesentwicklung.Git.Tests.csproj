@@ -53,13 +53,86 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Content Include="TestData\Branches.yml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\Gesetze\GG\Bundesgesetzblatt\GG\I. Die Grundrechte\Artikel 1.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\Gesetze\GG\Bundesgesetzblatt\GG\I. Die Grundrechte\Artikel 2.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\Gesetze\GG\Bundesgesetzblatt\GG\III. Der Bundestag\Artikel 38.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\Gesetze\GG\Bundesgesetzblatt\GG\III. Der Bundestag\Artikel 39.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\Gesetze\GG\Bundesgesetzblatt\GG\Präambel.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\Gesetze\GG\Änderung-1.yml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\Gesetze\GG\Änderung-1\Lesung-1\GG\I. Die Grundrechte\Artikel 1.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\Gesetze\GG\Änderung-1\Lesung-1\GG\I. Die Grundrechte\Artikel 2.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\Gesetze\GG\Änderung-1\Lesung-1\GG\III. Der Bundestag\Artikel 38.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\Gesetze\GG\Änderung-1\Lesung-1\GG\III. Der Bundestag\Artikel 39.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\Gesetze\GG\Änderung-1\Lesung-1\GG\IVa. Gemeinsamer Ausschuss\Artikel 53a.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\Gesetze\GG\Änderung-1\Lesung-1\GG\Präambel.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\Gesetze\GG\Änderung-1\Lesung-2\GG\I. Die Grundrechte\Artikel 1.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\Gesetze\GG\Änderung-1\Lesung-2\GG\I. Die Grundrechte\Artikel 2.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\Gesetze\GG\Änderung-1\Lesung-2\GG\III. Der Bundestag\Artikel 38.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\Gesetze\GG\Änderung-1\Lesung-2\GG\III. Der Bundestag\Artikel 39.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\Gesetze\GG\Änderung-1\Lesung-2\GG\IVa. Gemeinsamer Ausschuss\Artikel 53a.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\Gesetze\GG\Änderung-1\Lesung-2\GG\Präambel.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\Gesetze\GG\Änderung-2\Lesung-1\GG\I. Die Grundrechte\Artikel 1.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\Gesetze\GG\Änderung-2\Lesung-1\GG\I. Die Grundrechte\Artikel 2.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\Gesetze\GG\Änderung-2\Lesung-1\GG\III. Der Bundestag\Artikel 38.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\Gesetze\GG\Änderung-2\Lesung-1\GG\III. Der Bundestag\Artikel 39.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\Gesetze\GG\Änderung-2\Lesung-1\GG\IVa. Gemeinsamer Ausschuss\Artikel 53a.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\Gesetze\GG\Änderung-2\Lesung-1\GG\Präambel.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="TestData\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
