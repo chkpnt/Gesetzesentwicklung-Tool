@@ -37,38 +37,19 @@ namespace Gesetzesentwicklung.Models.Tests
         }
 
         [Test]
-        public void Models_SerializeBranchSettings()
+        public void Models_BranchSettingsSerialize()
         {
-            var yaml = toYaml(_branchSettings);
+            var yaml = Commons.ToYaml(_branchSettings);
 
             Assert.That(yaml, Is.EqualTo(_serializedBranchSettings));
         }
 
         [Test]
-        public void Models_DeserializeBranchSettings()
+        public void Models_BranchSettingsDeserialize()
         {
-            var settings = fromYaml(_serializedBranchSettings);
+            var settings = Commons.FromYaml<BranchesSettings>(_serializedBranchSettings);
 
             Assert.That(settings.Branches, Is.EquivalentTo(_branchSettings.Branches));
-        }
-
-        private string toYaml(BranchesSettings settings)
-        {
-            using (StringWriter textWriter = new StringWriter())
-            {
-                var serializer = new Serializer();
-                serializer.Serialize(textWriter, settings);
-                return textWriter.ToString();
-            }
-        }
-
-        private BranchesSettings fromYaml(string settings)
-        {
-            using (StringReader textReader = new StringReader(settings))
-            {
-                var deserializer = new Deserializer();
-                return deserializer.Deserialize<BranchesSettings>(textReader);
-            }
         }
     }
 }

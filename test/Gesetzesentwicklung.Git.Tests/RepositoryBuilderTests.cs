@@ -18,7 +18,6 @@ namespace Gesetzesentwicklung.Git.Tests
         [SetUp]
         public void SetUp()
         {
-            Console.WriteLine("SetUp: " + TestContext.CurrentContext.Test.Name);
             _sourceDir = new DirectoryInfo("TestData");
             _destDir = new DirectoryInfo("Git-Repository");           
         }

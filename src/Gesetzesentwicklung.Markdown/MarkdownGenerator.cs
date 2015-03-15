@@ -12,10 +12,10 @@ namespace Gesetzesentwicklung.Markdown
     public class MarkdownGenerator
     {
         private Gesetz _gesetz;
-        private GesetzesentwicklungSettings _settings;
+        private CommitSetting _settings;
         private DirectoryInfo _outputFolder;
 
-        public MarkdownGenerator(Gesetz gesetz, GesetzesentwicklungSettings settings, string outputFolder)
+        public MarkdownGenerator(Gesetz gesetz, CommitSetting settings, string outputFolder)
         {
             this._gesetz = gesetz;
             this._settings = settings;
@@ -87,7 +87,7 @@ namespace Gesetzesentwicklung.Markdown
         private void createSettingFile()
         {
             using (TextWriter textWriter = new StreamWriter(
-                path: Path.Combine(_outputFolder.Name, _gesetz.Name, GesetzesentwicklungSettings.Filename),
+                path: Path.Combine(_outputFolder.Name, _gesetz.Name + ".yml"),
                 append: false,
                 encoding: Encoding.UTF8))
             {
