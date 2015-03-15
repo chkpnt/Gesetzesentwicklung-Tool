@@ -17,7 +17,7 @@ namespace Gesetzesentwicklung.Models
                                   where branch2.StartsWith(branch1 + "/")
                                   select branch1;
 
-            return invalidBranches.Count() == 0;
+            return !invalidBranches.Any();
         }
     }
 }
