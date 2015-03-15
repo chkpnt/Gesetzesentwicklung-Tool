@@ -12,8 +12,9 @@ namespace Gesetzesentwicklung.Models.Tests
     [TestFixture]
     public class BranchSettingsTests
     {
-        BranchesSettings _branchSettings;
-        string _serializedBranchSettings;
+        private BranchesSettings _branchSettings;
+        private string _serializedBranchSettings;
+        private string _serializedBranchSettingsAlternative;
 
         [SetUp]
         public void SetUp()
@@ -22,17 +23,23 @@ namespace Gesetzesentwicklung.Models.Tests
             {
                 Branches = new Dictionary<string, BranchesSettings.BranchTyp>
                 {
-                    { "Bundesgesetzblatt", BranchesSettings.BranchTyp.Normal },
-                    { "1. Lesung", BranchesSettings.BranchTyp.Feature },
-                    { "2. Lesung", BranchesSettings.BranchTyp.Feature }
+                    { "Gesetze/GG/Bundesgesetzblatt", BranchesSettings.BranchTyp.Normal },
+                    { "Gesetze/GG/Änderung-1", BranchesSettings.BranchTyp.Feature },
+                    { "Gesetze/GG/Änderung-2", BranchesSettings.BranchTyp.Feature }
                 }
             };
 
             _serializedBranchSettings =
 @"Branches:
-  Bundesgesetzblatt: Normal
-  1. Lesung: Feature
-  2. Lesung: Feature
+  Gesetze/GG/Bundesgesetzblatt: Normal
+  Gesetze/GG/Änderung-1: Feature
+  Gesetze/GG/Änderung-2: Feature
+";
+            _serializedBranchSettingsAlternative =
+@"Branches:
+  Gesetze/GG/Bundesgesetzblatt: Normal
+  ""Gesetze/GG/Änderung-1"": Feature
+  ""Gesetze/GG/Änderung-2"": Feature
 ";
         }
 
@@ -41,7 +48,8 @@ namespace Gesetzesentwicklung.Models.Tests
         {
             var yaml = Commons.ToYaml(_branchSettings);
 
-            Assert.That(yaml, Is.EqualTo(_serializedBranchSettings));
+            Assert.That(yaml, Is.EqualTo(_serializedBranchSettings)
+                            | Is.EqualTo(_serializedBranchSettingsAlternative));
         }
 
         [Test]

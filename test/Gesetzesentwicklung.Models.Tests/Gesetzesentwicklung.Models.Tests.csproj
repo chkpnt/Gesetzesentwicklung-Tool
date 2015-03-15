@@ -51,6 +51,7 @@
     <Compile Include="BranchSettingsTests.cs" />
     <Compile Include="Commons.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ValidatorsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
