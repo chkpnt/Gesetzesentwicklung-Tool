@@ -12,7 +12,7 @@ namespace Gesetzesentwicklung.Models
         public List<CommitSetting> Commits { get; set; }
     }
 
-    public class CommitSetting
+    public class CommitSetting : IComparable<CommitSetting>
     {
         private string _beschreibung;
 
@@ -27,6 +27,11 @@ namespace Gesetzesentwicklung.Models
         {
             get { return _beschreibung; }
             set { _beschreibung = value.Replace("\r\n", "\n"); }
+        }
+
+        public int CompareTo(CommitSetting other)
+        {
+            return DateTime.Compare(this.Datum, other.Datum);
         }
 
         public bool Equals(CommitSetting other)

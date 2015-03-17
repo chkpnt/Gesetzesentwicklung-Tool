@@ -49,5 +49,26 @@ Beschreibung: blabla
 
             Assert.That(setting, Is.EqualTo(_commitSetting));
         }
+
+        [Test]
+        public void Models_CommitSetting_Order()
+        {
+            var commit_Oktober = new CommitSetting { Datum = DateTime.Parse("1960-10-08") };
+            var commit_November = new CommitSetting { Datum = DateTime.Parse("1960-11-10") }; 
+            var commit_Februar = new CommitSetting { Datum = DateTime.Parse("1960-02-04") };
+
+            var unsortedCommits = new List<List<CommitSetting>>
+            {
+                new List<CommitSetting> { commit_Februar, commit_November, commit_Oktober },
+                new List<CommitSetting> { commit_Oktober, commit_November, commit_Februar },
+                new List<CommitSetting> { commit_Oktober, commit_Februar, commit_November },
+                new List<CommitSetting> { commit_November, commit_Oktober, commit_Februar },
+                new List<CommitSetting> { commit_November, commit_Februar, commit_Oktober }
+            };
+            var sortedCommits = new List<CommitSetting> { commit_Februar, commit_Oktober, commit_November };
+
+            Assert.That(unsortedCommits, Has.All.Not.Ordered);
+            Assert.That(sortedCommits, Is.Ordered);
+        }
     }
 }
