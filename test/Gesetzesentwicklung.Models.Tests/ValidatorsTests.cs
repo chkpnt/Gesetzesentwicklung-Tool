@@ -22,7 +22,11 @@ namespace Gesetzesentwicklung.Models.Tests
                 }
             };
 
-            Assert.IsFalse(settings.IsValid());
+            IEnumerable<string> validatorMessages;
+
+            Assert.IsFalse(settings.IsValid(out validatorMessages));
+            Assert.That(validatorMessages.Count(), Is.EqualTo(1));
+            Assert.That(validatorMessages.ElementAt(0), Is.StringEnding("in Konflikt zu einem anderen Branch steht: Gesetze"));
         }
 
         [Test]
@@ -37,7 +41,10 @@ namespace Gesetzesentwicklung.Models.Tests
                 }
             };
 
-            Assert.IsTrue(settings.IsValid());
+            IEnumerable<string> validatorMessages;
+
+            Assert.IsTrue(settings.IsValid(out validatorMessages));
+            Assert.IsEmpty(validatorMessages);
         }
     }
 }
