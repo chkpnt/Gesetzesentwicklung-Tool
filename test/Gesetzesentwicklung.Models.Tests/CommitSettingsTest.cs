@@ -22,7 +22,6 @@ namespace Gesetzesentwicklung.Models.Tests
             {
                 Autor = "Foo Bar <foo@bar.net>",
                 Datum = DateTime.Parse("01/01/2015"),
-                Zeitzone = "CET",
                 Beschreibung = "blabla",
                 MergeInto = "Gesetze/GG/Bundesgesetzblatt"
             };
@@ -31,7 +30,6 @@ namespace Gesetzesentwicklung.Models.Tests
 @"MergeInto: Gesetze/GG/Bundesgesetzblatt
 Autor: Foo Bar <foo@bar.net>
 Datum: 2015-01-01T00:00:00.0000000
-Zeitzone: CET
 Beschreibung: blabla
 ";
         }
