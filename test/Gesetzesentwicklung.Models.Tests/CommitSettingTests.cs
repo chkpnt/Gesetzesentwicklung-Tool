@@ -70,5 +70,20 @@ Beschreibung: blabla
             Assert.That(unsortedCommits, Has.All.Not.Ordered);
             Assert.That(sortedCommits, Is.Ordered);
         }
+
+        [Test]
+        public void Models_CommitSetting_OrderBeiNull()
+        {
+            var commitMitNull = new CommitSetting { };
+            var commitOhneNull = new CommitSetting { Datum = DateTime.Parse("1960-11-10") };
+
+            Assert.That(commitMitNull.Datum, Is.EqualTo(DateTime.MinValue));
+
+            var liste1 = new List<CommitSetting> { commitMitNull, commitOhneNull };
+            var liste2 = new List<CommitSetting> { commitOhneNull, commitMitNull };
+
+            Assert.That(liste1, Is.Ordered);
+            Assert.That(liste2, Is.Not.Ordered);
+        }
     }
 }
