@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Gesetzesentwicklung.Models;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Gesetzesentwicklung.Models.Tests
+namespace Gesetzesentwicklung.Validators.Tests
 {
     [TestFixture]
     public class ValidatorsTests

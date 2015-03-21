@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Gesetzesentwicklung.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Gesetzesentwicklung.Models
+namespace Gesetzesentwicklung.Validators
 {
-    public static class Validators
+    public static class BranchSettingsExtensions
     {
         private static string Message_InvalidBranch = "Ungültiger Branch, da sein Name in Konflikt zu einem anderen Branch steht: {0}";
 
