@@ -18,6 +18,7 @@ namespace Gesetzesentwicklung.Models
 
         public string BranchFrom { get; set; }
         public string MergeInto { get; set; }
+        public string Daten { get; set; }
 
         public string Autor { get; set; }
         public DateTime Datum { get; set; }
@@ -42,6 +43,7 @@ namespace Gesetzesentwicklung.Models
                 return true;
             return string.Equals(BranchFrom, other.BranchFrom)
                 && string.Equals(MergeInto, other.MergeInto)
+                && string.Equals(Daten, other.Daten)
                 && string.Equals(Autor, other.Autor)
                 && DateTime.Equals(Datum, other.Datum)
                 && string.Equals(Beschreibung, other.Beschreibung);
@@ -65,6 +67,7 @@ namespace Gesetzesentwicklung.Models
                 int hash = 17;
                 hash = hash * 23 + ((BranchFrom != null) ? BranchFrom.GetHashCode() : 0);
                 hash = hash * 23 + ((MergeInto != null) ? MergeInto.GetHashCode() : 0);
+                hash = hash * 23 + ((Daten != null) ? Daten.GetHashCode() : 0);
                 hash = hash * 23 + ((Autor != null) ? Autor.GetHashCode() : 0);
                 hash = hash * 23 + ((Datum != null) ? Datum.GetHashCode() : 0);
                 hash = hash * 23 + ((Beschreibung != null) ? Beschreibung.GetHashCode() : 0);
