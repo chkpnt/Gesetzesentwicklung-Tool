@@ -40,7 +40,6 @@ namespace Gesetzesentwicklung.Markdown.Tests
             {
                 Autor = "Foo Bar <foo@example.net>",
                 Datum = DateTime.Parse("01/01/2015 00:00:00"),
-                Zeitzone = "CET",
                 Beschreibung = @"Commit-Message
 
 Letzte Zeile"
@@ -107,7 +106,6 @@ Präambel-Text"));
                 Is.EqualTo(
 @"Autor: Foo Bar <foo@example.net>
 Datum: 2015-01-01T00:00:00.0000000
-Zeitzone: CET
 Beschreibung: >-
   Commit-Message
 

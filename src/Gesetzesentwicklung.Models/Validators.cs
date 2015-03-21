@@ -8,7 +8,15 @@ namespace Gesetzesentwicklung.Models
 {
     public static class Validators
     {
+        private static string Message_InvalidBranch = "Ungültiger Branch, da sein Name in Konflikt zu einem anderen Branch steht: {0}";
+
         public static bool IsValid(this BranchesSettings branchSettings)
+        {
+            IEnumerable<string> notNeededMessages;
+            return branchSettings.IsValid(out notNeededMessages);
+        }
+
+        public static bool IsValid(this BranchesSettings branchSettings, out IEnumerable<string> validatorMessages)
         {
             var branches = branchSettings.Branches.Keys;
 
@@ -16,6 +24,9 @@ namespace Gesetzesentwicklung.Models
                                   from branch2 in branches
                                   where branch2.StartsWith(branch1 + "/")
                                   select branch1;
+
+            validatorMessages = from branch in invalidBranches
+                                select string.Format(Message_InvalidBranch, branch);
 
             return !invalidBranches.Any();
         }
