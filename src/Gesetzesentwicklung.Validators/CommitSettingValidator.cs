@@ -24,14 +24,12 @@ namespace Gesetzesentwicklung.Validators
 
         public bool IsValid(CommitSetting commitSetting, string parentDir, BranchesSettings branchSettings)
         {
-            IEnumerable<string> notNeededValidatorMessages;
-            return IsValid(commitSetting, parentDir, branchSettings, out notNeededValidatorMessages);
+            ValidatorProtokoll protokoll = new ValidatorProtokoll();
+            return IsValid(commitSetting, parentDir, branchSettings, ref protokoll);
         }
 
-        public bool IsValid(CommitSetting commitSetting, string parentDir, BranchesSettings branchSettings, out IEnumerable<string> validatorMessages)
+        public bool IsValid(CommitSetting commitSetting, string parentDir, BranchesSettings branchSettings, ref ValidatorProtokoll protokoll)
         {
-            validatorMessages = Enumerable.Empty<string>();
-
             return _fileSystem.DirectoryInfo.FromDirectoryName(Path.Combine(parentDir, commitSetting.Daten)).Exists;
         }
     }

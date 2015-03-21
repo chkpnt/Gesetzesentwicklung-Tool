@@ -13,11 +13,11 @@ namespace Gesetzesentwicklung.Validators
 
         public static bool IsValid(this BranchesSettings branchSettings)
         {
-            IEnumerable<string> notNeededMessages;
-            return branchSettings.IsValid(out notNeededMessages);
+            ValidatorProtokoll protokoll = new ValidatorProtokoll();
+            return branchSettings.IsValid(ref protokoll);
         }
 
-        public static bool IsValid(this BranchesSettings branchSettings, out IEnumerable<string> validatorMessages)
+        public static bool IsValid(this BranchesSettings branchSettings, ref ValidatorProtokoll protokoll)
         {
             var branches = branchSettings.Branches.Keys;
 
@@ -26,8 +26,9 @@ namespace Gesetzesentwicklung.Validators
                                   where branch2.StartsWith(branch1 + "/")
                                   select branch1;
 
-            validatorMessages = from branch in invalidBranches
-                                select string.Format(Message_InvalidBranch, branch);
+            var validatorMessages = from branch in invalidBranches
+                                    select string.Format(Message_InvalidBranch, branch);
+            protokoll.AddEntries(validatorMessages);
 
             return !invalidBranches.Any();
         }

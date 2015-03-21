@@ -40,20 +40,20 @@ namespace Gesetzesentwicklung.Validators.Tests
                 }
             };
 
-            IEnumerable<string> validatorMessages;
+            ValidatorProtokoll protokoll = new ValidatorProtokoll();
 
-            Assert.IsFalse(settings.IsValid(out validatorMessages));
-            Assert.That(validatorMessages.Count(), Is.EqualTo(1));
-            Assert.That(validatorMessages.ElementAt(0), Is.StringEnding("in Konflikt zu einem anderen Branch steht: Gesetze"));
+            Assert.IsFalse(settings.IsValid(ref protokoll));
+            Assert.That(protokoll.Entries.Count(), Is.EqualTo(1));
+            Assert.That(protokoll.Entries.ElementAt(0), Is.StringEnding("in Konflikt zu einem anderen Branch steht: Gesetze"));
         }
 
         [Test]
         public void Models_Validators_ValidBranchSettings()
-        {    
-            IEnumerable<string> validatorMessages;
+        {
+            ValidatorProtokoll protokoll = new ValidatorProtokoll();
 
-            Assert.IsTrue(_validBranchSettings.IsValid(out validatorMessages));
-            Assert.IsEmpty(validatorMessages);
+            Assert.IsTrue(_validBranchSettings.IsValid(ref protokoll));
+            Assert.IsEmpty(protokoll.Entries);
         }
 
         [Test]
