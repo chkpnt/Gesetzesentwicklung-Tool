@@ -9,8 +9,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{5964245F-6
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gesetzesentwicklung.GII.Tests", "test\Gesetzesentwicklung.GII.Tests\Gesetzesentwicklung.GII.Tests.csproj", "{7530FE32-6DE4-4D8E-A412-69BDC4BFB774}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gesetzesentwicklung.CLI", "src\Gesetzesentwicklung.CLI\Gesetzesentwicklung.CLI.csproj", "{58D6CF72-AD31-4584-BDA2-56ADD11CB8B3}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gesetzesentwicklung.Markdown.Tests", "test\Gesetzesentwicklung.Markdown.Tests\Gesetzesentwicklung.Markdown.Tests.csproj", "{A3EF3F91-F2A2-4F12-A7FB-27040574627D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gesetzesentwicklung.Markdown", "src\Gesetzesentwicklung.Markdown\Gesetzesentwicklung.Markdown.csproj", "{E47FE18A-E251-4B06-AD5A-71308A2FB4D1}"
@@ -35,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gesetzesentwicklung.Validat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gesetzesentwicklung.Validators.Tests", "test\Gesetzesentwicklung.Validators.Tests\Gesetzesentwicklung.Validators.Tests.csproj", "{8B9764A5-B225-4825-8572-025AAB699691}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gesetzesentwicklung.GUI", "src\Gesetzesentwicklung.GUI\Gesetzesentwicklung.GUI.csproj", "{8FFA93A3-9F3E-4793-A0C3-9DE89FE028EC}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gesetzesentwicklung.Lizenzen.Tests", "tests\Gesetzesentwicklung.Lizenzen.Tests\Gesetzesentwicklung.Lizenzen.Tests.csproj", "{6FD2B557-587D-432E-BC0A-E7D0C530C9CD}"
 EndProject
 Global
@@ -47,10 +47,6 @@ Global
 		{7530FE32-6DE4-4D8E-A412-69BDC4BFB774}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7530FE32-6DE4-4D8E-A412-69BDC4BFB774}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7530FE32-6DE4-4D8E-A412-69BDC4BFB774}.Release|Any CPU.Build.0 = Release|Any CPU
-		{58D6CF72-AD31-4584-BDA2-56ADD11CB8B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{58D6CF72-AD31-4584-BDA2-56ADD11CB8B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{58D6CF72-AD31-4584-BDA2-56ADD11CB8B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{58D6CF72-AD31-4584-BDA2-56ADD11CB8B3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A3EF3F91-F2A2-4F12-A7FB-27040574627D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A3EF3F91-F2A2-4F12-A7FB-27040574627D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3EF3F91-F2A2-4F12-A7FB-27040574627D}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -99,6 +95,10 @@ Global
 		{8B9764A5-B225-4825-8572-025AAB699691}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B9764A5-B225-4825-8572-025AAB699691}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B9764A5-B225-4825-8572-025AAB699691}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FFA93A3-9F3E-4793-A0C3-9DE89FE028EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FFA93A3-9F3E-4793-A0C3-9DE89FE028EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FFA93A3-9F3E-4793-A0C3-9DE89FE028EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FFA93A3-9F3E-4793-A0C3-9DE89FE028EC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6FD2B557-587D-432E-BC0A-E7D0C530C9CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6FD2B557-587D-432E-BC0A-E7D0C530C9CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FD2B557-587D-432E-BC0A-E7D0C530C9CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -109,7 +109,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{7530FE32-6DE4-4D8E-A412-69BDC4BFB774} = {5964245F-6F4A-48B9-A22C-58AD436122EB}
-		{58D6CF72-AD31-4584-BDA2-56ADD11CB8B3} = {1D147B2C-3606-4AD7-B393-8C06338BBF88}
 		{A3EF3F91-F2A2-4F12-A7FB-27040574627D} = {5964245F-6F4A-48B9-A22C-58AD436122EB}
 		{E47FE18A-E251-4B06-AD5A-71308A2FB4D1} = {1D147B2C-3606-4AD7-B393-8C06338BBF88}
 		{683C3CE6-E9A4-4050-842C-0DA307458280} = {1D147B2C-3606-4AD7-B393-8C06338BBF88}
@@ -122,6 +121,7 @@ Global
 		{2929F0B3-6303-4FCE-A257-86EE6F30FD3F} = {1D147B2C-3606-4AD7-B393-8C06338BBF88}
 		{8419AFD6-E2B5-4FF8-9143-855F479EB502} = {1D147B2C-3606-4AD7-B393-8C06338BBF88}
 		{8B9764A5-B225-4825-8572-025AAB699691} = {5964245F-6F4A-48B9-A22C-58AD436122EB}
+		{8FFA93A3-9F3E-4793-A0C3-9DE89FE028EC} = {1D147B2C-3606-4AD7-B393-8C06338BBF88}
 		{6FD2B557-587D-432E-BC0A-E7D0C530C9CD} = {5964245F-6F4A-48B9-A22C-58AD436122EB}
 	EndGlobalSection
 EndGlobal
