@@ -37,5 +37,11 @@ namespace Gesetzesentwicklung.GUI.ViewModels
                 NotifyOfPropertyChange(() => GIISelectorView);
             }
         }
+
+        public void OpenAbout()
+        {
+            var windowManager = new WindowManager();
+            windowManager.ShowDialog(new AboutViewModel());
+        }
     }
 }
