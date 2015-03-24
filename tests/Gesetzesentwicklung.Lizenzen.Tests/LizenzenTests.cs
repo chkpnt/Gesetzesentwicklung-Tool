@@ -26,7 +26,8 @@ namespace Gesetzesentwicklung.Lizenzen.Tests
 Autor: {1}
 Homepage: {2}
 Lizenz:
-{3}", lizenz.Projekt, lizenz.Autor, lizenz.Homepage, lizenz.LizenzText);
+{3}
+", lizenz.Projekt, lizenz.Autor, lizenz.Homepage, lizenz.LizenzText);
 
             Console.WriteLine(string.Join(Environment.NewLine, ausgabe.ToArray()));
         }
