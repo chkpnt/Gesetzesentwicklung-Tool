@@ -1,9 +1,12 @@
-﻿Projekt: Bibliothek YamlDotNet
-Autor: Antoine Aubry
-Homepage: http://aaubry.net/pages/yamldotnet.html
+﻿Projekt: Bibliothek Caliburn.Micro
+Autor: Rob Eisenberg et al.
+Homepage: http://caliburnmicro.com/
 LizenzAbk: MIT
 LizenzText: >
-  Copyright (c) 2008, 2009, 2010, 2011, 2012, 2013, 2014 Antoine Aubry 
+  The MIT License
+
+
+  Copyright (c) 2010 Blue Spire Consulting, Inc. 
 
 
   Permission is hereby granted, free of charge, to any person obtaining a 
@@ -25,4 +28,4 @@ LizenzText: >
   IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY 
   CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, 
   TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
-  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
