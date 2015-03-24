@@ -35,7 +35,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gesetzesentwicklung.Validat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gesetzesentwicklung.GUI", "src\Gesetzesentwicklung.GUI\Gesetzesentwicklung.GUI.csproj", "{8FFA93A3-9F3E-4793-A0C3-9DE89FE028EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gesetzesentwicklung.Lizenzen.Tests", "tests\Gesetzesentwicklung.Lizenzen.Tests\Gesetzesentwicklung.Lizenzen.Tests.csproj", "{6FD2B557-587D-432E-BC0A-E7D0C530C9CD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gesetzesentwicklung.Lizenzen.Tests", "test\Gesetzesentwicklung.Lizenzen.Tests\Gesetzesentwicklung.Lizenzen.Tests.csproj", "{6FD2B557-587D-432E-BC0A-E7D0C530C9CD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
