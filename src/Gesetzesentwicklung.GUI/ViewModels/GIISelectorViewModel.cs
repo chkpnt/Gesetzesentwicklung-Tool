@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using Gesetzesentwicklung.GII;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -37,10 +38,17 @@ namespace Gesetzesentwicklung.GUI.ViewModels
         public GIISelectorViewModel()
         {
             _gesetzesFilter = "Bla blub";
-            _gesetzeImInternet = new ObservableCollection<string>
+            _gesetzeImInternet = new ObservableCollection<string>();
+ 
+            Task.Run(() =>
             {
-                "bla", "blub", "foobar"
-            };
+                var verzeichnisLader = new VerzeichnisLader();
+                var xmlVerzeichnis = verzeichnisLader.LadeVerzeichnis().Result;
+                foreach (var norm in xmlVerzeichnis.Normen)
+                {
+                    Execute.OnUIThread(() => GesetzeImInternet.Add(norm.Titel));
+                }
+            });
         }
     }
 }

@@ -22,7 +22,6 @@ namespace Gesetzesentwicklung.GII.Tests
         public void SetUp()
         {
             _deserializer = new XmlSerializer(typeof(XmlGesetz));
-            Assembly.GetExecutingAssembly().GetManifestResourceNames().ToList().ForEach(l => Console.WriteLine(l));
             using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Gesetzesentwicklung.GII.Tests.Resources.demo.xml"))
             {
                 _gesetz = _deserializer.Deserialize(stream) as XmlGesetz;

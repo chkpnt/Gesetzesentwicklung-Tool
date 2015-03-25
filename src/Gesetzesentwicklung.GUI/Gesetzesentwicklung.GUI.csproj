@@ -131,6 +131,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Gesetzesentwicklung.GII\Gesetzesentwicklung.GII.csproj">
+      <Project>{2929f0b3-6303-4fce-a257-86ee6f30fd3f}</Project>
+      <Name>Gesetzesentwicklung.GII</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Gesetzesentwicklung.Lizenzen\Gesetzesentwicklung.Lizenzen.csproj">
       <Project>{683c3ce6-e9a4-4050-842c-0da307458280}</Project>
       <Name>Gesetzesentwicklung.Lizenzen</Name>
