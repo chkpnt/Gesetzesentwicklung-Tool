@@ -2,9 +2,13 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:vm="clr-namespace:Gesetzesentwicklung.GUI.ViewModels"
+             xmlns:cal="http://www.caliburnproject.org"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300"
+             d:DataContext="{d:DesignInstance Type=vm:GIISelectorViewModel, IsDesignTimeCreatable=True}"
+             cal:Bind.AtDesignTime="True">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -13,13 +17,13 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <TextBox x:Name="Test" TextWrapping="Wrap" Text="TextBox" Margin="0" Width="300"/>
-        <ListView Margin="0" Grid.Row="1">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <TextBox x:Name="GesetzesFilter" TextWrapping="Wrap" Text="TextBox" Margin="0" Width="300"/>
+        <ListBox x:Name="GesetzeImInternet" Margin="0" Grid.Row="1">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </UserControl>
