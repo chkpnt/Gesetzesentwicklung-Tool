@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="VerzeichnisLaderTests.cs" />
     <Compile Include="XmlVerzeichnisTests.cs" />
     <Compile Include="XmlGesetzTests.cs" />
     <Compile Include="ModelConverterTests.cs" />
