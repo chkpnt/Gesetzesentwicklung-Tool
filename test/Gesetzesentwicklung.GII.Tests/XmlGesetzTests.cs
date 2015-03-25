@@ -9,28 +9,28 @@ using System.Xml.Serialization;
 using Gesetzesentwicklung.Models;
 using Gesetzesentwicklung.GII;
 
-namespace Gesetzesentwicklung.Tests
+namespace Gesetzesentwicklung.GII.Tests
 {
     [TestFixture]
-    public class DeserializerTests
+    public class XmlGesetzTests
     {
         private XmlSerializer _deserializer;
 
         private XmlGesetz _gesetz;
 
         [SetUp]
-        public void Setup()
+        public void SetUp()
         {
             _deserializer = new XmlSerializer(typeof(XmlGesetz));
             Assembly.GetExecutingAssembly().GetManifestResourceNames().ToList().ForEach(l => Console.WriteLine(l));
-            using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Xml2Markdown.Tests.Resources.demo.xml"))
+            using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Gesetzesentwicklung.GII.Tests.Resources.demo.xml"))
             {
                 _gesetz = _deserializer.Deserialize(stream) as XmlGesetz;
             }
         }
 
         [Test]
-        public void GII_Deserializer()
+        public void GII_XmlGesetz_Deserializer()
         {
             Assert.That(_gesetz.Normen, Has.Count.EqualTo(214));
             

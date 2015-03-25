@@ -42,7 +42,8 @@
   <ItemGroup>
     <Compile Include="ModelConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="XmlModels.cs" />
+    <Compile Include="XmlGesetz.cs" />
+    <Compile Include="XmlVerzeichnis.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Gesetzesentwicklung.Models\Gesetzesentwicklung.Models.csproj">
