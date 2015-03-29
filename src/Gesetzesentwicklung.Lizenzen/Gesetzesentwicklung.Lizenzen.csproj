@@ -39,7 +39,7 @@
     <None Include="App.config" />
     <EmbeddedResource Include="Lizenzen\NuGet.Caliburn.Micro.yaml" />
     <EmbeddedResource Include="Lizenzen\NuGet.System.IO.Abstractions.yaml" />
-    <EmbeddedResource Include="Lizenzen\Codeschnippsel.Reflect.yaml" />
+    <EmbeddedResource Include="Lizenzen\Codeschnipsel.Reflect.yaml" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

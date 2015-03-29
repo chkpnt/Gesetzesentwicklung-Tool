@@ -15,8 +15,12 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        
-        <Button x:Name="OpenAbout" Margin="0" Content="Über" Grid.ColumnSpan="3" HorizontalAlignment="Right"/>
+
+        <Menu Grid.ColumnSpan="3">
+            <MenuItem Header="Hilfe">
+                <MenuItem x:Name="OpenAbout" Header="Über Gesetzesentwicklung-Tool"/>
+            </MenuItem>
+        </Menu>
         <Grid Grid.Column="0" Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
