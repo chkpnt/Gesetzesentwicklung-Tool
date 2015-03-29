@@ -3,17 +3,17 @@ using Gesetzesentwicklung.GII;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 
 namespace Gesetzesentwicklung.GUI.ViewModels
 {
     public class GIISelectorViewModel : PropertyChangedBase
     {
         private string _gesetzesFilter;
-
-        private ObservableCollection<string> _gesetzeImInternet;
 
         public string GesetzesFilter
         {
@@ -22,33 +22,46 @@ namespace Gesetzesentwicklung.GUI.ViewModels
             {
                 _gesetzesFilter = value;
                 NotifyOfPropertyChange(() => GesetzesFilter);
+
+                GesetzeImInternet.Refresh();
             }
         }
 
-        public ObservableCollection<string> GesetzeImInternet
-        {
-            get { return _gesetzeImInternet; }
-            set
-            {
-                _gesetzeImInternet = value;
-                NotifyOfPropertyChange(() => GesetzeImInternet);
-            }
-        }
+        public ListCollectionView GesetzeImInternet { get; private set; }
 
         public GIISelectorViewModel()
         {
-            _gesetzesFilter = "Bla blub";
-            _gesetzeImInternet = new ObservableCollection<string>();
- 
+            _gesetzesFilter = "";
+            //_gesetzeImInternet = new CollectionViewSource();
+            //_gesetzeImInternet.Source = new List<string> { "bla", "blub " };
+            //_gesetzeImInternet.View.Refresh();
+            //Refresh();
+
             Task.Run(() =>
             {
                 var verzeichnisLader = new VerzeichnisLader();
                 var xmlVerzeichnis = verzeichnisLader.LadeVerzeichnis().Result;
-                foreach (var norm in xmlVerzeichnis.Normen)
+                var normen = from norm in xmlVerzeichnis.Normen
+                             select new HighlightableTextBlockViewModel(norm.Titel);
+
+                Execute.OnUIThread(() =>
                 {
-                    Execute.OnUIThread(() => GesetzeImInternet.Add(norm.Titel));
-                }
+                    GesetzeImInternet = new ListCollectionView(normen.ToList());
+                    GesetzeImInternet.Filter = o =>
+                        {
+                            var s = o as HighlightableTextBlockViewModel;
+                            var showNorm = s.Contains(GesetzesFilter);
+                            if (showNorm)
+                            {
+                                s.HighlightText(GesetzesFilter);
+                            }
+                            return showNorm;
+                        };
+                    GesetzeImInternet.SortDescriptions.Add(new SortDescription("Text", ListSortDirection.Ascending));
+                    NotifyOfPropertyChange(() => GesetzeImInternet);
+                });
             });
         }
+
     }
 }

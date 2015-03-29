@@ -64,10 +64,14 @@
     <Compile Include="CaliburnBootstrapper.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\GIISelectorViewModel.cs" />
+    <Compile Include="ViewModels\HighlightableTextBlockViewModel.cs" />
     <Compile Include="ViewModels\LizenzenViewModel.cs" />
     <Compile Include="ViewModels\LizenzViewModel.cs" />
     <Compile Include="Views\AboutView.xaml.cs">
       <DependentUpon>AboutView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HighlightableTextBlockView.xaml.cs">
+      <DependentUpon>HighlightableTextBlockView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LizenzView.xaml.cs">
       <DependentUpon>LizenzView.xaml</DependentUpon>
@@ -80,6 +84,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\GIISelectorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\HighlightableTextBlockView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

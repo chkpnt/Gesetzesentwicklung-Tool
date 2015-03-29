@@ -17,13 +17,10 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <TextBox x:Name="GesetzesFilter" TextWrapping="Wrap" Text="TextBox" Margin="0" Width="300"/>
-        <ListBox x:Name="GesetzeImInternet" Margin="0" Grid.Row="1">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding}" />
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+        <DockPanel>
+            <Label Content="Filter:" />
+            <TextBox x:Name="GesetzesFilter" Text="TextBox" Margin="0" VerticalContentAlignment="Center"/>
+        </DockPanel>
+        <ListBox x:Name="GesetzeImInternet" Margin="0,10,0,0" Grid.Row="1" />
     </Grid>
 </UserControl>
