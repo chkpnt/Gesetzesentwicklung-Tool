@@ -18,9 +18,9 @@ namespace Gesetzesentwicklung.GUI.Views
     /// <summary>
     /// Interaction logic for GIISelector.xaml
     /// </summary>
-    public partial class GIISelectorView : UserControl
+    public partial class GesetzeImInternetView : UserControl
     {
-        public GIISelectorView()
+        public GesetzeImInternetView()
         {
             InitializeComponent();
         }

@@ -11,11 +11,11 @@ namespace Gesetzesentwicklung.GUI.ViewModels
     {
         private string _windowTitle = "Default Title";
 
-        private GIISelectorViewModel _giiSelectorView;
+        private GesetzeImInternetViewModel _giiSelectorView;
 
         public MainViewModel()
         {
-            _giiSelectorView = new GIISelectorViewModel();
+            _giiSelectorView = new GesetzeImInternetViewModel();
         }
 
         public string WindowTitle
@@ -28,7 +28,7 @@ namespace Gesetzesentwicklung.GUI.ViewModels
             }
         }
 
-        public GIISelectorViewModel GIISelectorView
+        public GesetzeImInternetViewModel GIISelectorView
         {
             get { return _giiSelectorView; }
             set

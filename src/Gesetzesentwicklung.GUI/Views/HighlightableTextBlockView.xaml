@@ -6,6 +6,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <TextBlock x:Name="TextBlock" Text="{Binding Path=Text, Mode=OneTime}" />
+        <TextBlock x:Name="TextBlock" Text="{Binding Path=NormTitel, Mode=OneTime}" />
     </Grid>
 </UserControl>

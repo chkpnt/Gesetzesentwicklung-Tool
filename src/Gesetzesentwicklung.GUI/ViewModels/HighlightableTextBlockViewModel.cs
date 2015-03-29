@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using Gesetzesentwicklung.GII;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,25 +12,19 @@ using System.Windows.Documents;
 
 namespace Gesetzesentwicklung.GUI.ViewModels
 {
-    class HighlightableTextBlockViewModel : ViewAware
+    public class HighlightableTextBlockViewModel : ViewAware
     {
-        private readonly string _text;
+        private readonly XmlVerzeichnis.Norm _norm;
 
-        public string Text { get { return _text; } }
+        public string NormTitel { get { return _norm.Titel; } }
 
         private TextBlock _textBlock;
 
-        public HighlightableTextBlockViewModel(string text)
+        public HighlightableTextBlockViewModel(XmlVerzeichnis.Norm norm)
         {
-            _text = text;
+            _norm = norm;
         }
 
-        protected override void OnViewLoaded(object view)
-        {
-            base.OnViewLoaded(view);
-
-
-        }
         protected override void OnViewAttached(object view, object context)
         {
             base.OnViewAttached(view, context);
@@ -54,14 +49,14 @@ namespace Gesetzesentwicklung.GUI.ViewModels
 
             if (string.IsNullOrEmpty(filter))
             {
-                _textBlock.Text = Text;
+                _textBlock.Text = NormTitel;
                 return;
             }
 
             _textBlock.Text = string.Empty;
             _textBlock.Inlines.Clear();
 
-            var positionen = Regex.Matches(Text, filter, RegexOptions.IgnoreCase)
+            var positionen = Regex.Matches(NormTitel, filter, RegexOptions.IgnoreCase)
                                   .Cast<Match>()
                                   .Select(m => m.Index);
 
@@ -77,27 +72,27 @@ namespace Gesetzesentwicklung.GUI.ViewModels
             {
                 if (currentPos < pos)
                 {
-                    yield return new Run(Text.Substring(currentPos, pos - currentPos));
+                    yield return new Run(NormTitel.Substring(currentPos, pos - currentPos));
                 }
 
                 yield return new Run
                 {
-                    Text = Text.Substring(pos, highlightLenght),
+                    Text = NormTitel.Substring(pos, highlightLenght),
                     FontWeight = FontWeights.Bold
                 };
 
                 currentPos = pos + highlightLenght;
             }
 
-            if (currentPos < Text.Length)
+            if (currentPos < NormTitel.Length)
             {
-                yield return new Run(Text.Substring(currentPos, Text.Length - currentPos));
+                yield return new Run(NormTitel.Substring(currentPos, NormTitel.Length - currentPos));
             }
         }
 
         public bool Contains(string GesetzesFilter)
         {
-            return Text.IndexOf(GesetzesFilter, StringComparison.OrdinalIgnoreCase) >= 0;
+            return NormTitel.IndexOf(GesetzesFilter, StringComparison.OrdinalIgnoreCase) >= 0;
         }
     }
 }
