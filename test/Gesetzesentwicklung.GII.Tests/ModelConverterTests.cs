@@ -9,7 +9,7 @@ using Gesetzesentwicklung.Models;
 namespace Gesetzesentwicklung.GII.Tests
 {
     [TestFixture]
-    class ModelConverterTests
+    public class ModelConverterTests
     {
         ModelConverter _converter;
 

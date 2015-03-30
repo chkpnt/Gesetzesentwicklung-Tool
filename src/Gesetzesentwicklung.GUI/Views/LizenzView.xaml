@@ -1,0 +1,10 @@
+﻿<Window x:Class="Gesetzesentwicklung.GUI.Views.LizenzView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="{Binding Projekt}" Height="600" Width="500" ResizeMode="NoResize">
+    <Grid>
+        <ScrollViewer>
+            <TextBox x:Name="LizenzText" TextWrapping="Wrap" IsReadOnly="True" BorderBrush="{x:Null}" BorderThickness="0" />
+        </ScrollViewer>
+    </Grid>
+</Window>
