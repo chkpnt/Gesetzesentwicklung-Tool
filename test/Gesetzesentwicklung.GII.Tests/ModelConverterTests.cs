@@ -11,12 +11,14 @@ namespace Gesetzesentwicklung.GII.Tests
     [TestFixture]
     public class ModelConverterTests
     {
-        ModelConverter _converter;
+        private ModelConverter _converter;
 
-        XmlGesetz _xmlGesetz;
+        private XmlGesetz _xmlGesetz;
+
+        private XmlVerzeichnis _xmlVerzeichnis;
 
         [SetUp]
-        public void setup()
+        public void SetUp()
         {
             _converter = new ModelConverter();
 
@@ -33,10 +35,20 @@ namespace Gesetzesentwicklung.GII.Tests
                     neuerArtikel("Art 3", "Kapitel B, Artikel 3")
                 }
             };
+
+            _xmlVerzeichnis = new XmlVerzeichnis
+            {
+                Normen = new List<XmlVerzeichnis.Norm>
+                {
+                    neuerVerzeichniseintrag("Gesetz über die Verwendung von C# in Behörden", "http://example.com/1"),
+                    neuerVerzeichniseintrag("Grundgesetz für die Bundesrepublik Deutschland", "http://www.gesetze-im-internet.de/gg/xml.zip"),
+                    neuerVerzeichniseintrag("Verordnung über die Abschaffung von Objective-C", "http://example.com/2")
+                }
+            };
         }
 
         [Test]
-        public void GII_GesetzesnameVonErsterNorm()
+        public void GII_ModelConverter_Gesetz_GesetzesnameVonErsterNorm()
         {
             var gesetz = _converter.Convert(_xmlGesetz);
 
@@ -44,7 +56,7 @@ namespace Gesetzesentwicklung.GII.Tests
         }
 
         [Test]
-        public void GII_AbschnittsnameIstRichtigZusammengesetz()
+        public void GII_ModelConverter_Gesetz_AbschnittsnameIstRichtigZusammengesetz()
         {
             var gesetz = _converter.Convert(_xmlGesetz);
 
@@ -52,7 +64,7 @@ namespace Gesetzesentwicklung.GII.Tests
         }
 
         [Test]
-        public void GII_ArtikelStattArt()
+        public void GII_ModelConverter_Gesetz_ArtikelStattArt()
         {
             var gesetz = _converter.Convert(_xmlGesetz);
 
@@ -64,7 +76,7 @@ namespace Gesetzesentwicklung.GII.Tests
         }
 
         [Test]
-        public void GII_ArtikelInRichtigenAbschnitten()
+        public void GII_ModelConverter_Gesetz_ArtikelInRichtigenAbschnitten()
         {
             var gesetz = _converter.Convert(_xmlGesetz);
 
@@ -84,6 +96,16 @@ namespace Gesetzesentwicklung.GII.Tests
                                       where artikel.Abschnitt == "II. Kapitel B"
                                       select artikel;
             Assert.That(artikelInAbschnitt2, Has.Exactly(1).Matches<Artikel>(a => a.Inhalt == "Kapitel B, Artikel 3"));
+        }
+
+        [Test]
+        public void GII_ModelConverter_Gesetzesverzeichnis()
+        {
+            var verzeichnis = _converter.Convert(_xmlVerzeichnis);
+
+            Assert.That(verzeichnis.Normen.Count(), Is.EqualTo(3));
+            Assert.That(verzeichnis.Normen.ElementAt(1).Titel, Is.EqualTo("Grundgesetz für die Bundesrepublik Deutschland"));
+            Assert.That(verzeichnis.Normen.ElementAt(1).Link, Is.EqualTo(new Uri("http://www.gesetze-im-internet.de/gg/xml.zip")));
         }
 
         private XmlGesetz.Norm neuerGesetzesname(string abkuerzung)
@@ -136,6 +158,15 @@ namespace Gesetzesentwicklung.GII.Tests
             return new XmlGesetz.Textdaten
             {
                 Text =  inhalt
+            };
+        }
+
+        private XmlVerzeichnis.Norm neuerVerzeichniseintrag(string titel, string url)
+        {
+            return new XmlVerzeichnis.Norm
+            {
+                Titel = titel,
+                Link = url
             };
         }
     }

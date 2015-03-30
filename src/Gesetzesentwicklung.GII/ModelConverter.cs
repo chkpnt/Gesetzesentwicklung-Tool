@@ -16,7 +16,7 @@ namespace Gesetzesentwicklung.GII
             Gesetzesname
         }
 
-        public Gesetz Convert(XmlGesetz xmlGesetz)
+        internal Gesetz Convert(XmlGesetz xmlGesetz)
         {
             var artikel = convertNormen2Artikel(xmlGesetz.Normen);
 
@@ -26,6 +26,19 @@ namespace Gesetzesentwicklung.GII
                 Artikel = artikel
             };
             return gesetz;
+        }
+
+        internal Gesetzesverzeichnis Convert(XmlVerzeichnis xmlVerzeichnis)
+        {
+            return new Gesetzesverzeichnis()
+            {
+                Normen = from norm in xmlVerzeichnis.Normen
+                         select new Gesetzesverzeichnis.Norm
+                         {
+                             Link = new Uri(norm.Link),
+                             Titel = norm.Titel
+                         }
+            };
         }
 
         IEnumerable<Artikel> convertNormen2Artikel(List<XmlGesetz.Norm> normen)

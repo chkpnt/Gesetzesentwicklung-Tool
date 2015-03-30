@@ -9,6 +9,9 @@ using System.Xml.Serialization;
 
 namespace Gesetzesentwicklung.GII
 {
+    // XmlSerializer verlangt hier eine public-Visibility,
+    // drum wenigstens ein internal-Konstruktor
+    // Evtl. wechseln zu DataContractSerializer? 
     [XmlRoot("dokumente")]
     public class XmlGesetz
     {

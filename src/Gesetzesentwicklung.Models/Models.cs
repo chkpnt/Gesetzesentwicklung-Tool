@@ -23,4 +23,15 @@ namespace Gesetzesentwicklung.Models
     {
         public string Name { get; set; }
     }
+
+    public class Gesetzesverzeichnis
+    {
+        public IEnumerable<Norm> Normen { get; set; }
+
+        public class Norm
+        {
+            public string Titel { get; set; }
+            public Uri Link { get; set; }
+        }
+    }
 }

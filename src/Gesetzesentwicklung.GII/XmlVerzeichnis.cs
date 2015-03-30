@@ -7,6 +7,9 @@ using System.Xml.Serialization;
 
 namespace Gesetzesentwicklung.GII
 {
+    // XmlSerializer verlangt hier eine public-Visibility,
+    // drum wenigstens ein internal-Konstruktor
+    // Evtl. wechseln zu DataContractSerializer? 
     [XmlRoot("items")]
     public class XmlVerzeichnis
     {
@@ -18,15 +21,8 @@ namespace Gesetzesentwicklung.GII
             [XmlElement("title")]
             public string Titel { get; set; }
 
-            [XmlIgnore()]
-            public Uri Link { get; set; }
-
             [XmlElement("link")]
-            public string _Link
-            {
-                get { return Link.ToString(); }
-                set { Link = new Uri(value); }
-            }
+            public string Link { get; set; }
         }
     }
 }
