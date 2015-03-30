@@ -29,7 +29,7 @@ namespace Gesetzesentwicklung.GUI.ViewModels
 
             ICollectionView lizenzenView = CollectionViewSource.GetDefaultView(Lizenzen);
             lizenzenView.SortDescriptions.Add(
-                new SortDescription(ReflectOn<Lizenz>.GetProperty<string>(m => m.Projekt).Name, ListSortDirection.Ascending)
+                new SortDescription(PropertyNameSolver.Instance.Lizenz_Projekt, ListSortDirection.Ascending)
             );
         }
 

@@ -56,7 +56,7 @@ namespace Gesetzesentwicklung.GUI.ViewModels
             _gesetzeImInternetView = CollectionViewSource.GetDefaultView(GesetzeImInternet);
             _gesetzeImInternetView.Filter = new Predicate<object>(GesetzeImInternet_FilterUndHighlighter);
             _gesetzeImInternetView.SortDescriptions.Add(
-                new SortDescription(ReflectOn<HighlightableTextBlockViewModel>.GetProperty<string>(m => m.NormTitel).Name, ListSortDirection.Ascending)
+                new SortDescription(PropertyNameSolver.Instance.HighlightableTextBlockViewModel_NormTitle, ListSortDirection.Ascending)
             );
 
             Task.Run(() =>
