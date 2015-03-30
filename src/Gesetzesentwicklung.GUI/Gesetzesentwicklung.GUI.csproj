@@ -140,13 +140,17 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Gesetzesentwicklung.GII\Gesetzesentwicklung.GII.csproj">
-      <Project>{2929f0b3-6303-4fce-a257-86ee6f30fd3f}</Project>
-      <Name>Gesetzesentwicklung.GII</Name>
+    <ProjectReference Include="..\Gesetzesentwicklung.GL\Gesetzesentwicklung.GL.csproj">
+      <Project>{3d64943b-b165-4a00-9b77-09d49bba3171}</Project>
+      <Name>Gesetzesentwicklung.GL</Name>
     </ProjectReference>
     <ProjectReference Include="..\Gesetzesentwicklung.Lizenzen\Gesetzesentwicklung.Lizenzen.csproj">
       <Project>{683c3ce6-e9a4-4050-842c-0da307458280}</Project>
       <Name>Gesetzesentwicklung.Lizenzen</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gesetzesentwicklung.Models\Gesetzesentwicklung.Models.csproj">
+      <Project>{f7b91df7-d12c-439b-aedd-48f0e9eaee09}</Project>
+      <Name>Gesetzesentwicklung.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\Gesetzesentwicklung.Shared\Gesetzesentwicklung.Shared.csproj">
       <Project>{11c3b8e3-dc96-4cac-b1b1-88a8427da25c}</Project>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Gesetzesentwicklung.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -14,12 +15,14 @@ namespace Gesetzesentwicklung.GII
     {
         private static readonly Uri XmlVerzeichnisUri = new Uri("http://www.gesetze-im-internet.de/gii-toc.xml");
 
-        public async Task<XmlVerzeichnis> LadeVerzeichnis()
+        public async Task<Gesetzesverzeichnis> LadeVerzeichnis()
         {
             using (var webclient = new WebClient())
             {
                 var stream = await webclient.OpenReadTaskAsync(XmlVerzeichnisUri);
-                return ParseXml(stream);
+                var xmlVerzeichnis = ParseXml(stream);
+                var modelConverter = new ModelConverter();
+                return modelConverter.Convert(xmlVerzeichnis);
             }
         }
 

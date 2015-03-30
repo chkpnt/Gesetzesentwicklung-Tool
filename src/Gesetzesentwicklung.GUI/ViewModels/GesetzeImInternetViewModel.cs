@@ -1,5 +1,5 @@
 ﻿using Caliburn.Micro;
-using Gesetzesentwicklung.GII;
+using Gesetzesentwicklung.GL;
 using Gesetzesentwicklung.Shared;
 using System;
 using System.Collections.Generic;
@@ -61,9 +61,9 @@ namespace Gesetzesentwicklung.GUI.ViewModels
 
             Task.Run(() =>
             {
-                var verzeichnisLader = new VerzeichnisLader();
-                var xmlVerzeichnis = verzeichnisLader.LadeVerzeichnis().Result;
-                var normen = from norm in xmlVerzeichnis.Normen
+                var gesetzesService = new GesetzeImInternetService();
+                var verzeichnis = gesetzesService.GetGesetzesverzeichnis().Result;
+                var normen = from norm in verzeichnis.Normen
                              select new HighlightableTextBlockViewModel(norm);
 
                 Execute.OnUIThread(() =>
@@ -92,6 +92,8 @@ namespace Gesetzesentwicklung.GUI.ViewModels
             {
                 return;
             }
+
+
             throw new NotImplementedException();
         }
 

@@ -15,8 +15,8 @@ namespace Gesetzesentwicklung.GII.Tests
         public async void GII_VerzeichnisLader()
         {
             var lader = new VerzeichnisLader();
-            var xmlVerzeichnis = await lader.LadeVerzeichnis();
-            Assert.That(xmlVerzeichnis.Normen, Has.Count.GreaterThan(0));
+            var gesetzesVerzeichnis = await lader.LadeVerzeichnis();
+            Assert.That(gesetzesVerzeichnis.Normen.Count(), Is.GreaterThan(0));
         }
     }
 }

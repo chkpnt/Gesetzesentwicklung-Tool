@@ -1,5 +1,5 @@
 ﻿using Caliburn.Micro;
-using Gesetzesentwicklung.GII;
+using Gesetzesentwicklung.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,13 +14,13 @@ namespace Gesetzesentwicklung.GUI.ViewModels
 {
     public class HighlightableTextBlockViewModel : ViewAware
     {
-        private readonly XmlVerzeichnis.Norm _norm;
+        private readonly Gesetzesverzeichnis.Norm _norm;
 
         public string NormTitel { get { return _norm.Titel; } }
 
         private TextBlock _textBlock;
 
-        public HighlightableTextBlockViewModel(XmlVerzeichnis.Norm norm)
+        public HighlightableTextBlockViewModel(Gesetzesverzeichnis.Norm norm)
         {
             _norm = norm;
         }

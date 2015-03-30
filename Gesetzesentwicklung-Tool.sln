@@ -37,6 +37,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gesetzesentwicklung.GUI", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gesetzesentwicklung.Lizenzen.Tests", "test\Gesetzesentwicklung.Lizenzen.Tests\Gesetzesentwicklung.Lizenzen.Tests.csproj", "{6FD2B557-587D-432E-BC0A-E7D0C530C9CD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gesetzesentwicklung.GL", "src\Gesetzesentwicklung.GL\Gesetzesentwicklung.GL.csproj", "{3D64943B-B165-4A00-9B77-09D49BBA3171}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -103,6 +105,10 @@ Global
 		{6FD2B557-587D-432E-BC0A-E7D0C530C9CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FD2B557-587D-432E-BC0A-E7D0C530C9CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FD2B557-587D-432E-BC0A-E7D0C530C9CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D64943B-B165-4A00-9B77-09D49BBA3171}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D64943B-B165-4A00-9B77-09D49BBA3171}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D64943B-B165-4A00-9B77-09D49BBA3171}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D64943B-B165-4A00-9B77-09D49BBA3171}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -123,5 +129,6 @@ Global
 		{8B9764A5-B225-4825-8572-025AAB699691} = {5964245F-6F4A-48B9-A22C-58AD436122EB}
 		{8FFA93A3-9F3E-4793-A0C3-9DE89FE028EC} = {1D147B2C-3606-4AD7-B393-8C06338BBF88}
 		{6FD2B557-587D-432E-BC0A-E7D0C530C9CD} = {5964245F-6F4A-48B9-A22C-58AD436122EB}
+		{3D64943B-B165-4A00-9B77-09D49BBA3171} = {1D147B2C-3606-4AD7-B393-8C06338BBF88}
 	EndGlobalSection
 EndGlobal
