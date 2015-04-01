@@ -14,7 +14,7 @@ namespace Gesetzesentwicklung.GII.Tests
         [Category("WithExternalResource")]
         public async void GII_VerzeichnisLader()
         {
-            var lader = new VerzeichnisLader();
+            var lader = new XmlVerzeichnisService();
             var gesetzesVerzeichnis = await lader.LadeVerzeichnis();
             Assert.That(gesetzesVerzeichnis.Normen.Count(), Is.GreaterThan(0));
         }

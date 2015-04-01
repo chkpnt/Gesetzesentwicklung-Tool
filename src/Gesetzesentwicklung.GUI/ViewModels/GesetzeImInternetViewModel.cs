@@ -20,6 +20,8 @@ namespace Gesetzesentwicklung.GUI.ViewModels
 
         private ICollectionView _gesetzeImInternetView;
 
+        private GesetzeImInternetService _gesetzesService;
+
         public string GesetzesFilter
         {
             get { return _gesetzesFilter; }
@@ -50,6 +52,7 @@ namespace Gesetzesentwicklung.GUI.ViewModels
 
         public GesetzeImInternetViewModel()
         {
+            _gesetzesService =  new GesetzeImInternetService();
             _gesetzesFilter = "";
 
             GesetzeImInternet = new List<HighlightableTextBlockViewModel>();
@@ -61,8 +64,7 @@ namespace Gesetzesentwicklung.GUI.ViewModels
 
             Task.Run(() =>
             {
-                var gesetzesService = new GesetzeImInternetService();
-                var verzeichnis = gesetzesService.GetGesetzesverzeichnis().Result;
+                var verzeichnis = _gesetzesService.GetGesetzesverzeichnis().Result;
                 var normen = from norm in verzeichnis.Normen
                              select new HighlightableTextBlockViewModel(norm);
 
@@ -93,8 +95,10 @@ namespace Gesetzesentwicklung.GUI.ViewModels
                 return;
             }
 
-
-            throw new NotImplementedException();
+            //Task.Run(() =>
+            //{
+                _gesetzesService.GenerateMarkdown(SelectedGesetzeImInternet.Norm);
+            //});
         }
 
     }

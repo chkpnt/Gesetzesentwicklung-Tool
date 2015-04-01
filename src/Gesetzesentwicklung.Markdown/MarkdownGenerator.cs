@@ -60,7 +60,7 @@ namespace Gesetzesentwicklung.Markdown
                 if (artikel.Abschnitt == null)
                 {
                     File.WriteAllText(
-                        path: Path.Combine(_outputFolder.Name, _gesetz.Name, dateiname),
+                        path: Path.Combine(_outputFolder.FullName, _gesetz.Name, dateiname),
                         contents: formatMarkdown(artikel),
                         encoding: Encoding.UTF8
                     );
@@ -68,7 +68,7 @@ namespace Gesetzesentwicklung.Markdown
                 else
                 {
                     File.WriteAllText(
-                        path: Path.Combine(_outputFolder.Name, _gesetz.Name, artikel.Abschnitt, dateiname),
+                        path: Path.Combine(_outputFolder.FullName, _gesetz.Name, artikel.Abschnitt, dateiname),
                         contents: formatMarkdown(artikel),
                         encoding: Encoding.UTF8
                     );
@@ -87,7 +87,7 @@ namespace Gesetzesentwicklung.Markdown
         private void createSettingFile()
         {
             using (TextWriter textWriter = new StreamWriter(
-                path: Path.Combine(_outputFolder.Name, _gesetz.Name + ".yml"),
+                path: Path.Combine(_outputFolder.FullName, _gesetz.Name + ".yml"),
                 append: false,
                 encoding: Encoding.UTF8))
             {

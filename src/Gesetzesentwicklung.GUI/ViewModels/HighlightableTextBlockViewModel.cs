@@ -14,15 +14,15 @@ namespace Gesetzesentwicklung.GUI.ViewModels
 {
     public class HighlightableTextBlockViewModel : ViewAware
     {
-        private readonly Gesetzesverzeichnis.Norm _norm;
+        public Gesetzesverzeichnis.Norm Norm { get; private set; }
 
-        public string NormTitel { get { return _norm.Titel; } }
+        public string NormTitel { get { return Norm.Titel; } }
 
         private TextBlock _textBlock;
 
         public HighlightableTextBlockViewModel(Gesetzesverzeichnis.Norm norm)
         {
-            _norm = norm;
+            Norm = norm;
         }
 
         protected override void OnViewAttached(object view, object context)

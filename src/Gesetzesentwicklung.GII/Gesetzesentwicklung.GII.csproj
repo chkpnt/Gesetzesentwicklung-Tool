@@ -42,7 +42,8 @@
   <ItemGroup>
     <Compile Include="ModelConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VerzeichnisLader.cs" />
+    <Compile Include="XmlGesetzService.cs" />
+    <Compile Include="XmlVerzeichnisService.cs" />
     <Compile Include="XmlGesetz.cs" />
     <Compile Include="XmlVerzeichnis.cs" />
   </ItemGroup>

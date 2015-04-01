@@ -11,7 +11,7 @@ using System.Xml.Serialization;
 
 namespace Gesetzesentwicklung.GII
 {
-    public class VerzeichnisLader
+    public class XmlVerzeichnisService
     {
         private static readonly Uri XmlVerzeichnisUri = new Uri("http://www.gesetze-im-internet.de/gii-toc.xml");
 
