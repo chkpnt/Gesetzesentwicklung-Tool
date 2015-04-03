@@ -2,7 +2,6 @@ properties {
   $codecoverage = "VisualStudio"
   
   $vstest_console_exe = Resolve-Path ($env:VS120COMNTOOLS + "..\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe")
-  $coveralls_exe = Resolve-Path "packages\coveralls.net.*\csmacnz.coveralls.exe"
   
   if ($codecoverage -eq "VisualStudio") {
     $code_coverage_exe = Resolve-Path ($env:VS120COMNTOOLS + "..\..\Team Tools\Dynamic Code Coverage Tools\CodeCoverage.exe")
@@ -38,7 +37,7 @@ task Clean {
   exec { msbuild "/t:Clean" $sln_file }
 }
 
-task Build -depends Clean {
+task Build -depends Clean, RestoreNuGetPackages {
   exec { msbuild $sln_file }
 }
 
@@ -60,7 +59,11 @@ task Test -depends FindTestAssemblies {
   }
 }
 
-task AppVeyor-PublishCodeCoverage {
+task ResolveCoveralls {
+  $skript:coveralls_exe = Resolve-Path "packages\coveralls.net.*\csmacnz.coveralls.exe"
+}
+
+task AppVeyor-PublishCodeCoverage -depends ResolveCoveralls {
   Write-Host $codecoverage
   
   if (!(Test-Path $coverage_xml)) {
@@ -68,16 +71,16 @@ task AppVeyor-PublishCodeCoverage {
   }
   
   exec {
-    & $coveralls_exe --dynamiccodecoverage `
-                     -i coverage.coveragexml `
-                     -o coverallsTestOutput.json `
-                     --repoToken $env:coveralls_token `
-                     --useRelativePaths `
-                     --commitId $env:APPVEYOR_REPO_COMMIT `
-                     --commitBranch $env:APPVEYOR_REPO_BRANCH `
-                     --commitAuthor $env:APPVEYOR_REPO_COMMIT_AUTHOR `
-                     --commitEmail $env:APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL `
-                     --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE `
-                     --jobId $env:APPVEYOR_JOB_ID
+    & $skript:coveralls_exe --dynamiccodecoverage `
+                            -i coverage.coveragexml `
+                            -o coverallsTestOutput.json `
+                            --repoToken $env:coveralls_token `
+                            --useRelativePaths `
+                            --commitId $env:APPVEYOR_REPO_COMMIT `
+                            --commitBranch $env:APPVEYOR_REPO_BRANCH `
+                            --commitAuthor $env:APPVEYOR_REPO_COMMIT_AUTHOR `
+                            --commitEmail $env:APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL `
+                            --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE `
+                            --jobId $env:APPVEYOR_JOB_ID
   }
 }
