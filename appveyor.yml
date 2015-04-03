@@ -20,6 +20,7 @@
   - git config --global core.autocrlf true
 
   before_build:
+  - ps: dir env:
   - nuget restore
 
   build_script:
