@@ -4,6 +4,7 @@
 
   before_build:
   - ps: dir "env:"
+  - ps: .\zeige-software.ps1
   - nuget restore
 
 -
