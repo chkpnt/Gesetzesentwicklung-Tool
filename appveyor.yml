@@ -16,8 +16,7 @@
   - ps: psake .\build.tasks.ps1 Build
 
   test_script:
-  - ps: psake .\build.tasks.ps1 Test
-  - ps: psake .\build.tasks.ps1 AppVeyor-PublishCodeCoverage
+  - ps: psake .\build.tasks.ps1 AppVeyor-TestAndPublishCodeCoverage
 
 -
   branches:

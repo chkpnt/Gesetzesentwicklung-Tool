@@ -45,7 +45,7 @@ task FindTestAssemblies {
   $script:test_assemblies = @(Get-ChildItem "test\**\*.Tests.dll" -Recurse)
 }
 
-task Test -depends FindTestAssemblies {
+task Test -depends FindTestAssemblies -ContinueOnError {
   $appveyor_logger = ""
   if (Test-Path Env:\APPVEYOR_BUILD_VERSION) {
     $appveyor_logger = "/Logger:Appveyor"
@@ -88,3 +88,5 @@ task AppVeyor-PublishCodeCoverage -depends ResolveCoveralls {
                           --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE `
                           --jobId $env:APPVEYOR_JOB_ID
 }
+
+task AppVeyor-TestAndPublishCodeCoverage -depends Test, AppVeyor-PublishCodeCoverage
