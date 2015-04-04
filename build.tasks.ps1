@@ -50,22 +50,18 @@ task Test -depends FindTestAssemblies {
   if (Test-Path Env:\APPVEYOR_BUILD_VERSION) {
     $appveyor_logger = "/Logger:Appveyor"
   }
-  
-  exec {
-    & $vstest_console_exe /InIsolation `
-                          /EnableCodeCoverage `
-                          /Settings:CodeCoverage.runsettings `
-                          $appveyor_logger `
-                          /TestAdapterPath:.\packages\NUnitTestAdapter.2.0.0\lib\ `
-                          $script:test_assemblies
-  }
+
+  & $vstest_console_exe /InIsolation `
+                        /EnableCodeCoverage `
+                        /Settings:CodeCoverage.runsettings `
+                        $appveyor_logger `
+                        /TestAdapterPath:.\packages\NUnitTestAdapter.2.0.0\lib\ `
+                        $script:test_assemblies
   
   if ($codecoverage -eq "VisualStudio") {
     $coverage_file = Resolve-Path -path "TestResults\*\*.coverage"
-    exec {
-      Write-Host ("Analyzing " + $coverage_file + " and saving as " + $coverage_xml)
-      & $code_coverage_exe analyze /output:$coverage_xml "$coverage_file"
-    }
+    Write-Host ("Analyzing " + $coverage_file + " and saving as " + $coverage_xml)
+    & $code_coverage_exe analyze /output:$coverage_xml "$coverage_file"
   }
 }
 
@@ -80,17 +76,15 @@ task AppVeyor-PublishCodeCoverage -depends ResolveCoveralls {
     throw ("Code-Coverage-Datei fehlt: " + $coverage_xml)
   }
   
-  exec {
-    & $script:coveralls_exe --dynamiccodecoverage `
-                            -i coverage.coveragexml `
-                            -o coverallsTestOutput.json `
-                            --repoToken $env:coveralls_token `
-                            --useRelativePaths `
-                            --commitId $env:APPVEYOR_REPO_COMMIT `
-                            --commitBranch $env:APPVEYOR_REPO_BRANCH `
-                            --commitAuthor $env:APPVEYOR_REPO_COMMIT_AUTHOR `
-                            --commitEmail $env:APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL `
-                            --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE `
-                            --jobId $env:APPVEYOR_JOB_ID
-  }
+  & $script:coveralls_exe --dynamiccodecoverage `
+                          -i coverage.coveragexml `
+                          -o coverallsTestOutput.json `
+                          --repoToken $env:coveralls_token `
+                          --useRelativePaths `
+                          --commitId $env:APPVEYOR_REPO_COMMIT `
+                          --commitBranch $env:APPVEYOR_REPO_BRANCH `
+                          --commitAuthor $env:APPVEYOR_REPO_COMMIT_AUTHOR `
+                          --commitEmail $env:APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL `
+                          --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE `
+                          --jobId $env:APPVEYOR_JOB_ID
 }
