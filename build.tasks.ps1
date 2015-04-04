@@ -46,8 +46,18 @@ task FindTestAssemblies {
 }
 
 task Test -depends FindTestAssemblies {
+  $appveyor_logger = ""
+  if (Test-Path Env:\APPVEYOR_BUILD_VERSION) {
+    $appveyor_logger = "/Logger:Appveyor"
+  }
+  
   exec {
-    & $vstest_console_exe /InIsolation /EnableCodeCoverage /Settings:CodeCoverage.runsettings /TestAdapterPath:.\packages\NUnitTestAdapter.2.0.0\lib\ $script:test_assemblies
+    & $vstest_console_exe /InIsolation `
+                          /EnableCodeCoverage `
+                          /Settings:CodeCoverage.runsettings `
+                          $appveyor_logger
+                          /TestAdapterPath:.\packages\NUnitTestAdapter.2.0.0\lib\ 
+                          `$script:test_assemblies
   }
   
   if ($codecoverage -eq "VisualStudio") {
