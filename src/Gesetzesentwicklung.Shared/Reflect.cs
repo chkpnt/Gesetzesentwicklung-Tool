@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 namespace Gesetzesentwicklung.Shared
 {
     // Quelle: https://digitaltapestry.wordpress.com/2009/03/20/reflecting-on-code/
+    [ExcludeFromCodeCoverage]
     public static class Reflect
     {
         public static MemberInfo GetMember(Expression<Action> expression)

@@ -10,30 +10,37 @@
             <!-- Match assembly file paths: -->
             <ModulePaths>
               <Include>
-				<ModulePath>.*\\Gesetzesentwicklung.GII.dll$</ModulePath>
+                <ModulePath>.*\\Gesetzesentwicklung.GII.dll$</ModulePath>
                 <ModulePath>.*\\Gesetzesentwicklung.Git.dll$</ModulePath>
-				<ModulePath>.*\\Gesetzesentwicklung.GL.dll$</ModulePath>
-				<ModulePath>.*\\Gesetzesentwicklung.GUI.dll$</ModulePath>
-				<ModulePath>.*\\Gesetzesentwicklung.Lizenzen.dll$</ModulePath>
-				<ModulePath>.*\\Gesetzesentwicklung.Markdown.dll$</ModulePath>
-				<ModulePath>.*\\Gesetzesentwicklung.Models.dll$</ModulePath>
-				<ModulePath>.*\\Gesetzesentwicklung.Shared.dll$</ModulePath>
-				<ModulePath>.*\\Gesetzesentwicklung.Validators.dll$</ModulePath>
+                <ModulePath>.*\\Gesetzesentwicklung.GL.dll$</ModulePath>
+                <ModulePath>.*\\Gesetzesentwicklung.GUI.dll$</ModulePath>
+                <ModulePath>.*\\Gesetzesentwicklung.Lizenzen.dll$</ModulePath>
+                <ModulePath>.*\\Gesetzesentwicklung.Markdown.dll$</ModulePath>
+                <ModulePath>.*\\Gesetzesentwicklung.Models.dll$</ModulePath>
+                <ModulePath>.*\\Gesetzesentwicklung.Shared.dll$</ModulePath>
+                <ModulePath>.*\\Gesetzesentwicklung.Validators.dll$</ModulePath>
               </Include>
-			  <Exclude>
-			<!--	<ModulePath>.*\\Gesetzesentwicklung.*Tests\.dll$</ModulePath> -->
-			<!--	<ModulePath>.*\\bin\\.*\\Gesetzesentwicklung\.Git\.dll</ModulePath> -->
-			  </Exclude>
-            </ModulePaths>
-			
-			<Functions>
               <Exclude>
+                <!--	<ModulePath>.*\\Gesetzesentwicklung.*Tests\.dll$</ModulePath> -->
+                <!--	<ModulePath>.*\\bin\\.*\\Gesetzesentwicklung\.Git\.dll</ModulePath> -->
+              </Exclude>
+            </ModulePaths>
+
+            <Functions>
+              <Exclude>
+                <!-- Solche Methoden sollte durch Code-Generator erzeugt werden: -->
                 <Function>.*\.Equals\(.*</Function>
-				<Function>.*\.EqualTo\(.*</Function>
-				<Function>.*\.GetHashCode\(.*</Function>
+                <Function>.*\.EqualTo\(.*</Function>
+                <Function>.*\.GetHashCode\(.*</Function>
               </Exclude>
             </Functions>
 
+            <Attributes>
+              <Exclude>
+                <Attribute>^System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute$</Attribute>
+              </Exclude>
+            </Attributes>
+            
             <!-- We recommend you do not change the following values: -->
             <UseVerifiableInstrumentation>True</UseVerifiableInstrumentation>
             <AllowLowIntegrityProcesses>True</AllowLowIntegrityProcesses>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -52,6 +53,7 @@ namespace Gesetzesentwicklung.GII
         {
             public string Text;
 
+            [ExcludeFromCodeCoverage]
             public System.Xml.Schema.XmlSchema GetSchema()
             {
                 return null;
@@ -67,6 +69,7 @@ namespace Gesetzesentwicklung.GII
                 this.Text = string.Join(Environment.NewLine + Environment.NewLine, paragraphs);
             }
 
+            [ExcludeFromCodeCoverage]
             public void WriteXml(System.Xml.XmlWriter writer)
             {
                 throw new NotImplementedException();
