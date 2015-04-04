@@ -60,7 +60,7 @@ task Test -depends FindTestAssemblies {
 }
 
 task ResolveCoveralls {
-  $skript:coveralls_exe = Resolve-Path "packages\coveralls.net.*\csmacnz.coveralls.exe"
+  $script:coveralls_exe = Resolve-Path "packages\coveralls.net.*\csmacnz.coveralls.exe"
 }
 
 task AppVeyor-PublishCodeCoverage -depends ResolveCoveralls {
@@ -71,7 +71,7 @@ task AppVeyor-PublishCodeCoverage -depends ResolveCoveralls {
   }
   
   exec {
-    & $skript:coveralls_exe --dynamiccodecoverage `
+    & $script:coveralls_exe --dynamiccodecoverage `
                             -i coverage.coveragexml `
                             -o coverallsTestOutput.json `
                             --repoToken $env:coveralls_token `
