@@ -85,5 +85,17 @@ Beschreibung: blabla
             Assert.That(liste1, Is.Ordered);
             Assert.That(liste2, Is.Not.Ordered);
         }
+
+        [Test]
+        public void Models_CommitSetting_ToString()
+        {
+            var expected = "CommitSetting [Autor: Foo Bar <foo@bar.net>, " + 
+                           "Datum: 01.01.2015 00:00:00, " +
+                           "Beschreibung: \"blabla\", " + 
+                           "BranchFrom: , " + 
+                           "MergeInto: Gesetze/GG/Bundesgesetzblatt]";
+
+            Assert.That(_commitSetting.ToString(), Is.EqualTo(expected));
+        }
     }
 }
