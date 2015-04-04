@@ -18,9 +18,7 @@ namespace Gesetzesentwicklung.Validators
             _fileSystem = fileSystem;
         }
 
-        public CommitSettingValidator() : this(fileSystem: new FileSystem())
-        {
-        }
+        public CommitSettingValidator() : this(fileSystem: new FileSystem()) { }
 
         public bool IsValid(CommitSetting commitSetting, string parentDir, BranchesSettings branchSettings)
         {

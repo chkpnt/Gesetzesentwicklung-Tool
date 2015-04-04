@@ -11,12 +11,6 @@ namespace Gesetzesentwicklung.Validators
     {
         private static string Message_InvalidBranch = "Ungültiger Branch, da sein Name in Konflikt zu einem anderen Branch steht: {0}";
 
-        public static bool IsValid(this BranchesSettings branchSettings)
-        {
-            ValidatorProtokoll protokoll = new ValidatorProtokoll();
-            return branchSettings.IsValid(ref protokoll);
-        }
-
         public static bool IsValid(this BranchesSettings branchSettings, ref ValidatorProtokoll protokoll)
         {
             var branches = branchSettings.Branches.Keys;
