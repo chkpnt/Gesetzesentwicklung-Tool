@@ -55,9 +55,9 @@ task Test -depends FindTestAssemblies {
     & $vstest_console_exe /InIsolation `
                           /EnableCodeCoverage `
                           /Settings:CodeCoverage.runsettings `
-                          $appveyor_logger
-                          /TestAdapterPath:.\packages\NUnitTestAdapter.2.0.0\lib\ 
-                          `$script:test_assemblies
+                          $appveyor_logger `
+                          /TestAdapterPath:.\packages\NUnitTestAdapter.2.0.0\lib\ `
+                          $script:test_assemblies
   }
   
   if ($codecoverage -eq "VisualStudio") {
