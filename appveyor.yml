@@ -1,9 +1,25 @@
 -
+  environment:
+    coveralls_token:
+      secure: SUUjAf0h5IiK+9NOJuLJheUwkAQZiC9Bf1/zZE0/oc3LOEoliMq+KNJdCB9BcdaI
+
   init:
   - git config --global core.autocrlf true 
 
+  install:
+  - choco install -y psake
+
   before_build:
-  - nuget restore
+  - ps: psake .\build.tasks.ps1 RestoreNuGetPackages
+
+  build_script:
+  - ps: psake .\build.tasks.ps1 Build
+
+  test_script:
+  - ps: psake .\build.tasks.ps1 Test
+
+  after_test:
+  - ps: psake .\build.tasks.ps1 AppVeyor-PublishCodeCoverage
 
 -
   branches:
