@@ -17,8 +17,6 @@
 
   test_script:
   - ps: psake .\build.tasks.ps1 Test
-
-  after_test:
   - ps: psake .\build.tasks.ps1 AppVeyor-PublishCodeCoverage
 
 -
