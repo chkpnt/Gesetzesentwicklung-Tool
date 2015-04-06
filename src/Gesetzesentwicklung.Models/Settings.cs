@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Gesetzesentwicklung.Shared;
+using YamlDotNet.Serialization;
 
 namespace Gesetzesentwicklung.Models
 {
@@ -14,14 +15,29 @@ namespace Gesetzesentwicklung.Models
 
     public class CommitSetting : IComparable<CommitSetting>
     {
-        private string _beschreibung;
-
         public string BranchFrom { get; set; }
         public string MergeInto { get; set; }
         public string Daten { get; set; }
-
         public string Autor { get; set; }
+
+        [YamlIgnore]
         public DateTime Datum { get; set; }
+
+        [YamlMember(Alias="Datum")]
+        public string _Datum {
+            get
+            {
+                return Datum.Equals(default(DateTime))
+                       ? null
+                       : Datum.ToString("dd.MM.yyyy");
+            }
+            set
+            {
+                Datum = DateTime.ParseExact(value, "dd.MM.yyyy", null);
+            }
+        }
+
+        private string _beschreibung;
 
         // [YamlMember(ScalarStyle = ScalarStyle.Literal)]
         public string Beschreibung
@@ -79,7 +95,7 @@ namespace Gesetzesentwicklung.Models
         {
             return string.Format("CommitSetting [Autor: {0}, Datum: {1}, "
             + "Beschreibung: {2}, BranchFrom: {3}, MergeInto: {4}]",
-            Autor, Datum, Beschreibung.ToLiteral(), BranchFrom, MergeInto);
+            Autor, _Datum, Beschreibung.ToLiteral(), BranchFrom, MergeInto);
         }
     }
 

@@ -29,7 +29,7 @@ namespace Gesetzesentwicklung.Models.Tests
             _serializedCommitSetting =
 @"MergeInto: Gesetze/GG/Bundesgesetzblatt
 Autor: Foo Bar <foo@bar.net>
-Datum: 2015-01-01T00:00:00.0000000
+Datum: 01.01.2015
 Beschreibung: blabla
 ";
         }
@@ -90,7 +90,7 @@ Beschreibung: blabla
         public void Models_CommitSetting_ToString()
         {
             var expected = "CommitSetting [Autor: Foo Bar <foo@bar.net>, " + 
-                           "Datum: 01.01.2015 00:00:00, " +
+                           "Datum: 01.01.2015, " +
                            "Beschreibung: \"blabla\", " + 
                            "BranchFrom: , " + 
                            "MergeInto: Gesetze/GG/Bundesgesetzblatt]";
