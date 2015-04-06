@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Abstractions;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,66 +12,69 @@ namespace Gesetzesentwicklung.Markdown
 {
     public class MarkdownGenerator
     {
-        private Gesetz _gesetz;
-        private CommitSetting _settings;
-        private DirectoryInfo _outputFolder;
+        private static readonly Encoding UTF8_Ohne_BOM = new UTF8Encoding(false, false);
 
-        public MarkdownGenerator(Gesetz gesetz, CommitSetting settings, string outputFolder)
+        private IFileSystem _fileSystem;
+
+
+        internal MarkdownGenerator(IFileSystem fileSystem)
         {
-            this._gesetz = gesetz;
-            this._settings = settings;
-            this._outputFolder = new DirectoryInfo(outputFolder);
+            _fileSystem = fileSystem;
         }
 
-        public void generate()
+        public MarkdownGenerator() : this(fileSystem: new FileSystem()) { }
+
+        public void generate(Gesetz gesetz, CommitSetting settings, string outputFolder)
         {
-            buildDirectories();
-            createFiles();
-            createSettingFile();
+            var buildFolder = _fileSystem.DirectoryInfo.FromDirectoryName(outputFolder);
+
+            buildDirectories(gesetz, buildFolder);
+            createFiles(gesetz, buildFolder);
+            createSettingFile(settings, gesetz, buildFolder);
         }
 
-        private void buildDirectories()
+        private void buildDirectories(Gesetz gesetz, DirectoryInfoBase buildFolder)
         {
-            _outputFolder.Create();
+            buildFolder.Create();
 
-            foreach (var verzeichnis in getDirectories())
+            foreach (var verzeichnis in getDirectories(gesetz))
             {
-                _outputFolder.CreateSubdirectory(verzeichnis);
+                buildFolder.CreateSubdirectory(verzeichnis);
             }
         }
 
-        private IEnumerable<string> getDirectories()
+        private IEnumerable<string> getDirectories(Gesetz gesetz)
         {
-            var abschnitte = (from artikel in _gesetz.Artikel
+            var abschnitte = (from artikel in gesetz.Artikel
                               where artikel.Abschnitt != null
                               select artikel.Abschnitt).Distinct();
 
             foreach(var abschnitt in abschnitte)
             {
-                yield return Path.Combine(_gesetz.Name, abschnitt);
+                yield return Path.Combine(gesetz.Name, abschnitt);
             }
         }
 
-        private void createFiles()
+        private void createFiles(Gesetz gesetz, DirectoryInfoBase buildFolder)
         {
-            foreach (var artikel in _gesetz.Artikel)
+            foreach (var artikel in gesetz.Artikel)
             {
                 var dateiname = artikel.Name + ".md";
 
                 if (artikel.Abschnitt == null)
                 {
-                    File.WriteAllText(
-                        path: Path.Combine(_outputFolder.FullName, _gesetz.Name, dateiname),
+                    _fileSystem.File.WriteAllText(
+                        path: Path.Combine(buildFolder.FullName, gesetz.Name, dateiname),
                         contents: formatMarkdown(artikel),
-                        encoding: Encoding.UTF8
+                        encoding: UTF8_Ohne_BOM
                     );
                 }
                 else
                 {
-                    File.WriteAllText(
-                        path: Path.Combine(_outputFolder.FullName, _gesetz.Name, artikel.Abschnitt, dateiname),
+                    _fileSystem.File.WriteAllText(
+                        path: Path.Combine(buildFolder.FullName, gesetz.Name, artikel.Abschnitt, dateiname),
                         contents: formatMarkdown(artikel),
-                        encoding: Encoding.UTF8
+                        encoding: UTF8_Ohne_BOM
                     );
                 }
             }
@@ -84,15 +88,18 @@ namespace Gesetzesentwicklung.Markdown
 {1}", artikel.Name, artikel.Inhalt);
         }
 
-        private void createSettingFile()
+        private void createSettingFile(CommitSetting settings, Gesetz gesetz, DirectoryInfoBase buildFolder)
         {
-            using (TextWriter textWriter = new StreamWriter(
-                path: Path.Combine(_outputFolder.FullName, _gesetz.Name + ".yml"),
-                append: false,
-                encoding: Encoding.UTF8))
+            using (TextWriter textWriter = new StringWriter())
             {
                 textWriter.NewLine = Environment.NewLine;
-                new Serializer().Serialize(textWriter, _settings);
+                new Serializer().Serialize(textWriter, settings);
+
+                _fileSystem.File.WriteAllText(
+                    path: Path.Combine(buildFolder.FullName, gesetz.Name + ".yml"),
+                    contents: textWriter.ToString(),
+                    encoding: UTF8_Ohne_BOM
+                );
             }
         }
     }

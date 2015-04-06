@@ -3,6 +3,8 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Abstractions;
+using System.IO.Abstractions.TestingHelpers;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,13 +14,15 @@ namespace Gesetzesentwicklung.Markdown.Tests
     [TestFixture]
     class MarkdownGeneratorTests
     {
-        private const string OutputFolder = "output";
+        private const string OutputFolder = @"c:\data\GesetzeImInternet\output\";
         
         private MarkdownGenerator _generator;
 
         private Gesetz _gesetz;
 
         private CommitSetting _settings;
+
+        private IFileSystem _fileSystem;
 
         [SetUp]
         public void SetUp()
@@ -39,55 +43,48 @@ namespace Gesetzesentwicklung.Markdown.Tests
             _settings = new CommitSetting
             {
                 Autor = "Foo Bar <foo@example.net>",
-                Datum = DateTime.Parse("01/01/2015 00:00:00"),
+                _Datum = "01.01.2015",
                 Beschreibung = @"Commit-Message
 
 Letzte Zeile"
             };
 
-            _generator = new MarkdownGenerator(_gesetz, _settings, OutputFolder);
-
-            if (!Directory.Exists(OutputFolder))
-            {
-                Directory.CreateDirectory(OutputFolder);
-            }
-        }
-
-        [TearDown]
-        public void TestDown()
-        {
-            Directory.Delete(OutputFolder, recursive: true);
+            _fileSystem = new MockFileSystem(new Dictionary<string, MockFileData>
+                {
+                    { @"c:\data\GesetzeImInternet\", new MockDirectoryData()}
+                });
+            _generator = new MarkdownGenerator(_fileSystem);
         }
 
         [Test]
         public void Markdown_RichtigeVerzeichnisstruktur()
         {
-            _generator.generate();
+            _generator.generate(_gesetz, _settings, OutputFolder);
 
-            Assert.IsTrue(Directory.Exists(Path.Combine(OutputFolder, "GG")));
-            Assert.IsTrue(Directory.Exists(Path.Combine(OutputFolder, "GG", "I. Die Grundrechte")));
+            Assert.IsTrue(_fileSystem.DirectoryInfo.FromDirectoryName(Path.Combine(OutputFolder, "GG")).Exists);
+            Assert.IsTrue(_fileSystem.DirectoryInfo.FromDirectoryName(Path.Combine(OutputFolder, "GG", "I. Die Grundrechte")).Exists);
         }
 
         [Test]
         public void Markdown_ProArtikelEineDatei()
         {
-            _generator.generate();
+            _generator.generate(_gesetz, _settings, OutputFolder);
 
-            Assert.IsTrue(File.Exists(Path.Combine(OutputFolder, "GG", "Präambel.md")));
-            Assert.IsTrue(File.Exists(Path.Combine(OutputFolder, "GG", "I. Die Grundrechte", "Artikel 1.md")));
+            Assert.IsTrue(_fileSystem.FileInfo.FromFileName(Path.Combine(OutputFolder, "GG", "Präambel.md")).Exists);
+            Assert.IsTrue(_fileSystem.FileInfo.FromFileName(Path.Combine(OutputFolder, "GG", "I. Die Grundrechte", "Artikel 1.md")).Exists);
         }
 
         [Test]
         public void Markdown_RichtigerInhaltInDenDateien()
         {
-            _generator.generate();
+            _generator.generate(_gesetz, _settings, OutputFolder);
 
-            Assert.That(File.ReadAllText(Path.Combine(OutputFolder, "GG", "Präambel.md"), Encoding.UTF8),
+            Assert.That(_fileSystem.File.ReadAllText(Path.Combine(OutputFolder, "GG", "Präambel.md"), Encoding.UTF8),
                 Is.EqualTo(
 @"# Präambel
 
 Präambel-Text"));
-            Assert.That(File.ReadAllText(Path.Combine(OutputFolder, "GG", "I. Die Grundrechte", "Artikel 1.md"), Encoding.UTF8),
+            Assert.That(_fileSystem.File.ReadAllText(Path.Combine(OutputFolder, "GG", "I. Die Grundrechte", "Artikel 1.md"), Encoding.UTF8),
                 Is.EqualTo(
 @"# Artikel 1
 
@@ -99,10 +96,10 @@ Präambel-Text"));
         [Test]
         public void Markdown_SettingsDatei()
         {
-            _generator.generate();
+            _generator.generate(_gesetz, _settings, OutputFolder);
 
-            Assert.IsTrue(File.Exists(Path.Combine(OutputFolder, "GG.yml")));
-            Assert.That(File.ReadAllText(Path.Combine(OutputFolder, "GG.yml"), Encoding.UTF8),
+            Assert.IsTrue(_fileSystem.File.Exists(Path.Combine(OutputFolder, "GG.yml")));
+            Assert.That(_fileSystem.File.ReadAllText(Path.Combine(OutputFolder, "GG.yml"), Encoding.UTF8),
                 Is.EqualTo(
 @"Autor: Foo Bar <foo@example.net>
 Datum: 01.01.2015

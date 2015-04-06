@@ -45,8 +45,8 @@ namespace Gesetzesentwicklung.GL
                 Beschreibung = "Bla blub",
                 Datum = DateTime.Parse("1960-10-08")
             };
-            var markdownGenerator = new MarkdownGenerator(gesetz, commitSetting, @"C:\tmp");
-            markdownGenerator.generate();
+            var markdownGenerator = new MarkdownGenerator();
+            markdownGenerator.generate(gesetz, commitSetting, @"C:\tmp");
         }
     }
 }
