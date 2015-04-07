@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Abstractions;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,60 +11,66 @@ namespace Gesetzesentwicklung.Git
 {
     public class RepositoryBuilder
     {
-        private DirectoryInfo _sourceDir;
-        private DirectoryInfo _destDir;
+        private IFileSystem _fileSystem;
 
-        public RepositoryBuilder(DirectoryInfo _sourceDir, DirectoryInfo _destDir, bool overwrite = false)
+        internal RepositoryBuilder(IFileSystem fileSystem)
         {
-            if (!_sourceDir.Exists)
+            _fileSystem = fileSystem;
+        }
+
+        public RepositoryBuilder() : this(fileSystem: new FileSystem()) { }
+
+        // Leider kann ich LibGit2Sharp kein System.IO.Abstractions unterjubeln...
+        public void Build(string sourceDir, string destDir, bool overwrite = false)
+        {
+            var sourceDirInfo = _fileSystem.DirectoryInfo.FromDirectoryName(sourceDir);
+            var destDirInfo = _fileSystem.DirectoryInfo.FromDirectoryName(destDir);
+
+            TestAssertions(sourceDirInfo, destDirInfo, overwrite);
+
+            CleanUpDir(destDirInfo);
+
+            IEnumerable<string> branches;
+            InspectSourceDir(sourceDirInfo, out branches);
+
+            Repository.Init(destDirInfo.FullName);
+        }
+
+        internal void TestAssertions(DirectoryInfoBase sourceDirInfo, DirectoryInfoBase destDirInfo, bool overwrite = false)
+        {
+            if (!sourceDirInfo.Exists)
             {
-                var message = string.Format("Verzeichnis existiert nicht: {0}", _sourceDir.FullName);
+                var message = string.Format("Verzeichnis existiert nicht: {0}", sourceDirInfo.FullName);
                 throw new ArgumentException(message);
             }
 
-            if (SameDirectory(_sourceDir.FullName, _destDir.FullName))
+            if (SameDirectory(sourceDirInfo.FullName, destDirInfo.FullName))
             {
                 throw new ArgumentException("Quell- und Zielverzeichnisse dürfen nicht gleich sein");
             }
 
-            if (overwrite == false && _destDir.Exists)
+            if (overwrite == false && destDirInfo.Exists)
             {
-                var message = string.Format("Verzeichnis existiert schon: {0}", _destDir.FullName);
+                var message = string.Format("Verzeichnis existiert schon: {0}", destDirInfo.FullName);
                 throw new ArgumentException(message);
             }
-
-            this._sourceDir = _sourceDir;
-            this._destDir = _destDir;
-
         }
 
-        public void build()
+        private void InspectSourceDir(DirectoryInfoBase sourceDirInfo, out IEnumerable<string> branches)
         {
-            cleanUpDestDir();
-
-            IEnumerable<string> branches;
-            inspectSourceDir(out branches);
-
-            Repository.Init(_destDir.FullName);
-
-
-        }
-
-        private void inspectSourceDir(out IEnumerable<string> branches)
-        {
-            branches = from dir in _sourceDir.GetDirectories()
+            branches = from dir in sourceDirInfo.GetDirectories()
                        where !dir.Name.StartsWith(".")
                        select dir.Name;
         }
 
-        private void cleanUpDestDir()
+        private void CleanUpDir(DirectoryInfoBase dirInfo)
         {
-            if (_destDir.Exists)
+            if (dirInfo.Exists)
             {
-                _destDir.Delete(recursive: true);
+                dirInfo.Delete(recursive: true);
             }
 
-            _destDir.Create();
+            dirInfo.Create();
         }
 
         static private bool SameDirectory(string path1, string path2)
