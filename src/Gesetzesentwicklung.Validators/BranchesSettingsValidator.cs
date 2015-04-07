@@ -1,17 +1,27 @@
 ﻿using Gesetzesentwicklung.Models;
 using System;
 using System.Collections.Generic;
+using System.IO.Abstractions;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Gesetzesentwicklung.Validators
 {
-    public static class BranchSettingsExtensions
+    public class BranchesSettingsValidator
     {
         private static string Message_InvalidBranch = "Ungültiger Branch, da sein Name in Konflikt zu einem anderen Branch steht: {0}";
 
-        public static bool IsValid(this BranchesSettings branchSettings, ref ValidatorProtokoll protokoll)
+        private readonly IFileSystem _fileSystem;
+
+        internal BranchesSettingsValidator(IFileSystem fileSystem)
+        {
+            _fileSystem = fileSystem;
+        }
+
+        public BranchesSettingsValidator() : this(fileSystem: new FileSystem()) { }
+
+        public bool IsValid(BranchesSettings branchSettings, string path, ref ValidatorProtokoll protokoll)
         {
             var branches = branchSettings.Branches.Keys;
 

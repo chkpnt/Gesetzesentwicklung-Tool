@@ -3,6 +3,7 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Abstractions;
 using System.IO.Abstractions.TestingHelpers;
 using System.Linq;
 using System.Text;
@@ -11,9 +12,13 @@ using System.Threading.Tasks;
 namespace Gesetzesentwicklung.Validators.Tests
 {
     [TestFixture]
-    public class ValidatorsTests
+    public class BranchesSettingsValidatorTests
     {
         private BranchesSettings _validBranchSettings;
+
+        private IFileSystem _fileSystem;
+
+        private BranchesSettingsValidator _classUnderTest;
 
         [SetUp]
         public void SetUp()
@@ -26,6 +31,14 @@ namespace Gesetzesentwicklung.Validators.Tests
                     { "Gesetze/GG", BranchesSettings.BranchTyp.Normal }
                 }
             };
+
+            _fileSystem = new MockFileSystem(new Dictionary<string, MockFileData>
+                {
+                    { @"c:\data\GesetzesData\GG\Änderung-1.yml", new MockFileData("") },
+                    { @"c:\data\GesetzesData\GG\Änderung-1\Lesung-1\", new MockDirectoryData()}
+                });
+
+            _classUnderTest = new BranchesSettingsValidator(_fileSystem);
         }
 
         [Test]
@@ -42,7 +55,7 @@ namespace Gesetzesentwicklung.Validators.Tests
 
             ValidatorProtokoll protokoll = new ValidatorProtokoll();
 
-            Assert.IsFalse(settings.IsValid(ref protokoll));
+            Assert.IsFalse(_classUnderTest.IsValid(settings, @"c:\", ref protokoll));
             Assert.That(protokoll.Entries.Count(), Is.EqualTo(1));
             Assert.That(protokoll.Entries.ElementAt(0), Is.StringEnding("in Konflikt zu einem anderen Branch steht: Gesetze"));
         }
@@ -52,38 +65,8 @@ namespace Gesetzesentwicklung.Validators.Tests
         {
             ValidatorProtokoll protokoll = new ValidatorProtokoll();
 
-            Assert.IsTrue(_validBranchSettings.IsValid(ref protokoll));
+            Assert.IsTrue(_classUnderTest.IsValid(_validBranchSettings, @"c:\", ref protokoll));
             Assert.IsEmpty(protokoll.Entries);
-        }
-
-        [Test]
-        public void Models_Validators_CommitSettings()
-        {
-            var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData>
-                {
-                    { @"c:\data\Gesetze\GG\Änderung-1.yml", new MockFileData("") },
-                    { @"c:\data\Gesetze\GG\Änderung-1\Lesung-1\", new MockDirectoryData()}
-                });
-
-            var validator = new CommitSettingValidator(fileSystem);
-
-            var commitSettingKorrekt = new CommitSetting
-            {
-                Autor = "Foo Bar <foo@bar.net>",
-                BranchFrom = "Gesetze/GG",
-                Daten = @"Änderung-1\Lesung-1"
-            };
-
-            var commitSettingFalsch = new CommitSetting
-            {
-                Autor = "Foo Bar <foo@bar.net>",
-                BranchFrom = "Gesetze/GG",
-                Daten = @"Änderung-1\Lesung-3"
-            };
-
-
-            Assert.IsTrue(validator.IsValid(commitSettingKorrekt, @"c:\data\Gesetze\GG", _validBranchSettings));
-            Assert.IsFalse(validator.IsValid(commitSettingFalsch, @"c:\data\Gesetze\GG", _validBranchSettings));
         }
     }
 }
