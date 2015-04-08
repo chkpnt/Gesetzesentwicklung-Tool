@@ -72,8 +72,8 @@ namespace Gesetzesentwicklung.Validators.Tests
 
             Assert.IsFalse(_classUnderTest.IsValid(_validBranchSettings, @"c:\GesetzesData\", ref protokoll));
             Assert.That(protokoll.Entries.Count(), Is.EqualTo(2));
-            Assert.That(protokoll.Entries.ElementAt(0), Is.EqualTo(@"Yaml-Datei fehlt: Gesetzesstand.yml"));
-            Assert.That(protokoll.Entries.ElementAt(1), Is.EqualTo(@"Yaml-Datei fehlt: Gesetze\GG\Änderung-1.yml"));
+            Assert.That(protokoll.Entries.ElementAt(0), Is.EqualTo(@"Yaml-Datei fehlt: c:\GesetzesData\Gesetzesstand.yml"));
+            Assert.That(protokoll.Entries.ElementAt(1), Is.EqualTo(@"Yaml-Datei fehlt: c:\GesetzesData\Gesetze\GG\Änderung-1.yml"));
         }
 
         [Test]

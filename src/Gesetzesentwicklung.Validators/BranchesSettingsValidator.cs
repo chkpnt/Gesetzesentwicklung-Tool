@@ -31,11 +31,13 @@ namespace Gesetzesentwicklung.Validators
                 return false;
             }
 
-            var branches = branchSettings.Branches.Keys;
+            var yamlFiles = from branchYamlFile in branchSettings.BranchesYamls
+                            select _fileSystem.FileInfo.FromFileName(Path.Combine(path, branchYamlFile));
 
-            var missingYamlMessages = from branch in branches
-                                      where !(_fileSystem.File.Exists(Path.Combine(path, branch + ".yml")))
-                                      select string.Format(Message_YamlFehlt, branch.Replace("/", @"\") + ".yml");
+            var missingYamlMessages = from file in yamlFiles
+                                      where !(file.Exists)
+                                      select string.Format(Message_YamlFehlt, file.FullName);
+
             protokoll.AddEntries(missingYamlMessages);
 
             return !missingYamlMessages.Any();
