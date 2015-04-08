@@ -16,6 +16,8 @@ namespace Gesetzesentwicklung.Validators.Tests
     {
         private BranchesSettings _validBranchSettings;
 
+        private CommitSetting _validCommitSetting;
+
         private IFileSystem _fileSystem;
 
         private CommitSettingValidator _classUnderTest;
@@ -29,17 +31,25 @@ namespace Gesetzesentwicklung.Validators.Tests
                     { @"c:\data\GesetzesData\GG\Änderung-1\Lesung-1\", new MockDirectoryData()}
                 });
 
-            _classUnderTest = new CommitSettingValidator(_fileSystem);
-        }
-
-        [Test]
-        public void Models_Validators_CommitSettings()
-        {
-            var commitSettingKorrekt = new CommitSetting
+            _validCommitSetting = new CommitSetting
             {
                 Autor = "Foo Bar <foo@bar.net>",
                 BranchFrom = "Gesetze/GG",
                 Daten = @"Änderung-1\Lesung-1"
+            };
+
+            _validBranchSettings = new BranchesSettings();
+
+            _classUnderTest = new CommitSettingValidator(_fileSystem);
+        }
+
+        [Test]
+        public void Models_Validators_CommitSetting()
+        {
+            var commitSettingKorrektOhneDaten = new CommitSetting
+            {
+                Autor = "Foo Bar <foo@bar.net>",
+                BranchFrom = "Gesetze/GG"
             };
 
             var commitSettingFalsch = new CommitSetting
@@ -50,8 +60,22 @@ namespace Gesetzesentwicklung.Validators.Tests
             };
 
 
-            Assert.IsTrue(_classUnderTest.IsValid(commitSettingKorrekt, @"c:\data\GesetzesData\GG", _validBranchSettings));
+            Assert.IsTrue(_classUnderTest.IsValid(_validCommitSetting, @"c:\data\GesetzesData\GG", _validBranchSettings));
+            Assert.IsTrue(_classUnderTest.IsValid(commitSettingKorrektOhneDaten, @"c:\data\GesetzesData\GG", _validBranchSettings));
             Assert.IsFalse(_classUnderTest.IsValid(commitSettingFalsch, @"c:\data\GesetzesData\GG", _validBranchSettings));
+        }
+
+        [Test]
+        public void Models_Validators_CommitSetting_VerzeichnisFehlt()
+        {
+            _fileSystem.Directory.Delete(@"c:\data\GesetzesData\GG\Änderung-1\Lesung-1\");
+
+            ValidatorProtokoll protokoll = new ValidatorProtokoll();
+            var result = _classUnderTest.IsValid(_validCommitSetting, @"c:\data\GesetzesData\GG", _validBranchSettings, ref protokoll);
+
+            Assert.IsFalse(result);
+            Assert.That(protokoll.Entries.Count(), Is.EqualTo(1));
+            Assert.That(protokoll.Entries.First(), Is.EqualTo(@"Verzeichnis fehlt: c:\data\GesetzesData\GG\Änderung-1\Lesung-1"));
         }
     }
 }

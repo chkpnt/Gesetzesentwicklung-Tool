@@ -11,6 +11,8 @@ namespace Gesetzesentwicklung.Validators
 {
     public class CommitSettingValidator
     {
+        private static string Message_VerzeichnisFehlt = "Verzeichnis fehlt: {0}";
+
         private readonly IFileSystem _fileSystem;
 
         internal CommitSettingValidator(IFileSystem fileSystem)
@@ -28,7 +30,21 @@ namespace Gesetzesentwicklung.Validators
 
         public bool IsValid(CommitSetting commitSetting, string parentDir, BranchesSettings branchSettings, ref ValidatorProtokoll protokoll)
         {
-            return _fileSystem.DirectoryInfo.FromDirectoryName(Path.Combine(parentDir, commitSetting.Daten)).Exists;
+            if (commitSetting.Daten == null)
+            {
+                return true;
+            }
+
+            var dir = _fileSystem.DirectoryInfo.FromDirectoryName(Path.Combine(parentDir, commitSetting.Daten));
+            var exists = dir.Exists;
+
+            if (!exists)
+            {
+                var message = string.Format(Message_VerzeichnisFehlt, dir.FullName);
+                protokoll.AddEntry(message);
+            }
+
+            return exists;
         }
     }
 }
