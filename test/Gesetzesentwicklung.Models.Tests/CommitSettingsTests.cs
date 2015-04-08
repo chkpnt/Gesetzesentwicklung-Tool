@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using YamlDotNet.Serialization;
 
 namespace Gesetzesentwicklung.Models.Tests
 {
@@ -44,7 +43,7 @@ Zeile 2"}
         [Test]
         public void Models_CommitSettings_Serialize()
         {
-            var yaml = Commons.ToYaml(_commitSettings);
+            var yaml = YamlStringParser.ToYaml(_commitSettings);
 
             Assert.That(yaml, Is.EqualTo(_serializedCommitSettings));
         }
@@ -52,7 +51,7 @@ Zeile 2"}
         [Test]
         public void Models_CommitSettings_Deserialize()
         {
-            var settings = Commons.FromYaml<CommitSettings>(_serializedCommitSettings);
+            var settings = YamlStringParser.FromYaml<CommitSettings>(_serializedCommitSettings);
 
             Assert.That(settings.Commits, Is.EquivalentTo(_commitSettings.Commits));
         }

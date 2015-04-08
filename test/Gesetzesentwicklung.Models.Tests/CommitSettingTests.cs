@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using YamlDotNet.Serialization;
 
 namespace Gesetzesentwicklung.Models.Tests
 {
@@ -37,7 +36,7 @@ Beschreibung: blabla
         [Test]
         public void Models_CommitSetting_Serialize()
         {
-            var yaml = Commons.ToYaml(_commitSetting);
+            var yaml = YamlStringParser.ToYaml(_commitSetting);
 
             Assert.That(yaml, Is.EqualTo(_serializedCommitSetting));
         }
@@ -45,7 +44,7 @@ Beschreibung: blabla
         [Test]
         public void Models_CommitSetting_Deserialize()
         {
-            var setting = Commons.FromYaml<CommitSetting>(_serializedCommitSetting);
+            var setting = YamlStringParser.FromYaml<CommitSetting>(_serializedCommitSetting);
 
             Assert.That(setting, Is.EqualTo(_commitSetting));
         }

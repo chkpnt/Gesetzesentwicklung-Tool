@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using YamlDotNet.Serialization;
 
 namespace Gesetzesentwicklung.Models.Tests
 {
@@ -46,7 +45,7 @@ namespace Gesetzesentwicklung.Models.Tests
         [Test]
         public void Models_BranchSettings_Serialize()
         {
-            var yaml = Commons.ToYaml(_branchSettings);
+            var yaml = YamlStringParser.ToYaml(_branchSettings);
 
             Assert.That(yaml, Is.EqualTo(_serializedBranchSettings)
                             | Is.EqualTo(_serializedBranchSettingsAlternative));
@@ -55,7 +54,7 @@ namespace Gesetzesentwicklung.Models.Tests
         [Test]
         public void Models_BranchSettings_Deserialize()
         {
-            var settings = Commons.FromYaml<BranchesSettings>(_serializedBranchSettings);
+            var settings = YamlStringParser.FromYaml<BranchesSettings>(_serializedBranchSettings);
 
             Assert.That(settings.Branches, Is.EquivalentTo(_branchSettings.Branches));
         }
