@@ -17,12 +17,12 @@ namespace Gesetzesentwicklung.Validators
 
         private readonly IFileSystem _fileSystem;
 
-        internal BranchesSettingsValidator(IFileSystem fileSystem)
+        public BranchesSettingsValidator() : this(fileSystem: new FileSystem()) { }
+        
+        public BranchesSettingsValidator(IFileSystem fileSystem)
         {
             _fileSystem = fileSystem;
         }
-
-        public BranchesSettingsValidator() : this(fileSystem: new FileSystem()) { }
 
         public bool IsValid(BranchesSettings branchSettings, string path, ref ValidatorProtokoll protokoll)
         {

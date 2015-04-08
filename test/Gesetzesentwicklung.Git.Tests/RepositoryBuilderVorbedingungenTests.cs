@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Gesetzesentwicklung.Models;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,10 +25,49 @@ namespace Gesetzesentwicklung.Git.Tests
         public void SetUp()
         {
             _fileSystem = new MockFileSystem(new Dictionary<string, MockFileData>
-                {
-                    { @"c:\data\GesetzesData\GG\Änderung-1.yml", new MockFileData("") },
-                    { @"c:\data\GesetzesData\GG\Änderung-1\Lesung-1\", new MockDirectoryData()}
-                });
+            {
+                { @"c:\data\GesetzesData\Branches.yml", new MockFileData(
+@"Branches:
+  Gesetzesstand: Normal
+  Gesetze/GG/Bundesgesetzblatt: Normal
+  Gesetze/GG/Änderung-1: Feature") },
+                { @"c:\data\GesetzesData\Gesetzesstand.yml", new MockFileData(
+@"Commits:
+- Daten: Gesetzesstand
+  Autor: Foo Bar <foo@example.net>
+  Datum: 01.01.1945
+  Beschreibung: |-
+    1. Lesung
+
+    Letzte Zeile") },
+                { @"c:\data\GesetzesData\Gesetzesstand\", new MockDirectoryData()},
+                { @"c:\data\GesetzesData\Gesetze\GG\Bundesgesetzblatt.yml", new MockFileData(
+@"Commits:
+- BranchFrom: Gesetzesstand
+  Autor: Foo Bar <foo@example.net>
+  Datum: 01.01.1949
+  Beschreibung: init") },
+                { @"c:\data\GesetzesData\Gesetze\GG\Änderung-1.yml", new MockFileData(
+@"Commits:
+- MergeInto: Gesetze/GG/Bundesgesetzblatt
+  Daten: Änderung-1\Lesung-2
+  Autor: Foo Bar <foo@example.net>
+  Datum: 10.04.1960
+  Beschreibung: |-
+    2. Lesung
+
+    Letzte Zeile
+- BranchFrom: Gesetze/GG/Bundesgesetzblatt
+  Daten: Änderung-1\Lesung-1
+  Autor: Foo Bar <foo@example.net>
+  Datum: 01.01.1960
+  Beschreibung: |-
+    1. Lesung
+
+    Letzte Zeile") },
+                { @"c:\data\GesetzesData\Gesetze\GG\Änderung-1\Lesung-1\", new MockDirectoryData()},
+                { @"c:\data\GesetzesData\Gesetze\GG\Änderung-1\Lesung-2\", new MockDirectoryData()},
+            });
 
             _classUnderTest = new RepositoryBuilder(_fileSystem);
         }
@@ -66,6 +106,53 @@ namespace Gesetzesentwicklung.Git.Tests
             destDirInfo.Create();
 
             _classUnderTest.TestAssertions(sourceDirInfo, destDirInfo);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException),
+         ExpectedMessage=@"Datei fehlt: c:\data\GesetzesData\Branches.yml")]
+        public void Git_BranchesSettingsDateiFehlt()
+        {
+            _fileSystem.File.Delete(@"c:\data\GesetzesData\Branches.yml");
+
+            var sourceDirInfo = _fileSystem.DirectoryInfo.FromDirectoryName(_sourceDir);
+
+            _classUnderTest.ReadBranchesSettings(sourceDirInfo);
+        }
+
+        [Test]
+        public void Git_BranchesSettingsDateiKorrektEingelesen()
+        {
+            var sourceDirInfo = _fileSystem.DirectoryInfo.FromDirectoryName(_sourceDir);
+
+            var branchSettings = _classUnderTest.ReadBranchesSettings(sourceDirInfo);
+
+            Assert.That(branchSettings.Branches.Count(), Is.EqualTo(3));
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException),
+         ExpectedMessage = @"Yaml-Datei fehlt: c:\data\GesetzesData\Gesetze\GG\Änderung-1.yml")]
+        public void Git_BranchesSettingsDatei_CommitSettingsYamlFehlt()
+        {
+            _fileSystem.File.Delete(@"c:\data\GesetzesData\Gesetze\GG\Änderung-1.yml");
+
+            var sourceDirInfo = _fileSystem.DirectoryInfo.FromDirectoryName(_sourceDir);
+
+            _classUnderTest.ReadBranchesSettings(sourceDirInfo);
+        }
+
+        [Test]
+        public void Git_CommitSettingsDateienKorrektEingelesen()
+        {
+            var sourceDirInfo = _fileSystem.DirectoryInfo.FromDirectoryName(_sourceDir);
+            var branchesSettings = _classUnderTest.ReadBranchesSettings(sourceDirInfo);
+
+            var commitSettings = _classUnderTest.ReadCommitSettings(sourceDirInfo, branchesSettings);
+
+            Assert.That(commitSettings.Commits.Count(), Is.EqualTo(4));
+            Assert.That(commitSettings.Commits.First()._Datum, Is.EqualTo("01.01.1945"));
+            Assert.That(commitSettings.Commits.Last()._Datum, Is.EqualTo("10.04.1960"));
         }
     }
 }

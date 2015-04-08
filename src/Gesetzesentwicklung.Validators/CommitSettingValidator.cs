@@ -15,12 +15,12 @@ namespace Gesetzesentwicklung.Validators
 
         private readonly IFileSystem _fileSystem;
 
-        internal CommitSettingValidator(IFileSystem fileSystem)
+        public CommitSettingValidator() : this(fileSystem: new FileSystem()) { }
+
+        public CommitSettingValidator(IFileSystem fileSystem)
         {
             _fileSystem = fileSystem;
         }
-
-        public CommitSettingValidator() : this(fileSystem: new FileSystem()) { }
 
         public bool IsValid(CommitSetting commitSetting, string parentDir, BranchesSettings branchSettings)
         {

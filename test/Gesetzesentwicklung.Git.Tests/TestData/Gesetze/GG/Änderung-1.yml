@@ -1,8 +1,16 @@
-BranchFrom: 
-Autor: Foo Bar <foo@example.net>
-Datum: 1960-01-01T00:00:00.0000000
-Zeitzone: CET
-Beschreibung: >|
-  1. Lesung
+- MergeInto: Gesetze/GG/Bundesgesetzblatt
+  Daten: Änderung-1\Lesung-2
+  Autor: Foo Bar <foo@example.net>
+  Datum: 10.04.1960
+  Beschreibung: |-
+    2. Lesung
 
-  Letzte Zeile
+	Letzte Zeile
+- BranchFrom: Gesetze/GG/Bundesgesetzblatt
+  Daten: Änderung-1\Lesung-1
+  Autor: Foo Bar <foo@example.net>
+  Datum: 01.01.1960
+  Beschreibung: |-
+    1. Lesung
+
+    Letzte Zeile

@@ -61,6 +61,10 @@
       <Project>{f7b91df7-d12c-439b-aedd-48f0e9eaee09}</Project>
       <Name>Gesetzesentwicklung.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Gesetzesentwicklung.Validators\Gesetzesentwicklung.Validators.csproj">
+      <Project>{8419afd6-e2b5-4ff8-9143-855f479eb502}</Project>
+      <Name>Gesetzesentwicklung.Validators</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

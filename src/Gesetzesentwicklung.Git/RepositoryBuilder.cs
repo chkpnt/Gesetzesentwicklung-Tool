@@ -1,4 +1,6 @@
-﻿using LibGit2Sharp;
+﻿using Gesetzesentwicklung.Models;
+using Gesetzesentwicklung.Validators;
+using LibGit2Sharp;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -54,6 +56,60 @@ namespace Gesetzesentwicklung.Git
                 var message = string.Format("Verzeichnis existiert schon: {0}", destDirInfo.FullName);
                 throw new ArgumentException(message);
             }
+        }
+
+        internal BranchesSettings ReadBranchesSettings(DirectoryInfoBase sourceDirInfo)
+        {
+            var branchesSettingsFileInfo = _fileSystem.FileInfo.FromFileName(Path.Combine(sourceDirInfo.FullName, "Branches.yml"));
+            if (! branchesSettingsFileInfo.Exists)
+            {
+                var message = string.Format("Datei fehlt: {0}", branchesSettingsFileInfo.FullName);
+                throw new ArgumentException(message);
+            }
+
+            var yamlFileParser = new YamlFileParser(_fileSystem);
+            var branchesSettings = yamlFileParser.FromYaml<BranchesSettings>(branchesSettingsFileInfo.FullName);
+
+            var validatorProtokoll = new ValidatorProtokoll();
+            var validator = new BranchesSettingsValidator(_fileSystem);
+            if (!validator.IsValid(branchesSettings, sourceDirInfo.FullName, ref validatorProtokoll))
+            {
+                var message = string.Join<string>(Environment.NewLine, validatorProtokoll.Entries);
+                throw new ArgumentException(message);
+            }
+            return branchesSettings;
+        }
+
+        internal CommitSettings ReadCommitSettings(DirectoryInfoBase sourceDirInfo, BranchesSettings branchesSettings)
+        {
+            var result = new CommitSettings { Commits = new List<CommitSetting>() };
+            
+            var yamlFiles = from branchYamlFile in branchesSettings.BranchesYamls
+                            select _fileSystem.FileInfo.FromFileName(Path.Combine(sourceDirInfo.FullName, branchYamlFile));
+
+            var yamlFileParser = new YamlFileParser(_fileSystem);
+            var validatorProtokoll = new ValidatorProtokoll();
+            var validator = new CommitSettingValidator(_fileSystem);
+
+            foreach (var commitSettingsYaml in yamlFiles)
+            {
+                var commitSettings = yamlFileParser.FromYaml<CommitSettings>(commitSettingsYaml.FullName);
+                foreach (var commitSetting in commitSettings.Commits)
+                {
+                    validator.IsValid(commitSetting, commitSettingsYaml.DirectoryName, branchesSettings, ref validatorProtokoll);
+                }
+                result.Commits.AddRange(commitSettings.Commits);
+            }
+
+            if (validatorProtokoll.Entries.Any())
+            {
+                var message = string.Join<string>(Environment.NewLine, validatorProtokoll.Entries);
+                throw new ArgumentException(message);
+            }
+
+            result.Commits.Sort();
+
+            return result;
         }
 
         private void InspectSourceDir(DirectoryInfoBase sourceDirInfo, out IEnumerable<string> branches)

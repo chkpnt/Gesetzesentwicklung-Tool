@@ -26,7 +26,7 @@ namespace Gesetzesentwicklung.Git.Tests
             _fileSystem = new FileSystem();
 
             _sourceDirInfo = _fileSystem.DirectoryInfo.FromDirectoryName("TestData");
-            _destDirInfo = _fileSystem.DirectoryInfo.FromDirectoryName("TestRepository");
+            _destDirInfo = _fileSystem.DirectoryInfo.FromDirectoryName("TestRepo");
 
             _classUnderTest = new RepositoryBuilder();
         }
@@ -41,11 +41,22 @@ namespace Gesetzesentwicklung.Git.Tests
         }
 
         [Test]
-        public void Git_ZielIstEinGitRepository()
+        public void Git_RepositoryKorrektErzeugt()
         {
             _classUnderTest.Build(_sourceDirInfo.FullName, _destDirInfo.FullName);
 
+            AssertThat_DestDirIstEinRepository();
+            AssertThat_ErsterCommitKorrekt();
+        }
+
+        private void AssertThat_DestDirIstEinRepository()
+        {
             Assert.That(_destDirInfo.GetDirectories(".git", SearchOption.TopDirectoryOnly).Count(), Is.EqualTo(1));
+        }
+
+        private void AssertThat_ErsterCommitKorrekt()
+        {
+
         }
     }
 }
