@@ -75,7 +75,7 @@ namespace Gesetzesentwicklung.Validators.Tests
 
             Assert.IsFalse(result);
             Assert.That(protokoll.Entries.Count(), Is.EqualTo(1));
-            Assert.That(protokoll.Entries.First(), Is.EqualTo(@"Verzeichnis fehlt: c:\data\GesetzesData\GG\Änderung-1\Lesung-1"));
+            Assert.That(protokoll.Entries.First().Message, Is.EqualTo(@"Verzeichnis fehlt: c:\data\GesetzesData\GG\Änderung-1\Lesung-1"));
         }
     }
 }

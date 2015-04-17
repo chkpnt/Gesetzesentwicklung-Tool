@@ -8,9 +8,21 @@ namespace Gesetzesentwicklung.Validators
 {
     public class ValidatorProtokoll
     {
-        private List<string> entries = new List<string>();
+        public class ProtokollEntry
+        {
+            public string Filename { get; private set; }
+            public string Message { get; private set; }
 
-        public IEnumerable<string> Entries
+            internal ProtokollEntry(string filename, string message)
+            {
+                Filename = filename;
+                Message = message;
+            }
+        }
+
+        private List<ProtokollEntry> entries = new List<ProtokollEntry>();
+
+        public IEnumerable<ProtokollEntry> Entries
         {
             get
             {
@@ -20,13 +32,25 @@ namespace Gesetzesentwicklung.Validators
         
         public void AddEntry(string message)
         {
-            entries.Add(message);
+            AddEntry("", message);
+        }
+
+        public void AddEntry(string filename, string message)
+        {
+            entries.Add(new ProtokollEntry(filename, message));
         }
 
         public void AddEntries(IEnumerable<string> messages)
         {
-            entries.AddRange(messages);
+            AddEntries("", messages);
         }
 
+        public void AddEntries(string filename, IEnumerable<string> messages)
+        {
+            foreach (var message in messages)
+            {
+                entries.Add(new ProtokollEntry(filename, message));
+            }
+        }
     }
 }

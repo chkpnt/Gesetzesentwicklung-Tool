@@ -23,9 +23,13 @@ namespace Gesetzesentwicklung.Validators.Tests
         {
             _classUnderTest.AddEntry("Ein Eintrag");
             _classUnderTest.AddEntries(new List<string> { "foo", "bar" });
+            _classUnderTest.AddEntry("c:\tmp", "a");
+            _classUnderTest.AddEntries("d:\tmp", new List<string> { "b" });
 
-            var expected = new List<string> { "Ein Eintrag", "foo", "bar" };
-            Assert.That(_classUnderTest.Entries, Is.EquivalentTo(expected));
+            var expectedMessage = new List<string> { "Ein Eintrag", "foo", "bar", "a", "b" };
+            Assert.That(_classUnderTest.Entries.Select(e => e.Message), Is.EquivalentTo(expectedMessage));
+
+            var expectedFilenames = new List<string> { "", "", "", "c:\tmp", "d:\tmp" };
         }
     }
 }
