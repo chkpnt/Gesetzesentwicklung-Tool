@@ -8,9 +8,9 @@ using YamlDotNet.Serialization;
 
 namespace Gesetzesentwicklung.Models
 {
-    public class YamlStringParser
+    public class YamlStringParser : IYamlStringParser
     {
-        public static T FromYaml<T>(string settings)
+        public T FromYaml<T>(string settings)
         {
             using (StringReader textReader = new StringReader(settings))
             {
@@ -19,7 +19,7 @@ namespace Gesetzesentwicklung.Models
             }
         }
 
-        public static string ToYaml(object o)
+        public string ToYaml(object o)
         {
             using (StringWriter textWriter = new StringWriter())
             {

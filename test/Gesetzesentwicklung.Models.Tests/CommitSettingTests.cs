@@ -13,6 +13,7 @@ namespace Gesetzesentwicklung.Models.Tests
     {
         private CommitSetting _commitSetting;
         private string _serializedCommitSetting;
+        private IYamlStringParser _yamlStringParser;
 
         [SetUp]
         public void SetUp()
@@ -31,12 +32,14 @@ Autor: Foo Bar <foo@bar.net>
 Datum: 01.01.2015
 Beschreibung: blabla
 ";
+
+            _yamlStringParser = new YamlStringParser();
         }
 
         [Test]
         public void Models_CommitSetting_Serialize()
         {
-            var yaml = YamlStringParser.ToYaml(_commitSetting);
+            var yaml = _yamlStringParser.ToYaml(_commitSetting);
 
             Assert.That(yaml, Is.EqualTo(_serializedCommitSetting));
         }
@@ -44,7 +47,7 @@ Beschreibung: blabla
         [Test]
         public void Models_CommitSetting_Deserialize()
         {
-            var setting = YamlStringParser.FromYaml<CommitSetting>(_serializedCommitSetting);
+            var setting = _yamlStringParser.FromYaml<CommitSetting>(_serializedCommitSetting);
 
             Assert.That(setting, Is.EqualTo(_commitSetting));
         }

@@ -13,6 +13,7 @@ namespace Gesetzesentwicklung.Models.Tests
     {
         private CommitSettings _commitSettings;
         private string _serializedCommitSettings;
+        private IYamlStringParser _yamlStringParser;
 
         [SetUp]
         public void SetUp()
@@ -38,12 +39,14 @@ Zeile 2"}
 
     Zeile 2
 ";
+
+            _yamlStringParser = new YamlStringParser();
         }
 
         [Test]
         public void Models_CommitSettings_Serialize()
         {
-            var yaml = YamlStringParser.ToYaml(_commitSettings);
+            var yaml = _yamlStringParser.ToYaml(_commitSettings);
 
             Assert.That(yaml, Is.EqualTo(_serializedCommitSettings));
         }
@@ -51,7 +54,7 @@ Zeile 2"}
         [Test]
         public void Models_CommitSettings_Deserialize()
         {
-            var settings = YamlStringParser.FromYaml<CommitSettings>(_serializedCommitSettings);
+            var settings = _yamlStringParser.FromYaml<CommitSettings>(_serializedCommitSettings);
 
             Assert.That(settings.Commits, Is.EquivalentTo(_commitSettings.Commits));
         }

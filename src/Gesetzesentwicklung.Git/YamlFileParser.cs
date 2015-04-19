@@ -15,17 +15,26 @@ namespace Gesetzesentwicklung.Git
 
         private readonly IFileSystem _fileSystem;
 
-        internal YamlFileParser(IFileSystem fileSystem)
+        private readonly IYamlStringParser _yamlStringParser;
+
+        internal YamlFileParser(IFileSystem fileSystem, IYamlStringParser yamlStringParser)
         {
             _fileSystem = fileSystem;
+            _yamlStringParser = yamlStringParser;
         }
 
-        public YamlFileParser() : this(fileSystem: new FileSystem()) { }
+        internal YamlFileParser(IFileSystem fileSystem)
+            : this(fileSystem: fileSystem,
+                   yamlStringParser: new YamlStringParser()) { }
 
         public T FromYaml<T>(string file)
+        public YamlFileParser()
+            : this(fileSystem: new FileSystem(),
+                   yamlStringParser: new YamlStringParser()) { }
         {
             var content = _fileSystem.File.ReadAllText(file, UTF8_Ohne_BOM);
-            return YamlStringParser.FromYaml<T>(content);
+            var setting = _yamlStringParser.FromYaml<T>(content);
+            return setting;
         }
     }
 }

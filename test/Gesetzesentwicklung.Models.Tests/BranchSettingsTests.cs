@@ -15,6 +15,7 @@ namespace Gesetzesentwicklung.Models.Tests
         private string _serializedBranchSettings;
         private string _serializedBranchSettingsAlternative;
         private List<string> _yamlFiles;
+        private IYamlStringParser _yamlStringParser;
 
         [SetUp]
         public void SetUp()
@@ -48,12 +49,14 @@ namespace Gesetzesentwicklung.Models.Tests
   ""Gesetze/GG/Änderung-1"": Feature
   ""Gesetze/GG/Änderung-2"": Feature
 ";
+
+            _yamlStringParser = new YamlStringParser();
         }
 
         [Test]
         public void Models_BranchSettings_Serialize()
         {
-            var yaml = YamlStringParser.ToYaml(_branchSettings);
+            var yaml = _yamlStringParser.ToYaml(_branchSettings);
 
             Assert.That(yaml, Is.EqualTo(_serializedBranchSettings)
                             | Is.EqualTo(_serializedBranchSettingsAlternative));
@@ -62,7 +65,7 @@ namespace Gesetzesentwicklung.Models.Tests
         [Test]
         public void Models_BranchSettings_Deserialize()
         {
-            var settings = YamlStringParser.FromYaml<BranchesSettings>(_serializedBranchSettings);
+            var settings = _yamlStringParser.FromYaml<BranchesSettings>(_serializedBranchSettings);
 
             Assert.That(settings.Branches, Is.EquivalentTo(_branchSettings.Branches));
             Assert.That(settings.BranchesYamls, Is.EquivalentTo(_yamlFiles));
