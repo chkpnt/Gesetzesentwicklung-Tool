@@ -27,13 +27,15 @@ namespace Gesetzesentwicklung.Git
             : this(fileSystem: fileSystem,
                    yamlStringParser: new YamlStringParser()) { }
 
-        public T FromYaml<T>(string file)
         public YamlFileParser()
             : this(fileSystem: new FileSystem(),
                    yamlStringParser: new YamlStringParser()) { }
+
+        public T FromYaml<T>(string file) where T : FileSetting
         {
             var content = _fileSystem.File.ReadAllText(file, UTF8_Ohne_BOM);
             var setting = _yamlStringParser.FromYaml<T>(content);
+            setting.FileSettingFilename = file;
             return setting;
         }
     }

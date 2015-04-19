@@ -8,12 +8,33 @@ using YamlDotNet.Serialization;
 
 namespace Gesetzesentwicklung.Models
 {
-    public class CommitSettings
+    public abstract class FileSetting
     {
+        [YamlIgnore]
+        public virtual string FileSettingFilename { get; set; }
+    }
+
+    public class CommitSettings : FileSetting
+    {
+        private string _fileSettingFilename;
+
+        public override string FileSettingFilename
+        { 
+            get { return _fileSettingFilename; }
+            set
+            {
+                _fileSettingFilename = value;
+                foreach (var commit in Commits.Where(c => c.FileSettingFilename == null))
+                {
+                    commit.FileSettingFilename = _fileSettingFilename;
+                }
+            }
+        }
+
         public List<CommitSetting> Commits { get; set; }
     }
 
-    public class CommitSetting : IComparable<CommitSetting>
+    public class CommitSetting : FileSetting, IComparable<CommitSetting>
     {
         public string BranchFrom { get; set; }
         public string MergeInto { get; set; }
@@ -99,7 +120,7 @@ namespace Gesetzesentwicklung.Models
         }
     }
 
-    public class BranchesSettings
+    public class BranchesSettings : FileSetting
     {
         public enum BranchTyp
         {

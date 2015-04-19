@@ -58,5 +58,23 @@ Zeile 2"}
 
             Assert.That(settings.Commits, Is.EquivalentTo(_commitSettings.Commits));
         }
+
+        [Test]
+        public void Models_CommitSettings_UebertrageFilename()
+        {
+            _commitSettings.FileSettingFilename = "bla";
+
+            Assert.That(_commitSettings.Commits, Has.All.Matches<CommitSetting>(c => c.FileSettingFilename == "bla"));
+        }
+
+        [Test]
+        public void Models_CommitSettings_UebertrageFilenameBeiExistierendemFilename()
+        {
+            _commitSettings.Commits.First().FileSettingFilename = "blub";
+            _commitSettings.FileSettingFilename = "bla";
+
+            Assert.That(_commitSettings.Commits.First().FileSettingFilename, Is.EqualTo("blub"));
+            Assert.That(_commitSettings.Commits.Last().FileSettingFilename, Is.EqualTo("bla"));
+        }
     }
 }
