@@ -53,6 +53,10 @@
       <Project>{f7b91df7-d12c-439b-aedd-48f0e9eaee09}</Project>
       <Name>Gesetzesentwicklung.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Gesetzesentwicklung.Shared\Gesetzesentwicklung.Shared.csproj">
+      <Project>{11c3b8e3-dc96-4cac-b1b1-88a8427da25c}</Project>
+      <Name>Gesetzesentwicklung.Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -1,4 +1,5 @@
 ﻿using Gesetzesentwicklung.Models;
+using Gesetzesentwicklung.Shared;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -30,6 +31,14 @@ namespace Gesetzesentwicklung.Validators
 
         public bool IsValid(CommitSetting commitSetting, string parentDir, BranchesSettings branchSettings, ref ValidatorProtokoll protokoll)
         {
+            var valid = true;
+            valid &= IsValid_Daten(commitSetting, parentDir, branchSettings, ref protokoll);
+            valid &= IsValid_Datum(commitSetting, parentDir, branchSettings, ref protokoll);
+            return valid;
+        }
+
+        private bool IsValid_Daten(CommitSetting commitSetting, string parentDir, BranchesSettings branchSettings, ref ValidatorProtokoll protokoll)
+        {
             if (commitSetting.Daten == null)
             {
                 return true;
@@ -45,6 +54,24 @@ namespace Gesetzesentwicklung.Validators
             }
 
             return exists;
+        }
+
+        // TODO: Herausnehmen, sobald Git gefixt ist...
+        private bool IsValid_Datum(CommitSetting commitSetting, string parentDir, BranchesSettings branchSettings, ref ValidatorProtokoll protokoll)
+        {
+            if (commitSetting.Datum.Equals(default(DateTime)))
+            {
+                protokoll.AddEntry("Datum fehlt");
+                return false;
+            }
+
+            if (commitSetting.Datum.ToEpoch() < 100000000)
+            {
+                protokoll.AddEntry("Minimales Datum ist der 04.03.1973");
+                return false;
+            }
+
+            return true;
         }
     }
 }

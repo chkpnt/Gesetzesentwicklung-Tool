@@ -35,7 +35,8 @@ namespace Gesetzesentwicklung.Validators.Tests
             {
                 Autor = "Foo Bar <foo@bar.net>",
                 BranchFrom = "Gesetze/GG",
-                Daten = @"Änderung-1\Lesung-1"
+                Daten = @"Änderung-1\Lesung-1",
+                _Datum = "01.01.1990"
             };
 
             _validBranchSettings = new BranchesSettings();
@@ -49,14 +50,16 @@ namespace Gesetzesentwicklung.Validators.Tests
             var commitSettingKorrektOhneDaten = new CommitSetting
             {
                 Autor = "Foo Bar <foo@bar.net>",
-                BranchFrom = "Gesetze/GG"
+                BranchFrom = "Gesetze/GG",
+                _Datum = "01.01.1990"
             };
 
             var commitSettingFalsch = new CommitSetting
             {
                 Autor = "Foo Bar <foo@bar.net>",
                 BranchFrom = "Gesetze/GG",
-                Daten = @"Änderung-1\Lesung-3"
+                Daten = @"Änderung-1\Lesung-3",
+                _Datum = "01.01.1990"
             };
 
 
@@ -76,6 +79,43 @@ namespace Gesetzesentwicklung.Validators.Tests
             Assert.IsFalse(result);
             Assert.That(protokoll.Entries.Count(), Is.EqualTo(1));
             Assert.That(protokoll.Entries.First().Message, Is.EqualTo(@"Verzeichnis fehlt: c:\data\GesetzesData\GG\Änderung-1\Lesung-1"));
+        }
+
+        [Test]
+        public void Models_Validators_CommitSetting_DatumFehlt()
+        {
+            var commitSettingOhneDatum = new CommitSetting
+            {
+                Autor = "Foo Bar <foo@bar.net>",
+                BranchFrom = "Gesetze/GG",
+                Daten = @"Änderung-1\Lesung-1"
+            };
+
+            ValidatorProtokoll protokoll = new ValidatorProtokoll();
+            var result = _classUnderTest.IsValid(commitSettingOhneDatum, @"c:\data\GesetzesData\GG", _validBranchSettings, ref protokoll);
+
+            Assert.IsFalse(result);
+            Assert.That(protokoll.Entries.Count(), Is.EqualTo(1));
+            Assert.That(protokoll.Entries.First().Message, Is.EqualTo("Datum fehlt"));
+        }
+
+        [Test]
+        public void Models_Validators_CommitSetting_ZuFrueh()
+        {
+            var commitSettingZuFrueh = new CommitSetting
+            {
+                Autor = "Foo Bar <foo@bar.net>",
+                BranchFrom = "Gesetze/GG",
+                Daten = @"Änderung-1\Lesung-1",
+                _Datum = "03.03.1973"
+            };
+
+            ValidatorProtokoll protokoll = new ValidatorProtokoll();
+            var result = _classUnderTest.IsValid(commitSettingZuFrueh, @"c:\data\GesetzesData\GG", _validBranchSettings, ref protokoll);
+
+            Assert.IsFalse(result);
+            Assert.That(protokoll.Entries.Count(), Is.EqualTo(1));
+            Assert.That(protokoll.Entries.First().Message, Is.EqualTo("Minimales Datum ist der 04.03.1973"));
         }
     }
 }
