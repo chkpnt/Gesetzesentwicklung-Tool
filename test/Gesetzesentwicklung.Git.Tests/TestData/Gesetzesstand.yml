@@ -1,7 +1,5 @@
-﻿- Daten: Gesetzesstand
+﻿Commits:
+- Daten: Gesetzesstand
   Autor: Foo Bar <foo@example.net>
-  Datum: 01.01.1945
-  Beschreibung: |-
-    1. Lesung
-
-    Letzte Zeile
+  Datum: 01.01.1980
+  Beschreibung: Initialer Commit

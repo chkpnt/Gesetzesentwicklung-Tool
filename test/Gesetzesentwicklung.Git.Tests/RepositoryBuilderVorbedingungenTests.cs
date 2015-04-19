@@ -35,7 +35,7 @@ namespace Gesetzesentwicklung.Git.Tests
 @"Commits:
 - Daten: Gesetzesstand
   Autor: Foo Bar <foo@example.net>
-  Datum: 01.01.1945
+  Datum: 01.01.1980
   Beschreibung: |-
     1. Lesung
 
@@ -45,14 +45,14 @@ namespace Gesetzesentwicklung.Git.Tests
 @"Commits:
 - BranchFrom: Gesetzesstand
   Autor: Foo Bar <foo@example.net>
-  Datum: 01.01.1949
+  Datum: 01.01.1981
   Beschreibung: init") },
                 { @"c:\data\GesetzesData\Gesetze\GG\Änderung-1.yml", new MockFileData(
 @"Commits:
 - MergeInto: Gesetze/GG/Bundesgesetzblatt
   Daten: Änderung-1\Lesung-2
   Autor: Foo Bar <foo@example.net>
-  Datum: 10.04.1960
+  Datum: 10.04.1982
   Beschreibung: |-
     2. Lesung
 
@@ -60,7 +60,7 @@ namespace Gesetzesentwicklung.Git.Tests
 - BranchFrom: Gesetze/GG/Bundesgesetzblatt
   Daten: Änderung-1\Lesung-1
   Autor: Foo Bar <foo@example.net>
-  Datum: 01.01.1960
+  Datum: 01.01.1982
   Beschreibung: |-
     1. Lesung
 
@@ -151,8 +151,8 @@ namespace Gesetzesentwicklung.Git.Tests
             var commitSettings = _classUnderTest.ReadCommitSettings(sourceDirInfo, branchesSettings);
 
             Assert.That(commitSettings.Commits.Count(), Is.EqualTo(4));
-            Assert.That(commitSettings.Commits.First()._Datum, Is.EqualTo("01.01.1945"));
-            Assert.That(commitSettings.Commits.Last()._Datum, Is.EqualTo("10.04.1960"));
+            Assert.That(commitSettings.Commits.First()._Datum, Is.EqualTo("01.01.1980"));
+            Assert.That(commitSettings.Commits.Last()._Datum, Is.EqualTo("10.04.1982"));
         }
     }
 }
