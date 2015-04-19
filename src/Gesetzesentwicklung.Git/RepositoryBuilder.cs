@@ -74,7 +74,7 @@ namespace Gesetzesentwicklung.Git
             var validator = new BranchesSettingsValidator(_fileSystem);
             if (!validator.IsValid(branchesSettings, sourceDirInfo.FullName, ref validatorProtokoll))
             {
-                var message = string.Join<string>(Environment.NewLine, validatorProtokoll.Entries);
+                var message = string.Join<string>(Environment.NewLine, validatorProtokoll.Entries.Select(e => e.Message));
                 throw new ArgumentException(message);
             }
             return branchesSettings;
@@ -103,7 +103,7 @@ namespace Gesetzesentwicklung.Git
 
             if (validatorProtokoll.Entries.Any())
             {
-                var message = string.Join<string>(Environment.NewLine, validatorProtokoll.Entries);
+                var message = string.Join<string>(Environment.NewLine, validatorProtokoll.Entries.Select(e => e.Message));
                 throw new ArgumentException(message);
             }
 
