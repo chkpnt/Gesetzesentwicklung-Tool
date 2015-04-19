@@ -32,10 +32,28 @@ namespace Gesetzesentwicklung.Git
 
             CleanUpDir(destDirInfo);
 
-            IEnumerable<string> branches;
-            InspectSourceDir(sourceDirInfo, out branches);
+            var brachesSettings = ReadBranchesSettings(sourceDirInfo);
+            var commitSettings = ReadCommitSettings(sourceDirInfo, brachesSettings);
 
             Repository.Init(destDirInfo.FullName);
+
+            MakeCommits(sourceDirInfo, destDirInfo, commitSettings);
+        }
+
+        private void MakeCommits(DirectoryInfoBase sourceDirInfo, DirectoryInfoBase destDirInfo, CommitSettings commitSettings)
+        {
+            var firstCommit = commitSettings.Commits.First();
+            using (var repo = new Repository(destDirInfo.FullName))
+            {
+                _fileSystem.File.WriteAllText(Path.Combine(destDirInfo.FullName, "README.md"), "bla");
+
+                repo.Stage("README.md");
+
+                Signature author = new Signature("Foo", "foo@bar.net", firstCommit.Datum);
+                Signature committer = author;
+
+                Commit c = repo.Commit(firstCommit.Beschreibung, author, committer);
+            }
         }
 
         internal void TestAssertions(DirectoryInfoBase sourceDirInfo, DirectoryInfoBase destDirInfo, bool overwrite = false)
@@ -110,13 +128,6 @@ namespace Gesetzesentwicklung.Git
             result.Commits.Sort();
 
             return result;
-        }
-
-        private void InspectSourceDir(DirectoryInfoBase sourceDirInfo, out IEnumerable<string> branches)
-        {
-            branches = from dir in sourceDirInfo.GetDirectories()
-                       where !dir.Name.StartsWith(".")
-                       select dir.Name;
         }
 
         private void CleanUpDir(DirectoryInfoBase dirInfo)
