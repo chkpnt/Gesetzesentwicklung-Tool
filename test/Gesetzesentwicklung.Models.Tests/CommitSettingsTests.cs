@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,8 +23,8 @@ namespace Gesetzesentwicklung.Models.Tests
             {
                 Commits = new List<CommitSetting>
                 {
-                    new CommitSetting { Autor = "Foo Bar <foo@bar.net>", Datum = DateTime.Parse("01/01/2015") },
-                    new CommitSetting { Autor = "Foo Bar <foo@bar.net>" , Beschreibung = 
+                    new CommitSetting { _Autor = "Foo Bar <foo@bar.net>", _Datum = "01.01.2015" },
+                    new CommitSetting { _Autor = "Foo Bar <foo@bar.net>", Beschreibung = 
 @"Zeile 1
 Zeile 2"}
                 }
@@ -31,9 +32,9 @@ Zeile 2"}
 
             _serializedCommitSettings =
 @"Commits:
-- Autor: Foo Bar <foo@bar.net>
+- Autor: '""Foo Bar"" <foo@bar.net>'
   Datum: 01.01.2015
-- Autor: Foo Bar <foo@bar.net>
+- Autor: '""Foo Bar"" <foo@bar.net>'
   Beschreibung: >-
     Zeile 1
 

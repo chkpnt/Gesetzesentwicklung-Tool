@@ -33,7 +33,7 @@ namespace Gesetzesentwicklung.Validators.Tests
 
             _validCommitSetting = new CommitSetting
             {
-                Autor = "Foo Bar <foo@bar.net>",
+                _Autor = "Foo Bar <foo@bar.net>",
                 BranchFrom = "Gesetze/GG",
                 Daten = @"Änderung-1\Lesung-1",
                 _Datum = "01.01.1990"
@@ -49,14 +49,14 @@ namespace Gesetzesentwicklung.Validators.Tests
         {
             var commitSettingKorrektOhneDaten = new CommitSetting
             {
-                Autor = "Foo Bar <foo@bar.net>",
+                _Autor = "Foo Bar <foo@bar.net>",
                 BranchFrom = "Gesetze/GG",
                 _Datum = "01.01.1990"
             };
 
             var commitSettingFalsch = new CommitSetting
             {
-                Autor = "Foo Bar <foo@bar.net>",
+                _Autor = "Foo Bar <foo@bar.net>",
                 BranchFrom = "Gesetze/GG",
                 Daten = @"Änderung-1\Lesung-3",
                 _Datum = "01.01.1990"
@@ -86,7 +86,7 @@ namespace Gesetzesentwicklung.Validators.Tests
         {
             var commitSettingOhneDatum = new CommitSetting
             {
-                Autor = "Foo Bar <foo@bar.net>",
+                _Autor = "Foo Bar <foo@bar.net>",
                 BranchFrom = "Gesetze/GG",
                 Daten = @"Änderung-1\Lesung-1"
             };
@@ -104,7 +104,7 @@ namespace Gesetzesentwicklung.Validators.Tests
         {
             var commitSettingZuFrueh = new CommitSetting
             {
-                Autor = "Foo Bar <foo@bar.net>",
+                _Autor = "Foo Bar <foo@bar.net>",
                 BranchFrom = "Gesetze/GG",
                 Daten = @"Änderung-1\Lesung-1",
                 _Datum = "03.03.1973"

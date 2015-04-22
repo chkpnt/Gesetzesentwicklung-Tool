@@ -41,9 +41,9 @@ namespace Gesetzesentwicklung.GL
             var gesetz = await LadeGesetzAusNormZip(norm);
             var commitSetting = new CommitSetting
             {
-                Autor = "Foo Bar <foo@bar.net>",
+                _Autor = "Foo Bar <foo@bar.net>",
                 Beschreibung = "Bla blub",
-                Datum = DateTime.Parse("1960-10-08")
+                _Datum = "08.10.1960"
             };
             var markdownGenerator = new MarkdownGenerator();
             markdownGenerator.generate(gesetz, commitSetting, @"C:\tmp");

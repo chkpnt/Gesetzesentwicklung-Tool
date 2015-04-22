@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,15 +21,15 @@ namespace Gesetzesentwicklung.Models.Tests
         {
             _commitSetting = new CommitSetting
             {
-                Autor = "Foo Bar <foo@bar.net>",
-                Datum = DateTime.Parse("01/01/2015"),
+                _Autor = "Foo Bar <foo@bar.net>",
+                _Datum = "01.01.2015",
                 Beschreibung = "blabla",
                 MergeInto = "Gesetze/GG/Bundesgesetzblatt"
             };
 
             _serializedCommitSetting =
 @"MergeInto: Gesetze/GG/Bundesgesetzblatt
-Autor: Foo Bar <foo@bar.net>
+Autor: '""Foo Bar"" <foo@bar.net>'
 Datum: 01.01.2015
 Beschreibung: blabla
 ";
@@ -91,7 +92,7 @@ Beschreibung: blabla
         [Test]
         public void Models_CommitSetting_ToString()
         {
-            var expected = "CommitSetting [Autor: Foo Bar <foo@bar.net>, " + 
+            var expected = "CommitSetting [Autor: \"Foo Bar\" <foo@bar.net>, " + 
                            "Datum: 01.01.2015, " +
                            "Beschreibung: \"blabla\", " + 
                            "BranchFrom: , " + 

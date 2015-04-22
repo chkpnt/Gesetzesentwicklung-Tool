@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Gesetzesentwicklung.Shared;
 using YamlDotNet.Serialization;
+using System.Net.Mail;
 
 namespace Gesetzesentwicklung.Models
 {
@@ -39,7 +40,16 @@ namespace Gesetzesentwicklung.Models
         public string BranchFrom { get; set; }
         public string MergeInto { get; set; }
         public string Daten { get; set; }
-        public string Autor { get; set; }
+
+        [YamlIgnore]
+        public MailAddress Autor { get; set; }
+
+        [YamlMember(Alias="Autor")]
+        public string _Autor
+        {
+            get { return Autor.ToString(); }
+            set { Autor = new MailAddress(value); }
+        }
 
         [YamlIgnore]
         public DateTime Datum { get; set; }

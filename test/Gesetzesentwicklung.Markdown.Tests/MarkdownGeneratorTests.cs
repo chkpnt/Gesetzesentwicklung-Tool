@@ -42,7 +42,7 @@ namespace Gesetzesentwicklung.Markdown.Tests
 
             _settings = new CommitSetting
             {
-                Autor = "Foo Bar <foo@example.net>",
+                _Autor = "Foo Bar <foo@example.net>",
                 _Datum = "01.01.2015",
                 Beschreibung = @"Commit-Message
 
@@ -101,7 +101,7 @@ Präambel-Text"));
             Assert.IsTrue(_fileSystem.File.Exists(Path.Combine(OutputFolder, "GG.yml")));
             Assert.That(_fileSystem.File.ReadAllText(Path.Combine(OutputFolder, "GG.yml"), Encoding.UTF8),
                 Is.EqualTo(
-@"Autor: Foo Bar <foo@example.net>
+@"Autor: '""Foo Bar"" <foo@example.net>'
 Datum: 01.01.2015
 Beschreibung: >-
   Commit-Message
