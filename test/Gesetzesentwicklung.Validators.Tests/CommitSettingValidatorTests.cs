@@ -14,8 +14,6 @@ namespace Gesetzesentwicklung.Validators.Tests
     [TestFixture]
     public class CommitSettingValidatorTests
     {
-        private BranchesSettings _validBranchSettings;
-
         private CommitSetting _validCommitSetting;
 
         private IFileSystem _fileSystem;
@@ -39,8 +37,6 @@ namespace Gesetzesentwicklung.Validators.Tests
                 _Datum = "01.01.1990"
             };
 
-            _validBranchSettings = new BranchesSettings();
-
             _classUnderTest = new CommitSettingValidator(_fileSystem);
         }
 
@@ -63,9 +59,9 @@ namespace Gesetzesentwicklung.Validators.Tests
             };
 
 
-            Assert.IsTrue(_classUnderTest.IsValid(_validCommitSetting, @"c:\data\GesetzesData\GG", _validBranchSettings));
-            Assert.IsTrue(_classUnderTest.IsValid(commitSettingKorrektOhneDaten, @"c:\data\GesetzesData\GG", _validBranchSettings));
-            Assert.IsFalse(_classUnderTest.IsValid(commitSettingFalsch, @"c:\data\GesetzesData\GG", _validBranchSettings));
+            Assert.IsTrue(_classUnderTest.IsValid(_validCommitSetting, @"c:\data\GesetzesData\GG"));
+            Assert.IsTrue(_classUnderTest.IsValid(commitSettingKorrektOhneDaten, @"c:\data\GesetzesData\GG"));
+            Assert.IsFalse(_classUnderTest.IsValid(commitSettingFalsch, @"c:\data\GesetzesData\GG"));
         }
 
         [Test]
@@ -74,7 +70,7 @@ namespace Gesetzesentwicklung.Validators.Tests
             _fileSystem.Directory.Delete(@"c:\data\GesetzesData\GG\Änderung-1\Lesung-1\");
 
             ValidatorProtokoll protokoll = new ValidatorProtokoll();
-            var result = _classUnderTest.IsValid(_validCommitSetting, @"c:\data\GesetzesData\GG", _validBranchSettings, ref protokoll);
+            var result = _classUnderTest.IsValid(_validCommitSetting, @"c:\data\GesetzesData\GG", ref protokoll);
 
             Assert.IsFalse(result);
             Assert.That(protokoll.Entries.Count(), Is.EqualTo(1));
@@ -92,7 +88,7 @@ namespace Gesetzesentwicklung.Validators.Tests
             };
 
             ValidatorProtokoll protokoll = new ValidatorProtokoll();
-            var result = _classUnderTest.IsValid(commitSettingOhneDatum, @"c:\data\GesetzesData\GG", _validBranchSettings, ref protokoll);
+            var result = _classUnderTest.IsValid(commitSettingOhneDatum, @"c:\data\GesetzesData\GG", ref protokoll);
 
             Assert.IsFalse(result);
             Assert.That(protokoll.Entries.Count(), Is.EqualTo(1));
@@ -111,7 +107,7 @@ namespace Gesetzesentwicklung.Validators.Tests
             };
 
             ValidatorProtokoll protokoll = new ValidatorProtokoll();
-            var result = _classUnderTest.IsValid(commitSettingZuFrueh, @"c:\data\GesetzesData\GG", _validBranchSettings, ref protokoll);
+            var result = _classUnderTest.IsValid(commitSettingZuFrueh, @"c:\data\GesetzesData\GG", ref protokoll);
 
             Assert.IsFalse(result);
             Assert.That(protokoll.Entries.Count(), Is.EqualTo(1));

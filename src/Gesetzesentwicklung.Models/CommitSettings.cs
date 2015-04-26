@@ -129,25 +129,4 @@ namespace Gesetzesentwicklung.Models
             Autor, _Datum, Beschreibung.ToLiteral(), BranchFrom, MergeInto);
         }
     }
-
-    public class BranchesSettings : FileSetting
-    {
-        public enum BranchTyp
-        {
-            Feature,
-            Normal
-        }
-
-        public Dictionary<string, BranchTyp> Branches { get; set; }
-
-        [YamlIgnore]
-        public IEnumerable<string> BranchesYamls
-        {
-            get
-            {
-                return from branch in Branches.Keys
-                       select branch.Replace("/", "\\") + ".yml";
-            }
-        }
-    }
 }

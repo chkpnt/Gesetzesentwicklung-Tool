@@ -23,21 +23,21 @@ namespace Gesetzesentwicklung.Validators
             _fileSystem = fileSystem;
         }
 
-        public bool IsValid(CommitSetting commitSetting, string parentDir, BranchesSettings branchSettings)
+        public bool IsValid(CommitSetting commitSetting, string parentDir)
         {
             ValidatorProtokoll protokoll = new ValidatorProtokoll();
-            return IsValid(commitSetting, parentDir, branchSettings, ref protokoll);
+            return IsValid(commitSetting, parentDir, ref protokoll);
         }
 
-        public bool IsValid(CommitSetting commitSetting, string parentDir, BranchesSettings branchSettings, ref ValidatorProtokoll protokoll)
+        public bool IsValid(CommitSetting commitSetting, string parentDir, ref ValidatorProtokoll protokoll)
         {
             var valid = true;
-            valid &= IsValid_Daten(commitSetting, parentDir, branchSettings, ref protokoll);
-            valid &= IsValid_Datum(commitSetting, parentDir, branchSettings, ref protokoll);
+            valid &= IsValid_Daten(commitSetting, parentDir, ref protokoll);
+            valid &= IsValid_Datum(commitSetting, parentDir, ref protokoll);
             return valid;
         }
 
-        private bool IsValid_Daten(CommitSetting commitSetting, string parentDir, BranchesSettings branchSettings, ref ValidatorProtokoll protokoll)
+        private bool IsValid_Daten(CommitSetting commitSetting, string parentDir, ref ValidatorProtokoll protokoll)
         {
             if (commitSetting.Daten == null)
             {
@@ -57,7 +57,7 @@ namespace Gesetzesentwicklung.Validators
         }
 
         // TODO: Herausnehmen, sobald Git gefixt ist...
-        private bool IsValid_Datum(CommitSetting commitSetting, string parentDir, BranchesSettings branchSettings, ref ValidatorProtokoll protokoll)
+        private bool IsValid_Datum(CommitSetting commitSetting, string parentDir, ref ValidatorProtokoll protokoll)
         {
             if (commitSetting.Datum.Equals(default(DateTime)))
             {

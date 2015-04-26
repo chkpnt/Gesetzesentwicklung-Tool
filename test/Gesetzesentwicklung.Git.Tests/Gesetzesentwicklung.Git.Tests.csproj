@@ -75,9 +75,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <Content Include="TestData\Branches.yml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="TestData\Gesetze\GG\Bundesgesetzblatt\GG\I. Die Grundrechte\Artikel 1.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

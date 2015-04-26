@@ -78,8 +78,22 @@ namespace Gesetzesentwicklung.Git.Tests
                 var filter = new CommitFilter { SortBy = CommitSortStrategies.Reverse };
                 var firstCommit = repo.Commits.QueryBy(filter).First();
                 Assert.That(firstCommit.MessageShort, Is.EqualTo("Initialer Commit"));
+                Assert.That(firstCommit.Author.Name, Is.EqualTo("Foo Bar"));
+                Assert.That(firstCommit.Author.Email, Is.EqualTo("foo@example.net"));
                 Assert.That(firstCommit.Author.When, Is.EqualTo(DateTimeOffset.ParseExact("01.01.1980", "dd.MM.yyyy", null)));
+                Assert.That(ListBranchesContainingCommit(repo, firstCommit.Sha).Single().Name, Is.EqualTo("master"));
             }
+        }
+
+        private IEnumerable<Branch> ListBranchesContainingCommit(Repository repo, string commitSha)
+        {
+            var localHeads = repo.Refs.Where(r => r.IsLocalBranch());
+
+            var commit = repo.Lookup<Commit>(commitSha);
+            var localHeadsContainingTheCommit = repo.Refs.ReachableFrom(localHeads, new[] { commit });
+
+            return localHeadsContainingTheCommit
+                .Select(branchRef => repo.Branches[branchRef.CanonicalName]);
         }
     }
 }

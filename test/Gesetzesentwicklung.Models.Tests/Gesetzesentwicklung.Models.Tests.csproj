@@ -45,7 +45,6 @@
   <ItemGroup>
     <Compile Include="CommitSettingTests.cs" />
     <Compile Include="CommitSettingsTests.cs" />
-    <Compile Include="BranchSettingsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

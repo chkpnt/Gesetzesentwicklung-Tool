@@ -45,7 +45,6 @@
   <ItemGroup>
     <Compile Include="CommitSettingValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="BranchesSettingsValidator.cs" />
     <Compile Include="ValidatorProtokoll.cs" />
   </ItemGroup>
   <ItemGroup>

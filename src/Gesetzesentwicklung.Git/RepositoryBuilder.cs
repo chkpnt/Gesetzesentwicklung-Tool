@@ -32,8 +32,7 @@ namespace Gesetzesentwicklung.Git
 
             CleanUpDir(destDirInfo);
 
-            var brachesSettings = ReadBranchesSettings(sourceDirInfo);
-            var commitSettings = ReadCommitSettings(sourceDirInfo, brachesSettings);
+            var commitSettings = ReadCommitSettings(sourceDirInfo);
 
             Repository.Init(destDirInfo.FullName);
 
@@ -49,7 +48,7 @@ namespace Gesetzesentwicklung.Git
 
                 repo.Stage("README.md");
 
-                Signature author = new Signature("Foo", "foo@bar.net", firstCommit.Datum);
+                Signature author = new Signature(firstCommit.Autor.DisplayName, firstCommit.Autor.Address, firstCommit.Datum);
                 Signature committer = author;
 
                 Commit c = repo.Commit(firstCommit.Beschreibung, author, committer);
@@ -76,34 +75,11 @@ namespace Gesetzesentwicklung.Git
             }
         }
 
-        internal BranchesSettings ReadBranchesSettings(DirectoryInfoBase sourceDirInfo)
-        {
-            var branchesSettingsFileInfo = _fileSystem.FileInfo.FromFileName(Path.Combine(sourceDirInfo.FullName, "Branches.yml"));
-            if (! branchesSettingsFileInfo.Exists)
-            {
-                var message = string.Format("Datei fehlt: {0}", branchesSettingsFileInfo.FullName);
-                throw new ArgumentException(message);
-            }
-
-            var yamlFileParser = new YamlFileParser(_fileSystem);
-            var branchesSettings = yamlFileParser.FromYaml<BranchesSettings>(branchesSettingsFileInfo.FullName);
-
-            var validatorProtokoll = new ValidatorProtokoll();
-            var validator = new BranchesSettingsValidator(_fileSystem);
-            if (!validator.IsValid(branchesSettings, sourceDirInfo.FullName, ref validatorProtokoll))
-            {
-                var message = string.Join<string>(Environment.NewLine, validatorProtokoll.Entries.Select(e => e.Message));
-                throw new ArgumentException(message);
-            }
-            return branchesSettings;
-        }
-
-        internal CommitSettings ReadCommitSettings(DirectoryInfoBase sourceDirInfo, BranchesSettings branchesSettings)
+        internal CommitSettings ReadCommitSettings(DirectoryInfoBase sourceDirInfo)
         {
             var result = new CommitSettings { Commits = new List<CommitSetting>() };
             
-            var yamlFiles = from branchYamlFile in branchesSettings.BranchesYamls
-                            select _fileSystem.FileInfo.FromFileName(Path.Combine(sourceDirInfo.FullName, branchYamlFile));
+            var yamlFiles = sourceDirInfo.GetFiles("*.yml", SearchOption.AllDirectories);
 
             var yamlFileParser = new YamlFileParser(_fileSystem);
             var validatorProtokoll = new ValidatorProtokoll();
@@ -114,7 +90,7 @@ namespace Gesetzesentwicklung.Git
                 var commitSettings = yamlFileParser.FromYaml<CommitSettings>(commitSettingsYaml.FullName);
                 foreach (var commitSetting in commitSettings.Commits)
                 {
-                    validator.IsValid(commitSetting, commitSettingsYaml.DirectoryName, branchesSettings, ref validatorProtokoll);
+                    validator.IsValid(commitSetting, commitSettingsYaml.DirectoryName, ref validatorProtokoll);
                 }
                 result.Commits.AddRange(commitSettings.Commits);
             }

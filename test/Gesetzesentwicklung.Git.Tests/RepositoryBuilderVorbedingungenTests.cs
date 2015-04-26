@@ -26,11 +26,6 @@ namespace Gesetzesentwicklung.Git.Tests
         {
             _fileSystem = new MockFileSystem(new Dictionary<string, MockFileData>
             {
-                { @"c:\data\GesetzesData\Branches.yml", new MockFileData(
-@"Branches:
-  Gesetzesstand: Normal
-  Gesetze/GG/Bundesgesetzblatt: Normal
-  Gesetze/GG/Änderung-1: Feature") },
                 { @"c:\data\GesetzesData\Gesetzesstand.yml", new MockFileData(
 @"Commits:
 - Daten: Gesetzesstand
@@ -109,46 +104,11 @@ namespace Gesetzesentwicklung.Git.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException),
-         ExpectedMessage=@"Datei fehlt: c:\data\GesetzesData\Branches.yml")]
-        public void Git_BranchesSettingsDateiFehlt()
-        {
-            _fileSystem.File.Delete(@"c:\data\GesetzesData\Branches.yml");
-
-            var sourceDirInfo = _fileSystem.DirectoryInfo.FromDirectoryName(_sourceDir);
-
-            _classUnderTest.ReadBranchesSettings(sourceDirInfo);
-        }
-
-        [Test]
-        public void Git_BranchesSettingsDateiKorrektEingelesen()
-        {
-            var sourceDirInfo = _fileSystem.DirectoryInfo.FromDirectoryName(_sourceDir);
-
-            var branchSettings = _classUnderTest.ReadBranchesSettings(sourceDirInfo);
-
-            Assert.That(branchSettings.Branches.Count(), Is.EqualTo(3));
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentException),
-         ExpectedMessage = @"Yaml-Datei fehlt: c:\data\GesetzesData\Gesetze\GG\Änderung-1.yml")]
-        public void Git_BranchesSettingsDatei_CommitSettingsYamlFehlt()
-        {
-            _fileSystem.File.Delete(@"c:\data\GesetzesData\Gesetze\GG\Änderung-1.yml");
-
-            var sourceDirInfo = _fileSystem.DirectoryInfo.FromDirectoryName(_sourceDir);
-
-            _classUnderTest.ReadBranchesSettings(sourceDirInfo);
-        }
-
-        [Test]
         public void Git_CommitSettingsDateienKorrektEingelesen()
         {
             var sourceDirInfo = _fileSystem.DirectoryInfo.FromDirectoryName(_sourceDir);
-            var branchesSettings = _classUnderTest.ReadBranchesSettings(sourceDirInfo);
 
-            var commitSettings = _classUnderTest.ReadCommitSettings(sourceDirInfo, branchesSettings);
+            var commitSettings = _classUnderTest.ReadCommitSettings(sourceDirInfo);
 
             Assert.That(commitSettings.Commits.Count(), Is.EqualTo(4));
             Assert.That(commitSettings.Commits.First()._Datum, Is.EqualTo("01.01.1980"));

@@ -52,7 +52,6 @@
     <Compile Include="CommitSettingValidatorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ValidatorProtokollTests.cs" />
-    <Compile Include="BranchesSettingsValidatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
