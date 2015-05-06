@@ -1,10 +1,10 @@
 properties {
   $codecoverage = "VisualStudio"
   
-  $vstest_console_exe = Resolve-Path ($env:VS120COMNTOOLS + "..\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe")
+  $vstest_console_exe = Resolve-Path ($env:VS140COMNTOOLS + "..\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe")
   
   if ($codecoverage -eq "VisualStudio") {
-    $code_coverage_exe = Resolve-Path ($env:VS120COMNTOOLS + "..\..\Team Tools\Dynamic Code Coverage Tools\CodeCoverage.exe")
+    $code_coverage_exe = Resolve-Path ($env:VS140COMNTOOLS + "..\..\Team Tools\Dynamic Code Coverage Tools\CodeCoverage.exe")
   }
   
   $test_results_dir = "TestResults\"

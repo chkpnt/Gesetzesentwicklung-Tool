@@ -7,6 +7,7 @@
   - git config --global core.autocrlf true 
 
   install:
+  - set PATH=C:\Program Files (x86)\MSBuild\14.0\Bin;%PATH%
   - choco install -y psake
 
   before_build:
