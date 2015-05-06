@@ -25,7 +25,7 @@ namespace Gesetzesentwicklung.Validators
 
         public bool IsValid(CommitSetting commitSetting, string parentDir)
         {
-            ValidatorProtokoll protokoll = new ValidatorProtokoll();
+            var protokoll = new ValidatorProtokoll();
             return IsValid(commitSetting, parentDir, ref protokoll);
         }
 

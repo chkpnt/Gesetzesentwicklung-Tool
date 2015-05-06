@@ -48,10 +48,10 @@ namespace Gesetzesentwicklung.Git
 
                 repo.Stage("README.md");
 
-                Signature author = new Signature(firstCommit.Autor.DisplayName, firstCommit.Autor.Address, firstCommit.Datum);
-                Signature committer = author;
+                var authorSignature = new Signature(firstCommit.Autor.DisplayName, firstCommit.Autor.Address, firstCommit.Datum);
+                var committerSignature = authorSignature;
 
-                Commit c = repo.Commit(firstCommit.Beschreibung, author, committer);
+                repo.Commit(firstCommit.Beschreibung, authorSignature, committerSignature);
             }
         }
 

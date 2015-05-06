@@ -108,7 +108,7 @@ namespace Gesetzesentwicklung.Models
         {
             unchecked
             {
-                int hash = 17;
+                var hash = 17;
                 hash = hash * 23 + ((BranchFrom != null) ? BranchFrom.GetHashCode() : 0);
                 hash = hash * 23 + ((MergeInto != null) ? MergeInto.GetHashCode() : 0);
                 hash = hash * 23 + ((Daten != null) ? Daten.GetHashCode() : 0);

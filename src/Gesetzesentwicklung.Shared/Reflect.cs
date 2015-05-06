@@ -37,7 +37,7 @@ namespace Gesetzesentwicklung.Shared
 
         public static MethodInfo GetMethod(Expression<Action> expression)
         {
-            MethodInfo method = GetMember(expression) as MethodInfo;
+            var method = GetMember(expression) as MethodInfo;
             if (method == null)
             {
                 throw new ArgumentException(
@@ -49,7 +49,7 @@ namespace Gesetzesentwicklung.Shared
 
         public static PropertyInfo GetProperty<T>(Expression<Func<T>> expression)
         {
-            PropertyInfo property = GetMember(expression) as PropertyInfo;
+            var property = GetMember(expression) as PropertyInfo;
             if (property == null)
             {
                 throw new ArgumentException(
@@ -61,7 +61,7 @@ namespace Gesetzesentwicklung.Shared
 
         public static FieldInfo GetField<T>(Expression<Func<T>> expression)
         {
-            FieldInfo field = GetMember(expression) as FieldInfo;
+            var field = GetMember(expression) as FieldInfo;
             if (field == null)
             {
                 throw new ArgumentException(

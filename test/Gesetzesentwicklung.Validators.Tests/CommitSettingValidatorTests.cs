@@ -69,7 +69,7 @@ namespace Gesetzesentwicklung.Validators.Tests
         {
             _fileSystem.Directory.Delete(@"c:\data\GesetzesData\GG\Änderung-1\Lesung-1\");
 
-            ValidatorProtokoll protokoll = new ValidatorProtokoll();
+            var protokoll = new ValidatorProtokoll();
             var result = _classUnderTest.IsValid(_validCommitSetting, @"c:\data\GesetzesData\GG", ref protokoll);
 
             Assert.IsFalse(result);
@@ -87,7 +87,7 @@ namespace Gesetzesentwicklung.Validators.Tests
                 Daten = @"Änderung-1\Lesung-1"
             };
 
-            ValidatorProtokoll protokoll = new ValidatorProtokoll();
+            var protokoll = new ValidatorProtokoll();
             var result = _classUnderTest.IsValid(commitSettingOhneDatum, @"c:\data\GesetzesData\GG", ref protokoll);
 
             Assert.IsFalse(result);
@@ -106,7 +106,7 @@ namespace Gesetzesentwicklung.Validators.Tests
                 _Datum = "03.03.1973"
             };
 
-            ValidatorProtokoll protokoll = new ValidatorProtokoll();
+            var protokoll = new ValidatorProtokoll();
             var result = _classUnderTest.IsValid(commitSettingZuFrueh, @"c:\data\GesetzesData\GG", ref protokoll);
 
             Assert.IsFalse(result);

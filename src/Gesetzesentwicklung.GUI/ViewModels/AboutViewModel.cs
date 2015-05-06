@@ -27,7 +27,7 @@ namespace Gesetzesentwicklung.GUI.ViewModels
                 Lizenzen.Add(lizenz);
             }
 
-            ICollectionView lizenzenView = CollectionViewSource.GetDefaultView(Lizenzen);
+            var lizenzenView = CollectionViewSource.GetDefaultView(Lizenzen);
             lizenzenView.SortDescriptions.Add(
                 new SortDescription(PropertyNameSolver.Instance.Lizenz_Projekt, ListSortDirection.Ascending)
             );
