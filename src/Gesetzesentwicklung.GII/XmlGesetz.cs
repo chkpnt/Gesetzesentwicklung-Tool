@@ -54,10 +54,7 @@ namespace Gesetzesentwicklung.GII
             public string Text;
 
             [ExcludeFromCodeCoverage]
-            public System.Xml.Schema.XmlSchema GetSchema()
-            {
-                return null;
-            }
+            public System.Xml.Schema.XmlSchema GetSchema() => null;
 
             public void ReadXml(System.Xml.XmlReader reader)
             {

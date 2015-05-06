@@ -47,7 +47,7 @@ namespace Gesetzesentwicklung.GUI.ViewModels
             }
         }
 
-        public bool IsItemSelected { get { return SelectedGesetzeImInternet != null;  } }
+        public bool IsItemSelected => SelectedGesetzeImInternet != null;
 
 
         public GesetzeImInternetViewModel()

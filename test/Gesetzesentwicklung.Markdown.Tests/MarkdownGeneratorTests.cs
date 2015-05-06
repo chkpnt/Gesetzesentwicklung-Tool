@@ -111,19 +111,13 @@ Beschreibung: >-
 "));
         }
 
-        private Artikel neuerArtikel(string titel, string inhalt)
-        {
-            return neuerArtikel(null, titel, inhalt);
-        }
+        private Artikel neuerArtikel(string titel, string inhalt) => neuerArtikel(null, titel, inhalt);
 
-        private Artikel neuerArtikel(string abschnitt, string name, string inhalt)
+        private Artikel neuerArtikel(string abschnitt, string name, string inhalt) => new Artikel
         {
-            return new Artikel
-            {
-                Abschnitt = abschnitt,
-                Name = name,
-                Inhalt = inhalt
-            };
-        }
+            Abschnitt = abschnitt,
+            Name = name,
+            Inhalt = inhalt
+        };
     }
 }

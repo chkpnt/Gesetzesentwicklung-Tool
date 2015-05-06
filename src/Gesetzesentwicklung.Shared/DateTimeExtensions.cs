@@ -10,9 +10,6 @@ namespace Gesetzesentwicklung.Shared
     {
         private readonly static DateTime Epoch0 = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
-        public static long ToEpoch(this DateTime date)
-        {
-            return Convert.ToInt64((date.ToUniversalTime() - Epoch0).TotalSeconds);
-        }
+        public static long ToEpoch(this DateTime date) => Convert.ToInt64((date.ToUniversalTime() - Epoch0).TotalSeconds);
     }
 }

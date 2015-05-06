@@ -108,66 +108,51 @@ namespace Gesetzesentwicklung.GII.Tests
             Assert.That(verzeichnis.Normen.ElementAt(1).Link, Is.EqualTo(new Uri("http://www.gesetze-im-internet.de/gg/xml.zip")));
         }
 
-        private XmlGesetz.Norm neuerGesetzesname(string abkuerzung)
+        private XmlGesetz.Norm neuerGesetzesname(string abkuerzung) => new XmlGesetz.Norm
         {
-            return new XmlGesetz.Norm
+            Metadaten = new XmlGesetz.Metadaten
             {
-                Metadaten = new XmlGesetz.Metadaten
+                Abkuerzung = abkuerzung,
+                Bezeichnung = null,
+                Gliederungseinheit = null
+            },
+            Textdaten = neuerText("")
+        };
+        private XmlGesetz.Norm neueGliederungseinheit(string bezeichnung, string titel) => new XmlGesetz.Norm
+        {
+            Metadaten = new XmlGesetz.Metadaten
+            {
+                Abkuerzung = "egal",
+                Bezeichnung = null,
+                Gliederungseinheit = new XmlGesetz.Gliederungseinheit
                 {
-                    Abkuerzung = abkuerzung,
-                    Bezeichnung = null,
-                    Gliederungseinheit = null
-                },
-                Textdaten = neuerText("")
-            };
-        }
-        private XmlGesetz.Norm neueGliederungseinheit(string bezeichnung, string titel)
-        {
-            return new XmlGesetz.Norm
-            {
-                Metadaten = new XmlGesetz.Metadaten
-                {
-                    Abkuerzung = "egal",
-                    Bezeichnung = null,
-                    Gliederungseinheit = new XmlGesetz.Gliederungseinheit
-                    {
-                        Bezeichnung = bezeichnung,
-                        Titel = titel
-                    }
-                },
-                Textdaten = neuerText("")
-            };
-        }
-
-        private XmlGesetz.Norm neuerArtikel(string bezeichnung, string inhalt)
-        {
-            return new XmlGesetz.Norm
-            {
-                Metadaten = new XmlGesetz.Metadaten
-                { 
-                    Abkuerzung = "egal",
                     Bezeichnung = bezeichnung,
-                    Gliederungseinheit = null
-                },
-                Textdaten = neuerText(inhalt)
-            };
-        }
+                    Titel = titel
+                }
+            },
+            Textdaten = neuerText("")
+        };
 
-        private XmlGesetz.Textdaten neuerText(string inhalt)
+        private XmlGesetz.Norm neuerArtikel(string bezeichnung, string inhalt) => new XmlGesetz.Norm
         {
-            return new XmlGesetz.Textdaten
+            Metadaten = new XmlGesetz.Metadaten
             {
-                Text =  inhalt
-            };
-        }
+                Abkuerzung = "egal",
+                Bezeichnung = bezeichnung,
+                Gliederungseinheit = null
+            },
+            Textdaten = neuerText(inhalt)
+        };
 
-        private XmlVerzeichnis.Norm neuerVerzeichniseintrag(string titel, string url)
+        private XmlGesetz.Textdaten neuerText(string inhalt) => new XmlGesetz.Textdaten
         {
-            return new XmlVerzeichnis.Norm
-            {
-                Titel = titel,
-                Link = url
-            };
-        }
+            Text = inhalt
+        };
+
+        private XmlVerzeichnis.Norm neuerVerzeichniseintrag(string titel, string url) => new XmlVerzeichnis.Norm
+        {
+            Titel = titel,
+            Link = url
+        };
     }
 }

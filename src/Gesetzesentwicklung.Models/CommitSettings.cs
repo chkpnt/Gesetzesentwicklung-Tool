@@ -77,10 +77,7 @@ namespace Gesetzesentwicklung.Models
             set { _beschreibung = value.Replace("\r\n", "\n"); }
         }
 
-        public int CompareTo(CommitSetting other)
-        {
-            return DateTime.Compare(this.Datum, other.Datum);
-        }
+        public int CompareTo(CommitSetting other) => DateTime.Compare(this.Datum, other.Datum);
 
         public bool Equals(CommitSetting other)
         {
@@ -122,9 +119,6 @@ namespace Gesetzesentwicklung.Models
             }
         }
 
-        public override string ToString()
-        {
-            return $"CommitSetting [Autor: {Autor}, Datum: {_Datum}, Beschreibung: {Beschreibung.ToLiteral()}, BranchFrom: {BranchFrom}, MergeInto: {MergeInto}]";
-        }
+        public override string ToString() => $"CommitSetting [Autor: {Autor}, Datum: {_Datum}, Beschreibung: {Beschreibung.ToLiteral()}, BranchFrom: {BranchFrom}, MergeInto: {MergeInto}]";
     }
 }

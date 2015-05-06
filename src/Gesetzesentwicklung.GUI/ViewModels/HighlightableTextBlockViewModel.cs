@@ -16,7 +16,7 @@ namespace Gesetzesentwicklung.GUI.ViewModels
     {
         public Gesetzesverzeichnis.Norm Norm { get; private set; }
 
-        public string NormTitel { get { return Norm.Titel; } }
+        public string NormTitel => Norm.Titel;
 
         private TextBlock _textBlock;
 
@@ -90,9 +90,6 @@ namespace Gesetzesentwicklung.GUI.ViewModels
             }
         }
 
-        public bool Contains(string GesetzesFilter)
-        {
-            return NormTitel.IndexOf(GesetzesFilter, StringComparison.OrdinalIgnoreCase) >= 0;
-        }
+        public bool Contains(string GesetzesFilter) => NormTitel.IndexOf(GesetzesFilter, StringComparison.OrdinalIgnoreCase) >= 0;
     }
 }

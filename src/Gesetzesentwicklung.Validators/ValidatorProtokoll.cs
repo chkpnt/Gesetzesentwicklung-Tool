@@ -22,14 +22,8 @@ namespace Gesetzesentwicklung.Validators
 
         private List<ProtokollEntry> entries = new List<ProtokollEntry>();
 
-        public IEnumerable<ProtokollEntry> Entries
-        {
-            get
-            {
-               return entries.AsEnumerable();
-            }
-        }
-        
+        public IEnumerable<ProtokollEntry> Entries => entries.AsEnumerable();
+
         public void AddEntry(string message)
         {
             AddEntry("", message);

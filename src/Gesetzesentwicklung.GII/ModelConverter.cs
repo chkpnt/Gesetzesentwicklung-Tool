@@ -28,18 +28,15 @@ namespace Gesetzesentwicklung.GII
             return gesetz;
         }
 
-        internal Gesetzesverzeichnis Convert(XmlVerzeichnis xmlVerzeichnis)
+        internal Gesetzesverzeichnis Convert(XmlVerzeichnis xmlVerzeichnis) => new Gesetzesverzeichnis()
         {
-            return new Gesetzesverzeichnis()
-            {
-                Normen = from norm in xmlVerzeichnis.Normen
-                         select new Gesetzesverzeichnis.Norm
-                         {
-                             Link = new Uri(norm.Link),
-                             Titel = norm.Titel
-                         }
-            };
-        }
+            Normen = from norm in xmlVerzeichnis.Normen
+                     select new Gesetzesverzeichnis.Norm
+                     {
+                         Link = new Uri(norm.Link),
+                         Titel = norm.Titel
+                     }
+        };
 
         IEnumerable<Artikel> convertNormen2Artikel(List<XmlGesetz.Norm> normen)
         {
