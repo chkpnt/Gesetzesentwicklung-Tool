@@ -77,7 +77,7 @@ Beschreibung: blabla
         [Test]
         public void Models_CommitSetting_OrderBeiNull()
         {
-            var commitMitNull = new CommitSetting { };
+            var commitMitNull = new CommitSetting();
             var commitOhneNull = new CommitSetting { Datum = DateTime.Parse("1960-11-10") };
 
             Assert.That(commitMitNull.Datum, Is.EqualTo(DateTime.MinValue));
