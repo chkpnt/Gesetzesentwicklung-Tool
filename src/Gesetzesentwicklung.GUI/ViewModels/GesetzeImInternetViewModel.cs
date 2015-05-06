@@ -64,7 +64,7 @@ namespace Gesetzesentwicklung.GUI.ViewModels
 
             Task.Run(() =>
             {
-                var verzeichnis = _gesetzesService.GetGesetzesverzeichnis().Result;
+                var verzeichnis = _gesetzesService.GetGesetzesverzeichnisAsync().Result;
                 var normen = from norm in verzeichnis.Normen
                              select new HighlightableTextBlockViewModel(norm);
 
@@ -97,7 +97,7 @@ namespace Gesetzesentwicklung.GUI.ViewModels
 
             //Task.Run(() =>
             //{
-                _gesetzesService.GenerateMarkdown(SelectedGesetzeImInternet.Norm);
+                _gesetzesService.GenerateMarkdownAsync(SelectedGesetzeImInternet.Norm);
             //});
         }
 

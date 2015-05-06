@@ -12,10 +12,10 @@ namespace Gesetzesentwicklung.GII.Tests
     {
         [Test]
         [Category("WithExternalResource")]
-        public async void GII_VerzeichnisLader()
+        public async void GII_VerzeichnisLaderAsync()
         {
             var lader = new XmlVerzeichnisService();
-            var gesetzesVerzeichnis = await lader.LadeVerzeichnis();
+            var gesetzesVerzeichnis = await lader.LadeVerzeichnisAsync();
             Assert.That(gesetzesVerzeichnis.Normen.Count(), Is.GreaterThan(0));
         }
     }

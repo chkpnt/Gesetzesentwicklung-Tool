@@ -13,13 +13,13 @@ namespace Gesetzesentwicklung.GL
 {
     public class GesetzeImInternetService
     {
-        public async Task<Gesetzesverzeichnis> GetGesetzesverzeichnis()
+        public async Task<Gesetzesverzeichnis> GetGesetzesverzeichnisAsync()
         {
             var verzeichnisLader = new XmlVerzeichnisService();
-            return await verzeichnisLader.LadeVerzeichnis();
+            return await verzeichnisLader.LadeVerzeichnisAsync();
         }
 
-        internal async Task<Gesetz> LadeGesetzAusNormZip(Gesetzesverzeichnis.Norm norm)
+        internal async Task<Gesetz> LadeGesetzAusNormZipAsync(Gesetzesverzeichnis.Norm norm)
         {
             using (var webclient = new WebClient())
             {
@@ -36,9 +36,9 @@ namespace Gesetzesentwicklung.GL
             }
         }
 
-        public async void GenerateMarkdown(Gesetzesverzeichnis.Norm norm)
+        public async void GenerateMarkdownAsync(Gesetzesverzeichnis.Norm norm)
         {
-            var gesetz = await LadeGesetzAusNormZip(norm);
+            var gesetz = await LadeGesetzAusNormZipAsync(norm);
             var commitSetting = new CommitSetting
             {
                 _Autor = "Foo Bar <foo@bar.net>",

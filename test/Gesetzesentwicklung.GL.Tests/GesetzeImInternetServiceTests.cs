@@ -21,7 +21,7 @@ namespace Gesetzesentwicklung.GL.Tests
 
         [Test]
         [Category("WithExternalResource")]
-        public async void GL_GesetzeImInternetService_DownloadNorm()
+        public async void GL_GesetzeImInternetService_DownloadNormAsync()
         {
             var norm = new Gesetzesverzeichnis.Norm
             {
@@ -29,7 +29,7 @@ namespace Gesetzesentwicklung.GL.Tests
                 Link = new Uri("http://www.gesetze-im-internet.de/gg/xml.zip")
             };
 
-            var gesetz = await _classUnderTest.LadeGesetzAusNormZip(norm);
+            var gesetz = await _classUnderTest.LadeGesetzAusNormZipAsync(norm);
 
             Assert.That(gesetz.Name, Is.EqualTo("GG"));
             Assert.That(gesetz.Artikel.Count(), Is.EqualTo(199));

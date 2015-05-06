@@ -15,7 +15,7 @@ namespace Gesetzesentwicklung.GII
     {
         private static readonly Uri XmlVerzeichnisUri = new Uri("http://www.gesetze-im-internet.de/gii-toc.xml");
 
-        public async Task<Gesetzesverzeichnis> LadeVerzeichnis()
+        public async Task<Gesetzesverzeichnis> LadeVerzeichnisAsync()
         {
             using (var webclient = new WebClient())
             {
