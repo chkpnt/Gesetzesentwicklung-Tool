@@ -78,7 +78,7 @@ namespace Gesetzesentwicklung.Git
         internal CommitSettings ReadCommitSettings(DirectoryInfoBase sourceDirInfo)
         {
             var result = new CommitSettings { Commits = new List<CommitSetting>() };
-            
+
             var yamlFiles = sourceDirInfo.GetFiles("*.yml", SearchOption.AllDirectories);
 
             var yamlFileParser = new YamlFileParser(_fileSystem);
@@ -124,6 +124,6 @@ namespace Gesetzesentwicklung.Git
                     StringComparison.InvariantCultureIgnoreCase);
 
             return comp == 0;
-        }    
+        }
     }
 }

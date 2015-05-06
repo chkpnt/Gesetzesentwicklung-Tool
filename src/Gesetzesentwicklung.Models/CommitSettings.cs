@@ -20,7 +20,7 @@ namespace Gesetzesentwicklung.Models
         private string _fileSettingFilename;
 
         public override string FileSettingFilename
-        { 
+        {
             get { return _fileSettingFilename; }
             set
             {
