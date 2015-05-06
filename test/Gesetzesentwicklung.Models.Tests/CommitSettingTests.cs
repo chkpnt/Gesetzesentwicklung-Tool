@@ -57,7 +57,7 @@ Beschreibung: blabla
         public void Models_CommitSetting_Order()
         {
             var commit_Oktober = new CommitSetting { Datum = DateTime.Parse("1960-10-08") };
-            var commit_November = new CommitSetting { Datum = DateTime.Parse("1960-11-10") }; 
+            var commit_November = new CommitSetting { Datum = DateTime.Parse("1960-11-10") };
             var commit_Februar = new CommitSetting { Datum = DateTime.Parse("1960-02-04") };
 
             var unsortedCommits = new List<List<CommitSetting>>
@@ -92,10 +92,10 @@ Beschreibung: blabla
         [Test]
         public void Models_CommitSetting_ToString()
         {
-            var expected = "CommitSetting [Autor: \"Foo Bar\" <foo@bar.net>, " + 
+            var expected = "CommitSetting [Autor: \"Foo Bar\" <foo@bar.net>, " +
                            "Datum: 01.01.2015, " +
-                           "Beschreibung: \"blabla\", " + 
-                           "BranchFrom: , " + 
+                           "Beschreibung: \"blabla\", " +
+                           "BranchFrom: , " +
                            "MergeInto: Gesetze/GG/Bundesgesetzblatt]";
 
             Assert.That(_commitSetting.ToString(), Is.EqualTo(expected));
