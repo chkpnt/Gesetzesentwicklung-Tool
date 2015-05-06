@@ -59,7 +59,7 @@ namespace Gesetzesentwicklung.Git
         {
             if (!sourceDirInfo.Exists)
             {
-                var message = string.Format("Verzeichnis existiert nicht: {0}", sourceDirInfo.FullName);
+                var message = $"Verzeichnis existiert nicht: {sourceDirInfo.FullName}";
                 throw new ArgumentException(message);
             }
 
@@ -70,7 +70,7 @@ namespace Gesetzesentwicklung.Git
 
             if (overwrite == false && destDirInfo.Exists)
             {
-                var message = string.Format("Verzeichnis existiert schon: {0}", destDirInfo.FullName);
+                var message = $"Verzeichnis existiert schon: {destDirInfo.FullName}";
                 throw new ArgumentException(message);
             }
         }

@@ -124,9 +124,7 @@ namespace Gesetzesentwicklung.Models
 
         public override string ToString()
         {
-            return string.Format("CommitSetting [Autor: {0}, Datum: {1}, "
-            + "Beschreibung: {2}, BranchFrom: {3}, MergeInto: {4}]",
-            Autor, _Datum, Beschreibung.ToLiteral(), BranchFrom, MergeInto);
+            return $"CommitSetting [Autor: {Autor}, Datum: {_Datum}, Beschreibung: {Beschreibung.ToLiteral()}, BranchFrom: {BranchFrom}, MergeInto: {MergeInto}]";
         }
     }
 }

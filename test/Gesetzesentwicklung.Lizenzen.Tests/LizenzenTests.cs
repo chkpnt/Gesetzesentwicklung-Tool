@@ -22,12 +22,12 @@ namespace Gesetzesentwicklung.Lizenzen.Tests
         public void Lizenzen_AusgabeDerGenutztenLizenzen()
         {
             var ausgabe = from lizenz in _lizenzen.Lizenzen
-                          select string.Format(@"Projekt: {0}
-Autor: {1}
-Homepage: {2}
+                          select $@"Projekt: {lizenz.Projekt}
+Autor: {lizenz.Autor}
+Homepage: {lizenz.Homepage}
 Lizenz:
-{3}
-", lizenz.Projekt, lizenz.Autor, lizenz.Homepage, lizenz.LizenzText);
+{lizenz.LizenzText}
+";
 
             Console.WriteLine(string.Join(Environment.NewLine, ausgabe.ToArray()));
         }

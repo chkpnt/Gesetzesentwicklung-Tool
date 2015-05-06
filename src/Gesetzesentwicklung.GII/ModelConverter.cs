@@ -52,9 +52,11 @@ namespace Gesetzesentwicklung.GII
                 switch (normTyp)
                 {
                     case XmlNormenTyp.Gliederungseinheit:
+#pragma warning disable CC0048 // Use string interpolation instead of String.Format
                         currentAbschnitt = string.Format("{0} {1}",
                                 norm.Metadaten.Gliederungseinheit.Bezeichnung,
                                 norm.Metadaten.Gliederungseinheit.Titel);
+#pragma warning restore CC0048 // Use string interpolation instead of String.Format
                         break;
                     case XmlNormenTyp.Artikel:
                         yield return new Artikel

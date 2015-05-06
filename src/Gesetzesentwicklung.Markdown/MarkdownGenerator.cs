@@ -82,10 +82,9 @@ namespace Gesetzesentwicklung.Markdown
 
         private string formatMarkdown(Artikel artikel)
         {
-            return string.Format(
-@"# {0}
+            return $@"# {artikel.Name}
 
-{1}", artikel.Name, artikel.Inhalt);
+{artikel.Inhalt}";
         }
 
         private void createSettingFile(CommitSetting settings, Gesetz gesetz, DirectoryInfoBase buildFolder)
