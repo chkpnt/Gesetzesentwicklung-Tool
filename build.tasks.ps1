@@ -2,7 +2,7 @@ properties {
   $codecoverage = "VisualStudio2013"
   
   $msbuild_exe = Resolve-Path (${env:ProgramFiles(x86)} + "\MSBuild\14.0\Bin\MSBuild.exe")
-  $vstest_console_exe = Resolve-Path ($env:VS140COMNTOOLS + "..\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe")
+  $vstest_console_exe = Resolve-Path ($env:VS120COMNTOOLS + "..\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe")
   if ($codecoverage -eq "VisualStudio2013") {
     $code_coverage_exe = Resolve-Path ($env:VS120COMNTOOLS + "..\..\Team Tools\Dynamic Code Coverage Tools\CodeCoverage.exe")
   }
