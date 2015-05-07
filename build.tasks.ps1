@@ -1,10 +1,10 @@
 properties {
-  $codecoverage = "VisualStudio"
+  $codecoverage = "VisualStudio2013"
   
   $vstest_console_exe = Resolve-Path ($env:VS140COMNTOOLS + "..\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe")
   
-  if ($codecoverage -eq "VisualStudio") {
-    $code_coverage_exe = Resolve-Path ($env:VS140COMNTOOLS + "..\..\Team Tools\Dynamic Code Coverage Tools\CodeCoverage.exe")
+  if ($codecoverage -eq "VisualStudio2013") {
+    $code_coverage_exe = Resolve-Path ($env:VS120COMNTOOLS + "..\..\Team Tools\Dynamic Code Coverage Tools\CodeCoverage.exe")
   }
   
   $test_results_dir = "TestResults\"
@@ -58,7 +58,7 @@ task Test -depends FindTestAssemblies -ContinueOnError {
                         /TestAdapterPath:.\packages\NUnitTestAdapter.2.0.0\lib\ `
                         $script:test_assemblies
   
-  if ($codecoverage -eq "VisualStudio") {
+  if ($codecoverage -eq "VisualStudio2013") {
     $coverage_file = Resolve-Path -path "TestResults\*\*.coverage"
     Write-Host ("Analyzing " + $coverage_file + " and saving as " + $coverage_xml)
     & $code_coverage_exe analyze /output:$coverage_xml "$coverage_file"
