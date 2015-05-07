@@ -5,10 +5,10 @@
 
   init:
   - git config --global core.autocrlf true 
-  - ps: dir "env:"
 
   install:
   - set PATH=C:\Program Files (x86)\MSBuild\14.0\Bin;%PATH%
+  - set VS140COMNTOOLS=C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\Tools\
   - choco install -y psake
 
   before_build:
