@@ -24,13 +24,15 @@ namespace Gesetzesentwicklung.Models.Tests
                 _Autor = "Foo Bar <foo@bar.net>",
                 _Datum = "01.01.2015",
                 Beschreibung = "blabla",
+                Tag = "GitTag",
                 MergeInto = "Gesetze/GG/Bundesgesetzblatt"
             };
 
             _serializedCommitSetting =
 @"MergeInto: Gesetze/GG/Bundesgesetzblatt
-Autor: '""Foo Bar"" <foo@bar.net>'
+Tag: GitTag
 Datum: 01.01.2015
+Autor: '""Foo Bar"" <foo@bar.net>'
 Beschreibung: blabla
 ";
 

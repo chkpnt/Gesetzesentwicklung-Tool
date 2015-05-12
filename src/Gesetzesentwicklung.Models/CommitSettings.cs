@@ -37,25 +37,24 @@ namespace Gesetzesentwicklung.Models
 
     public class CommitSetting : FileSetting, IComparable<CommitSetting>
     {
-        public string BranchFrom { get; set; }
-        public string MergeInto { get; set; }
+        [YamlMember(Order = 0)]
         public string Daten { get; set; }
 
-        [YamlIgnore]
-        public MailAddress Autor { get; set; }
+        [YamlMember(Order = 1)]
+        public string BranchFrom { get; set; }
 
-        [YamlMember(Alias="Autor")]
-        public string _Autor
-        {
-            get { return Autor.ToString(); }
-            set { Autor = new MailAddress(value); }
-        }
+        [YamlMember(Order = 2)]
+        public string MergeInto { get; set; }
+
+        [YamlMember(Order = 3)]
+        public string Tag { get; set; }
 
         [YamlIgnore]
         public DateTime Datum { get; set; }
 
-        [YamlMember(Alias="Datum")]
-        public string _Datum {
+        [YamlMember(Alias = "Datum", Order = 4)]
+        public string _Datum
+        {
             get
             {
                 return Datum.Equals(default(DateTime))
@@ -68,9 +67,20 @@ namespace Gesetzesentwicklung.Models
             }
         }
 
+        [YamlIgnore]
+        public MailAddress Autor { get; set; }
+
+        [YamlMember(Alias="Autor", Order = 5)]
+        public string _Autor
+        {
+            get { return Autor.ToString(); }
+            set { Autor = new MailAddress(value); }
+        }
+
         private string _beschreibung;
 
         // [YamlMember(ScalarStyle = ScalarStyle.Literal)]
+        [YamlMember(Order = 6)]
         public string Beschreibung
         {
             get { return _beschreibung; }
@@ -87,6 +97,7 @@ namespace Gesetzesentwicklung.Models
                 return true;
             return string.Equals(BranchFrom, other.BranchFrom)
                 && string.Equals(MergeInto, other.MergeInto)
+                && string.Equals(Tag, other.Tag)
                 && string.Equals(Daten, other.Daten)
                 && string.Equals(Autor, other.Autor)
                 && DateTime.Equals(Datum, other.Datum)
@@ -109,12 +120,13 @@ namespace Gesetzesentwicklung.Models
             unchecked
             {
                 var hash = 17;
-                hash = hash * 23 + ((BranchFrom != null) ? BranchFrom.GetHashCode() : 0);
-                hash = hash * 23 + ((MergeInto != null) ? MergeInto.GetHashCode() : 0);
-                hash = hash * 23 + ((Daten != null) ? Daten.GetHashCode() : 0);
-                hash = hash * 23 + ((Autor != null) ? Autor.GetHashCode() : 0);
-                hash = hash * 23 + ((Datum != null) ? Datum.GetHashCode() : 0);
-                hash = hash * 23 + ((Beschreibung != null) ? Beschreibung.GetHashCode() : 0);
+                hash = hash * 23 + BranchFrom?.GetHashCode() ?? 0;
+                hash = hash * 23 + MergeInto?.GetHashCode() ?? 0;
+                hash = hash * 23 + Tag?.GetHashCode() ?? 0;
+                hash = hash * 23 + Daten?.GetHashCode() ?? 0;
+                hash = hash * 23 + Autor?.GetHashCode() ?? 0;
+                hash = hash * 23 + Datum.GetHashCode();
+                hash = hash * 23 + Beschreibung?.GetHashCode() ?? 0;
                 return hash;
             }
         }

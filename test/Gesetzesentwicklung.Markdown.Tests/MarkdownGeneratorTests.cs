@@ -101,8 +101,8 @@ Präambel-Text"));
             Assert.IsTrue(_fileSystem.File.Exists(Path.Combine(OutputFolder, "GG.yml")));
             Assert.That(_fileSystem.File.ReadAllText(Path.Combine(OutputFolder, "GG.yml"), Encoding.UTF8),
                 Is.EqualTo(
-@"Autor: '""Foo Bar"" <foo@example.net>'
-Datum: 01.01.2015
+@"Datum: 01.01.2015
+Autor: '""Foo Bar"" <foo@example.net>'
 Beschreibung: >-
   Commit-Message
 

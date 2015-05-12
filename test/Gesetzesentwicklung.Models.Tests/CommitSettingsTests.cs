@@ -32,8 +32,8 @@ Zeile 2"}
 
             _serializedCommitSettings =
 @"Commits:
-- Autor: '""Foo Bar"" <foo@bar.net>'
-  Datum: 01.01.2015
+- Datum: 01.01.2015
+  Autor: '""Foo Bar"" <foo@bar.net>'
 - Autor: '""Foo Bar"" <foo@bar.net>'
   Beschreibung: >-
     Zeile 1
