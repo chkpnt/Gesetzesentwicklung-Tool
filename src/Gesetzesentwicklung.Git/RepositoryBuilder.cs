@@ -52,6 +52,11 @@ namespace Gesetzesentwicklung.Git
                 var committerSignature = authorSignature;
 
                 repo.Commit(firstCommit.Beschreibung, authorSignature, committerSignature);
+
+                if (! string.IsNullOrEmpty(firstCommit.Tag))
+                {
+                    repo.ApplyTag(firstCommit.Tag);
+                }
             }
         }
 

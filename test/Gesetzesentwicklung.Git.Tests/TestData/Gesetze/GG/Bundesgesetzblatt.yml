@@ -1,6 +1,6 @@
 ﻿Commits:
-- BranchFrom: Gesetze/GG/Bundesgesetzblatt
+- BranchFrom: init
   Daten: Bundesgesetzblatt
-  Autor: Foo Bar <foo@example.net>
   Datum: 02.01.1980
+  Autor: Foo Bar <foo@example.net>
   Beschreibung: bla
