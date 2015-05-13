@@ -40,15 +40,8 @@ namespace Gesetzesentwicklung.Models
         [YamlMember(Order = 0)]
         public string Daten { get; set; }
 
-        [YamlIgnore]
+        [YamlMember(Order = 1)]
         public string Ziel { get; set; }
-
-        [YamlMember(Alias = "Ziel", Order = 1)]
-        public string _Ziel
-        {
-            get { return Ziel?.Replace(@"\", "/"); }
-            set { Ziel = value.Replace("/", @"\"); }
-        }
 
         [YamlMember(Order = 2)]
         public string BranchFrom { get; set; }
