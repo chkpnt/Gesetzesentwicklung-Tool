@@ -41,18 +41,21 @@ namespace Gesetzesentwicklung.Models
         public string Daten { get; set; }
 
         [YamlMember(Order = 1)]
-        public string BranchFrom { get; set; }
+        public string Ziel { get; set; }
 
         [YamlMember(Order = 2)]
-        public string MergeInto { get; set; }
+        public string BranchFrom { get; set; }
 
         [YamlMember(Order = 3)]
+        public string MergeInto { get; set; }
+
+        [YamlMember(Order = 4)]
         public string Tag { get; set; }
 
         [YamlIgnore]
         public DateTime Datum { get; set; }
 
-        [YamlMember(Alias = "Datum", Order = 4)]
+        [YamlMember(Alias = "Datum", Order = 5)]
         public string _Datum
         {
             get
@@ -70,7 +73,7 @@ namespace Gesetzesentwicklung.Models
         [YamlIgnore]
         public MailAddress Autor { get; set; }
 
-        [YamlMember(Alias="Autor", Order = 5)]
+        [YamlMember(Alias="Autor", Order = 6)]
         public string _Autor
         {
             get { return Autor.ToString(); }
@@ -80,7 +83,7 @@ namespace Gesetzesentwicklung.Models
         private string _beschreibung;
 
         // [YamlMember(ScalarStyle = ScalarStyle.Literal)]
-        [YamlMember(Order = 6)]
+        [YamlMember(Order = 7)]
         public string Beschreibung
         {
             get { return _beschreibung; }

@@ -75,76 +75,76 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <Content Include="TestData\Gesetze\GG\Bundesgesetzblatt\GG\I. Die Grundrechte\Artikel 1.md">
+    <Content Include="TestData\Gesetze\GG\Bundesgesetzblatt\I. Die Grundrechte\Artikel 1.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\Gesetze\GG\Bundesgesetzblatt\GG\I. Die Grundrechte\Artikel 2.md">
+    <Content Include="TestData\Gesetze\GG\Bundesgesetzblatt\I. Die Grundrechte\Artikel 2.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\Gesetze\GG\Bundesgesetzblatt\GG\III. Der Bundestag\Artikel 38.md">
+    <Content Include="TestData\Gesetze\GG\Bundesgesetzblatt\III. Der Bundestag\Artikel 38.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\Gesetze\GG\Bundesgesetzblatt\GG\III. Der Bundestag\Artikel 39.md">
+    <Content Include="TestData\Gesetze\GG\Bundesgesetzblatt\III. Der Bundestag\Artikel 39.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\Gesetze\GG\Bundesgesetzblatt\GG\Präambel.md">
+    <Content Include="TestData\Gesetze\GG\Bundesgesetzblatt\Präambel.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestData\Gesetze\GG\Änderung-1.yml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\Gesetze\GG\Änderung-1\Lesung-1\GG\I. Die Grundrechte\Artikel 1.md">
+    <Content Include="TestData\Gesetze\GG\Änderung-1\Lesung-1\I. Die Grundrechte\Artikel 1.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\Gesetze\GG\Änderung-1\Lesung-1\GG\I. Die Grundrechte\Artikel 2.md">
+    <Content Include="TestData\Gesetze\GG\Änderung-1\Lesung-1\I. Die Grundrechte\Artikel 2.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\Gesetze\GG\Änderung-1\Lesung-1\GG\III. Der Bundestag\Artikel 38.md">
+    <Content Include="TestData\Gesetze\GG\Änderung-1\Lesung-1\III. Der Bundestag\Artikel 38.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\Gesetze\GG\Änderung-1\Lesung-1\GG\III. Der Bundestag\Artikel 39.md">
+    <Content Include="TestData\Gesetze\GG\Änderung-1\Lesung-1\III. Der Bundestag\Artikel 39.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\Gesetze\GG\Änderung-1\Lesung-1\GG\IVa. Gemeinsamer Ausschuss\Artikel 53a.md">
+    <Content Include="TestData\Gesetze\GG\Änderung-1\Lesung-1\IVa. Gemeinsamer Ausschuss\Artikel 53a.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\Gesetze\GG\Änderung-1\Lesung-1\GG\Präambel.md">
+    <Content Include="TestData\Gesetze\GG\Änderung-1\Lesung-1\Präambel.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\Gesetze\GG\Änderung-1\Lesung-2\GG\I. Die Grundrechte\Artikel 1.md">
+    <Content Include="TestData\Gesetze\GG\Änderung-1\Lesung-2\I. Die Grundrechte\Artikel 1.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\Gesetze\GG\Änderung-1\Lesung-2\GG\I. Die Grundrechte\Artikel 2.md">
+    <Content Include="TestData\Gesetze\GG\Änderung-1\Lesung-2\I. Die Grundrechte\Artikel 2.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\Gesetze\GG\Änderung-1\Lesung-2\GG\III. Der Bundestag\Artikel 38.md">
+    <Content Include="TestData\Gesetze\GG\Änderung-1\Lesung-2\III. Der Bundestag\Artikel 38.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\Gesetze\GG\Änderung-1\Lesung-2\GG\III. Der Bundestag\Artikel 39.md">
+    <Content Include="TestData\Gesetze\GG\Änderung-1\Lesung-2\III. Der Bundestag\Artikel 39.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\Gesetze\GG\Änderung-1\Lesung-2\GG\IVa. Gemeinsamer Ausschuss\Artikel 53a.md">
+    <Content Include="TestData\Gesetze\GG\Änderung-1\Lesung-2\IVa. Gemeinsamer Ausschuss\Artikel 53a.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\Gesetze\GG\Änderung-1\Lesung-2\GG\Präambel.md">
+    <Content Include="TestData\Gesetze\GG\Änderung-1\Lesung-2\Präambel.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\Gesetze\GG\Änderung-2\Lesung-1\GG\I. Die Grundrechte\Artikel 1.md">
+    <Content Include="TestData\Gesetze\GG\Änderung-2\Lesung-1\I. Die Grundrechte\Artikel 1.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\Gesetze\GG\Änderung-2\Lesung-1\GG\I. Die Grundrechte\Artikel 2.md">
+    <Content Include="TestData\Gesetze\GG\Änderung-2\Lesung-1\I. Die Grundrechte\Artikel 2.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\Gesetze\GG\Änderung-2\Lesung-1\GG\III. Der Bundestag\Artikel 38.md">
+    <Content Include="TestData\Gesetze\GG\Änderung-2\Lesung-1\III. Der Bundestag\Artikel 38.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\Gesetze\GG\Änderung-2\Lesung-1\GG\III. Der Bundestag\Artikel 39.md">
+    <Content Include="TestData\Gesetze\GG\Änderung-2\Lesung-1\III. Der Bundestag\Artikel 39.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\Gesetze\GG\Änderung-2\Lesung-1\GG\IVa. Gemeinsamer Ausschuss\Artikel 53a.md">
+    <Content Include="TestData\Gesetze\GG\Änderung-2\Lesung-1\IVa. Gemeinsamer Ausschuss\Artikel 53a.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\Gesetze\GG\Änderung-2\Lesung-1\GG\Präambel.md">
+    <Content Include="TestData\Gesetze\GG\Änderung-2\Lesung-1\Präambel.md">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestData\Gesetzesstand.yml">

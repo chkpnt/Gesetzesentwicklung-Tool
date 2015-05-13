@@ -1,6 +1,7 @@
 ﻿Commits:
-- BranchFrom: Gesetze/GG/Bundesgesetzblatt
-  Daten: Änderung-2\Lesung-1
+- Daten: Änderung-2\Lesung-1
+  Ziel: /GG
+  BranchFrom: Gesetze/GG/Bundesgesetzblatt
   Datum: 01.01.1990
   Autor: Foo Bar <foo@example.net>
   Beschreibung: |-

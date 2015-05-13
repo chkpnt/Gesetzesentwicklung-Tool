@@ -1,14 +1,16 @@
 Commits:
-- MergeInto: Gesetze/GG/Bundesgesetzblatt
-  Daten: Änderung-1\Lesung-2
+- Daten: Änderung-1\Lesung-2
+  Ziel: /GG
+  MergeInto: Gesetze/GG/Bundesgesetzblatt
   Datum: 10.04.1982
   Autor: Foo Bar <foo@example.net>
   Beschreibung: |-
     2. Lesung
 
     Letzte Zeile
-- BranchFrom: Gesetze/GG/Bundesgesetzblatt
-  Daten: Änderung-1\Lesung-1
+- Daten: Änderung-1\Lesung-1
+  Ziel: /GG
+  BranchFrom: Gesetze/GG/Bundesgesetzblatt
   Datum: 01.01.1982
   Autor: Foo Bar <foo@example.net>
   Beschreibung: |-

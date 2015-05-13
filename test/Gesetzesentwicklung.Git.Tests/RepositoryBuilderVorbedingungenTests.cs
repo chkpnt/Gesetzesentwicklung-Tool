@@ -29,6 +29,7 @@ namespace Gesetzesentwicklung.Git.Tests
                 { @"c:\data\GesetzesData\Gesetzesstand.yml", new MockFileData(
 @"Commits:
 - Daten: Gesetzesstand
+  Ziel: /
   Autor: Foo Bar <foo@example.net>
   Datum: 01.01.1980
   Beschreibung: |-
@@ -44,16 +45,18 @@ namespace Gesetzesentwicklung.Git.Tests
   Beschreibung: init") },
                 { @"c:\data\GesetzesData\Gesetze\GG\Änderung-1.yml", new MockFileData(
 @"Commits:
-- MergeInto: Gesetze/GG/Bundesgesetzblatt
-  Daten: Änderung-1\Lesung-2
+- Daten: Änderung-1\Lesung-2
+  Ziel: /GG
+  MergeInto: Gesetze/GG/Bundesgesetzblatt
   Autor: Foo Bar <foo@example.net>
   Datum: 10.04.1982
   Beschreibung: |-
     2. Lesung
 
     Letzte Zeile
-- BranchFrom: Gesetze/GG/Bundesgesetzblatt
-  Daten: Änderung-1\Lesung-1
+- Daten: Änderung-1\Lesung-1
+  Ziel: /GG
+  BranchFrom: Gesetze/GG/Bundesgesetzblatt
   Autor: Foo Bar <foo@example.net>
   Datum: 01.01.1982
   Beschreibung: |-

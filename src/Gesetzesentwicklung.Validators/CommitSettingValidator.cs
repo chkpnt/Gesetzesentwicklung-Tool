@@ -33,10 +33,10 @@ namespace Gesetzesentwicklung.Validators
         {
             var valid = true;
             valid &= IsValid_Daten(commitSetting, parentDir, ref protokoll);
+            valid &= IsValid_Ziel(commitSetting, parentDir, ref protokoll);
             valid &= IsValid_Datum(commitSetting, parentDir, ref protokoll);
             return valid;
         }
-
         private bool IsValid_Daten(CommitSetting commitSetting, string parentDir, ref ValidatorProtokoll protokoll)
         {
             if (commitSetting.Daten == null)
@@ -55,6 +55,31 @@ namespace Gesetzesentwicklung.Validators
 
             return exists;
         }
+
+        private bool IsValid_Ziel(CommitSetting commitSetting, string parentDir, ref ValidatorProtokoll protokoll)
+        {
+            if (commitSetting.Ziel == null)
+            {
+                if (commitSetting.Daten == null)
+                {
+                    return true;
+                }
+                else
+                {
+                    protokoll.AddEntry("Kein Ziel angegeben, wohl aber Daten");
+                    return false;
+                }
+            }
+
+            if (! commitSetting.Ziel.StartsWith("/"))
+            {
+                protokoll.AddEntry(@"Ziel muss mit ""/"" anfangen");
+                return false;
+            }
+
+            return true;
+        }
+
 
         // TODO: Herausnehmen, sobald Git gefixt ist...
         private bool IsValid_Datum(CommitSetting commitSetting, string parentDir, ref ValidatorProtokoll protokoll)
