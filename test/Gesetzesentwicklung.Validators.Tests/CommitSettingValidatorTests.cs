@@ -135,25 +135,5 @@ namespace Gesetzesentwicklung.Validators.Tests
             Assert.That(protokoll.Entries.Count(), Is.EqualTo(1));
             Assert.That(protokoll.Entries.First().Message, Is.EqualTo("Kein Ziel angegeben, wohl aber Daten"));
         }
-
-        [Test]
-        public void Models_Validators_CommitSetting_ZielFalschesFormat()
-        {
-            var commitSettingFalschesZiel = new CommitSetting
-            {
-                Daten = @"Änderung-1\Lesung-1",
-                _Ziel = "GG",
-                BranchFrom = "Gesetze/GG",
-                _Autor = "Foo Bar <foo@bar.net>",
-                _Datum = "01.01.1990"
-            };
-
-            var protokoll = new ValidatorProtokoll();
-            var result = _classUnderTest.IsValid(commitSettingFalschesZiel, @"c:\data\GesetzesData\GG", ref protokoll);
-
-            Assert.IsFalse(result);
-            Assert.That(protokoll.Entries.Count(), Is.EqualTo(1));
-            Assert.That(protokoll.Entries.First().Message, Is.EqualTo(@"Ziel muss mit ""/"" anfangen"));
-        }
     }
 }

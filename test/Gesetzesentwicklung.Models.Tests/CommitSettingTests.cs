@@ -21,15 +21,17 @@ namespace Gesetzesentwicklung.Models.Tests
         {
             _commitSetting = new CommitSetting
             {
+                _Ziel = "/",
+                MergeInto = "Gesetze/GG/Bundesgesetzblatt",
+                Tag = "GitTag",
                 _Autor = "Foo Bar <foo@bar.net>",
                 _Datum = "01.01.2015",
-                Beschreibung = "blabla",
-                Tag = "GitTag",
-                MergeInto = "Gesetze/GG/Bundesgesetzblatt"
+                Beschreibung = "blabla"
             };
 
             _serializedCommitSetting =
-@"MergeInto: Gesetze/GG/Bundesgesetzblatt
+@"Ziel: /
+MergeInto: Gesetze/GG/Bundesgesetzblatt
 Tag: GitTag
 Datum: 01.01.2015
 Autor: '""Foo Bar"" <foo@bar.net>'
@@ -53,6 +55,25 @@ Beschreibung: blabla
             var setting = _yamlStringParser.FromYaml<CommitSetting>(_serializedCommitSetting);
 
             Assert.That(setting, Is.EqualTo(_commitSetting));
+        }
+
+        [Test]
+        public void Models_CommitSetting_Mapping_Ziel()
+        {
+            var commitSetting = new CommitSetting();
+
+            Assert.That(commitSetting.Ziel, Is.Null);
+            commitSetting._Ziel = "/";
+            Assert.That(commitSetting.Ziel, Is.EqualTo(""));
+            commitSetting._Ziel = "/GG/Foobar";
+            Assert.That(commitSetting.Ziel, Is.EqualTo(@"GG\Foobar"));
+
+            commitSetting.Ziel = null;
+            Assert.That(commitSetting._Ziel, Is.Null);
+            commitSetting.Ziel = "";
+            Assert.That(commitSetting._Ziel, Is.EqualTo("/"));
+            commitSetting.Ziel = @"GG\Foobar";
+            Assert.That(commitSetting._Ziel, Is.EqualTo("/GG/Foobar"));
         }
 
         [Test]

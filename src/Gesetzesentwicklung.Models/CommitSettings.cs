@@ -46,8 +46,8 @@ namespace Gesetzesentwicklung.Models
         [YamlMember(Alias = "Ziel", Order = 1)]
         public string _Ziel
         {
-            get { return Ziel?.Replace(@"\", "/"); }
-            set { Ziel = value.Replace("/", @"\"); }
+            get { return Ziel?.Replace(@"\", "/").Insert(0, "/"); }
+            set { Ziel = value.TrimStart('/').Replace("/", @"\"); }
         }
 
         [YamlMember(Order = 2)]

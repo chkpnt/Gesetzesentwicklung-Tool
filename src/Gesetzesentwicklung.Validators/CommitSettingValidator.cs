@@ -71,12 +71,6 @@ namespace Gesetzesentwicklung.Validators
                 }
             }
 
-            if (! commitSetting.Ziel.StartsWith(@"\"))
-            {
-                protokoll.AddEntry(@"Ziel muss mit ""/"" anfangen");
-                return false;
-            }
-
             return true;
         }
 
