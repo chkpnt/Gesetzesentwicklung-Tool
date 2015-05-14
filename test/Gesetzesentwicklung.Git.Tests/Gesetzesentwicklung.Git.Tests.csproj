@@ -58,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommitSettingExtensionsTests.cs" />
     <Compile Include="RepositoryBuilderTests.cs" />
     <Compile Include="DirectoryInfoExtensionsTests.cs" />
     <Compile Include="RepositoryBuilderVorbedingungenTests.cs" />
