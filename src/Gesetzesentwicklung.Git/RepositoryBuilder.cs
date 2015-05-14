@@ -44,9 +44,21 @@ namespace Gesetzesentwicklung.Git
             var firstCommit = commitSettings.Commits.First();
             using (var repo = new Repository(destDirInfo.FullName))
             {
-                _fileSystem.File.WriteAllText(Path.Combine(destDirInfo.FullName, "README.md"), "bla");
+                if (firstCommit.Ziel != null) {
+                    CleanUpPathInRepository(repo, firstCommit.Ziel);
+                    var datenQuelle = _fileSystem.DirectoryInfo.FromDirectoryName(Path.Combine(Path.GetDirectoryName(firstCommit.FileSettingFilename), firstCommit.Daten));
+                    var datenZiel = _fileSystem.DirectoryInfo.FromDirectoryName(Path.Combine(destDirInfo.FullName, firstCommit.Ziel));
+                    datenQuelle.CopyTo(datenZiel);
 
-                repo.Stage("README.md");
+                    if (firstCommit.Ziel == "")
+                    {
+                        repo.Stage("*");
+                    }
+                    else
+                    {
+                        repo.Stage(firstCommit.Ziel);
+                    }
+                }
 
                 var authorSignature = new Signature(firstCommit.Autor.DisplayName, firstCommit.Autor.Address, firstCommit.Datum);
                 var committerSignature = authorSignature;
@@ -58,6 +70,16 @@ namespace Gesetzesentwicklung.Git
                     repo.ApplyTag(firstCommit.Tag);
                 }
             }
+        }
+
+        private void CleanUpPathInRepository(Repository repo, string ziel)
+        {
+            if (ziel == "")
+            {
+                ziel = "*";
+            }
+
+            repo.Remove(ziel);
         }
 
         internal void TestAssertions(DirectoryInfoBase sourceDirInfo, DirectoryInfoBase destDirInfo, bool overwrite = false)
