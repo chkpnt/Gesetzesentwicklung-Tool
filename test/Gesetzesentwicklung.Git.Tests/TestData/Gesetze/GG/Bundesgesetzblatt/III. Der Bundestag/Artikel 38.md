@@ -1,11 +1,11 @@
 # Artikel 38 
 
 (1) Die Abgeordneten des Deutschen Bundestages werden in allgemeiner, 
-unmittelbarer, freier, gleicher und geheimer Wahl gewählt. Sie sind 
-Vertreter des ganzen Volkes, an Aufträge und Weisungen nicht gebunden 
+unmittelbarer, freier, gleicher und geheimer Wahl gewÃ¤hlt. Sie sind 
+Vertreter des ganzen Volkes, an AuftrÃ¤ge und Weisungen nicht gebunden 
 und nur ihrem Gewissen unterworfen. 
 
-(2) Wahlberechtigt ist, wer das einundzwanzigste, wählbar, wer das 
-fünfundzwanzigste Lebensjahr vollendet hat. 
+(2) Wahlberechtigt ist, wer das einundzwanzigste, wÃ¤hlbar, wer das 
+fÃ¼nfundzwanzigste Lebensjahr vollendet hat. 
 
-(3) Da Nähere bestimmt ein Bundesgesetz. 
+(3) Da NÃ¤here bestimmt ein Bundesgesetz. 

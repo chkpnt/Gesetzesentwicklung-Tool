@@ -41,35 +41,87 @@ namespace Gesetzesentwicklung.Git
 
         private void MakeCommits(DirectoryInfoBase sourceDirInfo, DirectoryInfoBase destDirInfo, CommitSettings commitSettings)
         {
-            var firstCommit = commitSettings.Commits.First();
             using (var repo = new Repository(destDirInfo.FullName))
             {
-                if (firstCommit.Ziel != null) {
-                    CleanUpPathInRepository(repo, firstCommit.Ziel);
-                    var datenQuelle = _fileSystem.DirectoryInfo.FromDirectoryName(Path.Combine(Path.GetDirectoryName(firstCommit.FileSettingFilename), firstCommit.Daten));
-                    var datenZiel = _fileSystem.DirectoryInfo.FromDirectoryName(Path.Combine(destDirInfo.FullName, firstCommit.Ziel));
-                    datenQuelle.CopyTo(datenZiel);
-
-                    if (firstCommit.Ziel == "")
+                var firstCommit = true;
+                foreach (var commit in commitSettings.Commits)
+                {
+                    var branchName = commit.DerivedBranchName(sourceDirInfo);
+                    if (firstCommit)
                     {
-                        repo.Stage("*");
+                        InitialBranch(repo, branchName);
                     }
                     else
                     {
-                        repo.Stage(firstCommit.Ziel);
+                        Checkout(repo, branchName, commit.BranchFrom);
                     }
-                }
 
-                var authorSignature = new Signature(firstCommit.Autor.DisplayName, firstCommit.Autor.Address, firstCommit.Datum);
-                var committerSignature = authorSignature;
+                    if (commit.Ziel != null)
+                    {
+                        CleanUpPathInRepository(repo, commit.Ziel);
+                        UpdateRepository(repo, commit, destDirInfo);
+                    }
 
-                repo.Commit(firstCommit.Beschreibung, authorSignature, committerSignature);
+                    Commit(repo, commit);
 
-                if (! string.IsNullOrEmpty(firstCommit.Tag))
-                {
-                    repo.ApplyTag(firstCommit.Tag);
+                    if (!string.IsNullOrEmpty(commit.Tag))
+                    {
+                        repo.ApplyTag(commit.Tag);
+                    }
+
+                    firstCommit = false;
                 }
             }
+        }
+
+        private void Commit(Repository repo, CommitSetting commit)
+        {
+            var authorSignature = new Signature(commit.Autor.DisplayName, commit.Autor.Address, commit.Datum);
+            var committerSignature = authorSignature;
+
+            repo.Commit(commit.Beschreibung, authorSignature, committerSignature);
+        }
+
+        private void UpdateRepository(Repository repo, CommitSetting commit, DirectoryInfoBase destDirInfo)
+        {
+            var datenQuelle = _fileSystem.DirectoryInfo.FromDirectoryName(Path.Combine(Path.GetDirectoryName(commit.FileSettingFilename), commit.Daten));
+            var datenZiel = _fileSystem.DirectoryInfo.FromDirectoryName(Path.Combine(destDirInfo.FullName, commit.Ziel));
+            datenQuelle.CopyTo(datenZiel);
+
+            if (commit.Ziel == "")
+            {
+                repo.Stage("*");
+            }
+            else
+            {
+                repo.Stage(commit.Ziel);
+            }
+        }
+
+        private void Checkout(Repository repo, string branchName, string branchFrom)
+        {
+            var branch = repo.Branches[branchName];
+
+            var head = repo.Head;
+
+            if (branch == null)
+            {
+                if (branchFrom == null)
+                {
+                    repo.CreateBranch(branchName);
+                }
+                else
+                {
+                    repo.CreateBranch(branchName, branchFrom);
+                }
+            }
+
+            repo.Checkout(branchName);
+        }
+
+        private void InitialBranch(Repository repo, string branchName)
+        {
+            repo.Refs.UpdateTarget("HEAD", $"refs/heads/{branchName}");
         }
 
         private void CleanUpPathInRepository(Repository repo, string ziel)

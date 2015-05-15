@@ -1,15 +1,15 @@
 # Artikel 39 
 
-(1) Der Bundestag wird auf vier Jahre gewählt. Seine Wahlperiode endet 
-vier Jahre nach dem ersten Zusammentritt oder mit seiner Auflösung. Die 
+(1) Der Bundestag wird auf vier Jahre gewÃ¤hlt. Seine Wahlperiode endet 
+vier Jahre nach dem ersten Zusammentritt oder mit seiner AuflÃ¶sung. Die 
 Neuwahl findet im letzten Vierteljahr der Wahlperiode statt, im Falle 
-der Auflösung spätestens nach sechzig Tagen. 
+der AuflÃ¶sung spÃ¤testens nach sechzig Tagen. 
 
-(2) Der Bundestag tritt spätestens am dreißigsten Tage nach der Wahl, 
+(2) Der Bundestag tritt spÃ¤testens am dreiÃŸigsten Tage nach der Wahl, 
 jedoch nicht vor dem Ende der Wahlperiode des letzten Bundestages 
 zusammen. 
 
-(3) Der Bundestag bestimmt den Schluß und den Wiederbeginn seiner 
-Sitzungen. Der Präsident des Bundestages kann ihn früher einberufen. 
+(3) Der Bundestag bestimmt den SchluÃŸ und den Wiederbeginn seiner 
+Sitzungen. Der PrÃ¤sident des Bundestages kann ihn frÃ¼her einberufen. 
 Er ist hierzu verpflichtet, wenn ein Drittel der Mitglieder, der 
-Bundespräsident oder der Bundeskanzler es verlangen. 
+BundesprÃ¤sident oder der Bundeskanzler es verlangen. 

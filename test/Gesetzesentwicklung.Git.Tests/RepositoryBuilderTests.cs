@@ -64,6 +64,17 @@ namespace Gesetzesentwicklung.Git.Tests
             AssertThat_DestDirIstEinRepository();
             AssertThat_ErsterCommitKorrekt();
             AssertThat_ErsterCommitHatInitTag();
+            AssertThat_ZweiterCommitBranchtAbVomInitTag();
+        }
+
+        private void AssertThat_ZweiterCommitBranchtAbVomInitTag()
+        {
+            using (var repo = new Repository(_destDirInfo.FullName))
+            {
+                var filter = new CommitFilter { SortBy = CommitSortStrategies.Reverse };
+                var secondCommit = repo.Commits.QueryBy(filter).ElementAt(1);
+                Assert.That(secondCommit.Author.When, Is.EqualTo(DateTimeOffset.ParseExact("02.01.1980", "dd.MM.yyyy", null)));
+            }
         }
 
         private void AssertThat_DestDirIstEinRepository()
@@ -82,7 +93,7 @@ namespace Gesetzesentwicklung.Git.Tests
                 Assert.That(firstCommit.Author.Name, Is.EqualTo("Foo Bar"));
                 Assert.That(firstCommit.Author.Email, Is.EqualTo("foo@example.net"));
                 Assert.That(firstCommit.Author.When, Is.EqualTo(DateTimeOffset.ParseExact("01.01.1980", "dd.MM.yyyy", null)));
-                Assert.That(ListBranchesContainingCommit(repo, firstCommit.Sha).Single().Name, Is.EqualTo("master"));
+                Assert.That(ListBranchesContainingCommit(repo, firstCommit.Sha).Select(b => b.Name) , Contains.Item("Gesetzesstand"));
             }
         }
 
