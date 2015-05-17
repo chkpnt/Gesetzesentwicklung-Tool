@@ -24,6 +24,10 @@ namespace Gesetzesentwicklung.Models
             set { Ziel = value.TrimStart('/').Replace("/", @"\"); }
         }
 
+        // Derzeit abgeleitet über den Dateinamen
+        [YamlIgnore]
+        public string Branch { get; set; }
+
         [YamlMember(Order = 2)]
         public string BranchFrom { get; set; }
 

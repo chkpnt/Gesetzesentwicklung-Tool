@@ -130,11 +130,13 @@ Commits:
         [Test]
         public void Git_RepositoryBuilder_ReadCommitSettings_CommitSettingsDateienKorrektEingelesen()
         {
-            var commitSettings = _classUnderTest.ReadCommitSettings(_sourceDirInfo);
+            var commitSettings = _classUnderTest.ReadBranchSettings(_sourceDirInfo);
 
             Assert.That(commitSettings.Commits.Count(), Is.EqualTo(4));
             Assert.That(commitSettings.Commits.First()._Datum, Is.EqualTo("01.01.1980"));
+            Assert.That(commitSettings.Commits.First().Branch, Is.EqualTo("Gesetzesstand"));
             Assert.That(commitSettings.Commits.Last()._Datum, Is.EqualTo("10.04.1982"));
+            Assert.That(commitSettings.Commits.Last().Branch, Is.EqualTo("Gesetze/GG/Änderung-1"));
         }
     }
 }
