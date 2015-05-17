@@ -9,7 +9,7 @@ using System.Net.Mail;
 
 namespace Gesetzesentwicklung.Models
 {
-    public class CommitSettings : FileSetting
+    public class BranchSettings : FileSetting
     {
         private string _fileSettingFilename;
 

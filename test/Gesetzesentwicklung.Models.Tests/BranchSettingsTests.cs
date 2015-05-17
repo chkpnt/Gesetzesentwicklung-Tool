@@ -10,16 +10,16 @@ using System.Threading.Tasks;
 namespace Gesetzesentwicklung.Models.Tests
 {
     [TestFixture]
-    public class CommitSettingsTests
+    public class BranchSettingsTests
     {
-        private CommitSettings _commitSettings;
+        private BranchSettings _branchSettings;
         private string _serializedCommitSettings;
         private IYamlStringParser _yamlStringParser;
 
         [SetUp]
         public void SetUp()
         {
-            _commitSettings = new CommitSettings
+            _branchSettings = new BranchSettings
             {
                 Commits = new List<CommitSetting>
                 {
@@ -47,7 +47,7 @@ Zeile 2"}
         [Test]
         public void Models_CommitSettings_Serialize()
         {
-            var yaml = _yamlStringParser.ToYaml(_commitSettings);
+            var yaml = _yamlStringParser.ToYaml(_branchSettings);
 
             Assert.That(yaml, Is.EqualTo(_serializedCommitSettings));
         }
@@ -55,27 +55,27 @@ Zeile 2"}
         [Test]
         public void Models_CommitSettings_Deserialize()
         {
-            var settings = _yamlStringParser.FromYaml<CommitSettings>(_serializedCommitSettings);
+            var settings = _yamlStringParser.FromYaml<BranchSettings>(_serializedCommitSettings);
 
-            Assert.That(settings.Commits, Is.EquivalentTo(_commitSettings.Commits));
+            Assert.That(settings.Commits, Is.EquivalentTo(_branchSettings.Commits));
         }
 
         [Test]
         public void Models_CommitSettings_UebertrageFilename()
         {
-            _commitSettings.FileSettingFilename = "bla";
+            _branchSettings.FileSettingFilename = "bla";
 
-            Assert.That(_commitSettings.Commits, Has.All.Matches<CommitSetting>(c => c.FileSettingFilename == "bla"));
+            Assert.That(_branchSettings.Commits, Has.All.Matches<CommitSetting>(c => c.FileSettingFilename == "bla"));
         }
 
         [Test]
         public void Models_CommitSettings_UebertrageFilenameBeiExistierendemFilename()
         {
-            _commitSettings.Commits.First().FileSettingFilename = "blub";
-            _commitSettings.FileSettingFilename = "bla";
+            _branchSettings.Commits.First().FileSettingFilename = "blub";
+            _branchSettings.FileSettingFilename = "bla";
 
-            Assert.That(_commitSettings.Commits.First().FileSettingFilename, Is.EqualTo("blub"));
-            Assert.That(_commitSettings.Commits.Last().FileSettingFilename, Is.EqualTo("bla"));
+            Assert.That(_branchSettings.Commits.First().FileSettingFilename, Is.EqualTo("blub"));
+            Assert.That(_branchSettings.Commits.Last().FileSettingFilename, Is.EqualTo("bla"));
         }
     }
 }

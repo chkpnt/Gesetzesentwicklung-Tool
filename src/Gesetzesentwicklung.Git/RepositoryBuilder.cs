@@ -39,12 +39,12 @@ namespace Gesetzesentwicklung.Git
             MakeCommits(sourceDirInfo, destDirInfo, commitSettings);
         }
 
-        private void MakeCommits(DirectoryInfoBase sourceDirInfo, DirectoryInfoBase destDirInfo, CommitSettings commitSettings)
+        private void MakeCommits(DirectoryInfoBase sourceDirInfo, DirectoryInfoBase destDirInfo, BranchSettings branchSettings)
         {
             using (var repo = new Repository(destDirInfo.FullName))
             {
                 var firstCommit = true;
-                foreach (var commit in commitSettings.Commits)
+                foreach (var commit in branchSettings.Commits)
                 {
                     var branchName = commit.DerivedBranchName(sourceDirInfo);
                     if (firstCommit)
@@ -154,9 +154,9 @@ namespace Gesetzesentwicklung.Git
             }
         }
 
-        internal CommitSettings ReadCommitSettings(DirectoryInfoBase sourceDirInfo)
+        internal BranchSettings ReadCommitSettings(DirectoryInfoBase sourceDirInfo)
         {
-            var result = new CommitSettings { Commits = new List<CommitSetting>() };
+            var result = new BranchSettings { Commits = new List<CommitSetting>() };
 
             var yamlFiles = sourceDirInfo.GetFiles("*.yml", SearchOption.AllDirectories);
 
@@ -166,7 +166,7 @@ namespace Gesetzesentwicklung.Git
 
             foreach (var commitSettingsYaml in yamlFiles)
             {
-                var commitSettings = yamlFileParser.FromYaml<CommitSettings>(commitSettingsYaml.FullName);
+                var commitSettings = yamlFileParser.FromYaml<BranchSettings>(commitSettingsYaml.FullName);
                 foreach (var commitSetting in commitSettings.Commits)
                 {
                     validator.IsValid(commitSetting, commitSettingsYaml.DirectoryName, ref validatorProtokoll);
