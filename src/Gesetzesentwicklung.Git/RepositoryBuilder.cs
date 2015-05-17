@@ -46,7 +46,7 @@ namespace Gesetzesentwicklung.Git
                 var firstCommit = true;
                 foreach (var commit in branchSettings.Commits)
                 {
-                    var branchName = commit.DerivedBranchName(sourceDirInfo);
+                    var branchName = DeriveBranchName(commit.FileSettingFilename, sourceDirInfo);
                     if (firstCommit)
                     {
                         InitialBranch(repo, branchName);
@@ -166,12 +166,12 @@ namespace Gesetzesentwicklung.Git
 
             foreach (var commitSettingsYaml in yamlFiles)
             {
-                var commitSettings = yamlFileParser.FromYaml<BranchSettings>(commitSettingsYaml.FullName);
-                foreach (var commitSetting in commitSettings.Commits)
+                var branchSettings = yamlFileParser.FromYaml<BranchSettings>(commitSettingsYaml.FullName);
+                foreach (var commitSetting in branchSettings.Commits)
                 {
                     validator.IsValid(commitSetting, commitSettingsYaml.DirectoryName, ref validatorProtokoll);
                 }
-                result.Commits.AddRange(commitSettings.Commits);
+                result.Commits.AddRange(branchSettings.Commits);
             }
 
             if (validatorProtokoll.Entries.Any())
@@ -183,6 +183,29 @@ namespace Gesetzesentwicklung.Git
             result.Commits.Sort();
 
             return result;
+        }
+
+        internal string DeriveBranchName(string fileSettingFilename, DirectoryInfoBase sourceDirInfo)
+        {
+            if (string.IsNullOrEmpty(fileSettingFilename))
+            {
+                throw new ArgumentException("Branch kann nicht abgeleitet werden: Fehlender Dateiname");
+            }
+
+            var letzterTeil = Path.GetFileNameWithoutExtension(fileSettingFilename);
+            var fileSettingDirectory = Path.GetDirectoryName(fileSettingFilename);
+
+            if (!fileSettingDirectory.StartsWith(sourceDirInfo.FullName))
+            {
+                throw new ArgumentException($"Branch kann nicht abgeleitet werden: CommitSetting-Datei muss unterhalb von {sourceDirInfo.FullName} liegen");
+            }
+
+            var davor = fileSettingDirectory
+                .Replace(sourceDirInfo.FullName, "")
+                .Replace(@"\", "/")
+                .TrimStart('/');
+
+            return davor == "" ? letzterTeil : $"{davor}/{letzterTeil}";
         }
 
         private void CleanUpDir(DirectoryInfoBase dirInfo)
