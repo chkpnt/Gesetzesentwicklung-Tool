@@ -73,7 +73,10 @@ namespace Gesetzesentwicklung.Git.Tests
             {
                 var filter = new CommitFilter { SortBy = CommitSortStrategies.Reverse };
                 var secondCommit = repo.Commits.QueryBy(filter).ElementAt(1);
-                Assert.That(secondCommit.Author.When, Is.EqualTo(DateTimeOffset.ParseExact("02.01.1980", "dd.MM.yyyy", null)));
+                Assert.That(secondCommit.MessageShort, Is.StringStarting("<C2>"));
+
+                var commitDesInitTags = (Commit) repo.Tags["init"].Target;
+                Assert.That(secondCommit.Parents, Has.Member(commitDesInitTags));
             }
         }
 
@@ -89,7 +92,7 @@ namespace Gesetzesentwicklung.Git.Tests
             {
                 var filter = new CommitFilter { SortBy = CommitSortStrategies.Reverse };
                 var firstCommit = repo.Commits.QueryBy(filter).First();
-                Assert.That(firstCommit.MessageShort, Is.EqualTo("Initialer Commit"));
+                Assert.That(firstCommit.MessageShort, Is.StringStarting("<C1>"));
                 Assert.That(firstCommit.Author.Name, Is.EqualTo("Foo Bar"));
                 Assert.That(firstCommit.Author.Email, Is.EqualTo("foo@example.net"));
                 Assert.That(firstCommit.Author.When, Is.EqualTo(DateTimeOffset.ParseExact("01.01.1980", "dd.MM.yyyy", null)));
