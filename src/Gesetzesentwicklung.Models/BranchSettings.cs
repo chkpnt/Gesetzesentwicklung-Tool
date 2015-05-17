@@ -26,6 +26,10 @@ namespace Gesetzesentwicklung.Models
             }
         }
 
+        [YamlMember(Order = 0)]
+        public string AutoMergeInto { get; set; }
+
+        [YamlMember(Order = 1)]
         public List<CommitSetting> Commits { get; set; }
     }
 }

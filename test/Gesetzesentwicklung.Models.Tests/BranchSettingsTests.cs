@@ -21,6 +21,7 @@ namespace Gesetzesentwicklung.Models.Tests
         {
             _branchSettings = new BranchSettings
             {
+                AutoMergeInto = "Gesetzesstand",
                 Commits = new List<CommitSetting>
                 {
                     new CommitSetting { _Autor = "Foo Bar <foo@bar.net>", _Datum = "01.01.2015" },
@@ -31,7 +32,8 @@ Zeile 2"}
             };
 
             _serializedCommitSettings =
-@"Commits:
+@"AutoMergeInto: Gesetzesstand
+Commits:
 - Datum: 01.01.2015
   Autor: '""Foo Bar"" <foo@bar.net>'
 - Autor: '""Foo Bar"" <foo@bar.net>'
