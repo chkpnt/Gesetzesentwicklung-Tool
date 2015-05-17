@@ -43,6 +43,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommitSetting.cs" />
+    <Compile Include="FileSetting.cs" />
     <Compile Include="IYamlStringParser.cs" />
     <Compile Include="Models.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
