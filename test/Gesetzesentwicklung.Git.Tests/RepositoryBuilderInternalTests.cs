@@ -128,15 +128,36 @@ Commits:
         }
 
         [Test]
-        public void Git_RepositoryBuilder_ReadCommitSettings_CommitSettingsDateienKorrektEingelesen()
+        public void Git_RepositoryBuilder_ReadBranchSettings_CommitSettingsDateienKorrektEingelesen()
         {
-            var commitSettings = _classUnderTest.ReadBranchSettings(_sourceDirInfo);
+            var branchSettings = _classUnderTest.ReadBranchSettings(_sourceDirInfo);
 
-            Assert.That(commitSettings.Commits.Count(), Is.EqualTo(4));
-            Assert.That(commitSettings.Commits.First()._Datum, Is.EqualTo("01.01.1980"));
-            Assert.That(commitSettings.Commits.First().Branch, Is.EqualTo("Gesetzesstand"));
-            Assert.That(commitSettings.Commits.Last()._Datum, Is.EqualTo("10.04.1982"));
-            Assert.That(commitSettings.Commits.Last().Branch, Is.EqualTo("Gesetze/GG/Änderung-1"));
+            Assert.That(branchSettings.Count(), Is.EqualTo(3));
+
+            foreach (var branchSetting in branchSettings)
+            {
+                switch (branchSetting.FileSettingFilename)
+                {
+                    case @"c:\data\GesetzesData\Gesetzesstand.yml":
+                        Assert.That(branchSetting.Commits.Count(), Is.EqualTo(1));
+                        Assert.That(branchSetting.Commits.First()._Datum, Is.EqualTo("01.01.1980"));
+                        Assert.That(branchSetting.Commits.First().Branch, Is.EqualTo("Gesetzesstand"));
+                        break;
+                    case @"c:\data\GesetzesData\Gesetze\GG\Bundesgesetzblatt.yml":
+                        Assert.That(branchSetting.Commits.Count(), Is.EqualTo(1));
+                        Assert.That(branchSetting.Commits.First()._Datum, Is.EqualTo("01.01.1981"));
+                        Assert.That(branchSetting.Commits.First().Branch, Is.EqualTo("Gesetze/GG/Bundesgesetzblatt"));
+                        break;
+                    case @"c:\data\GesetzesData\Gesetze\GG\Änderung-1.yml":
+                        Assert.That(branchSetting.Commits.Count(), Is.EqualTo(2));
+                        Assert.That(branchSetting.Commits.First()._Datum, Is.EqualTo("01.01.1982"));
+                        Assert.That(branchSetting.Commits.First().Branch, Is.EqualTo("Gesetze/GG/Änderung-1"));
+                        break;
+                    default:
+                        Assert.Fail("Falscher Dateiname");
+                        break;
+                }
+            }
         }
     }
 }

@@ -32,19 +32,24 @@ namespace Gesetzesentwicklung.Git
 
             CleanUpDir(destDirInfo);
 
-            var commitSettings = ReadBranchSettings(sourceDirInfo);
+            var branchSettings = ReadBranchSettings(sourceDirInfo);
 
             Repository.Init(destDirInfo.FullName);
 
-            MakeCommits(sourceDirInfo, destDirInfo, commitSettings);
+            MakeCommits(sourceDirInfo, destDirInfo, branchSettings);
         }
 
-        private void MakeCommits(DirectoryInfoBase sourceDirInfo, DirectoryInfoBase destDirInfo, BranchSettings branchSettings)
+        private void MakeCommits(DirectoryInfoBase sourceDirInfo, DirectoryInfoBase destDirInfo, IEnumerable<BranchSettings> branchSettings)
         {
+            var allCommits = from b in branchSettings
+                             from c in b.Commits
+                             orderby c ascending
+                             select c;
+
             using (var repo = new Repository(destDirInfo.FullName))
             {
                 var firstCommit = true;
-                foreach (var commit in branchSettings.Commits)
+                foreach (var commit in allCommits)
                 {
                     var branchName = DeriveBranchName(commit.FileSettingFilename, sourceDirInfo);
                     if (firstCommit)
@@ -154,7 +159,7 @@ namespace Gesetzesentwicklung.Git
             }
         }
 
-        internal BranchSettings ReadBranchSettings(DirectoryInfoBase sourceDirInfo)
+        internal IEnumerable<BranchSettings> ReadBranchSettings(DirectoryInfoBase sourceDirInfo)
         {
             var result = new BranchSettings { Commits = new List<CommitSetting>() };
 
@@ -167,12 +172,13 @@ namespace Gesetzesentwicklung.Git
             foreach (var branchSettingsFile in yamlFiles)
             {
                 var branchSettings = yamlFileParser.FromYaml<BranchSettings>(branchSettingsFile.FullName);
+                branchSettings.Commits.Sort();
                 foreach (var commitSetting in branchSettings.Commits)
                 {
                     commitSetting.Branch = DeriveBranchName(branchSettingsFile.FullName, sourceDirInfo);
                     validator.IsValid(commitSetting, branchSettingsFile.DirectoryName, ref validatorProtokoll);
                 }
-                result.Commits.AddRange(branchSettings.Commits);
+                yield return branchSettings;
             }
 
             if (validatorProtokoll.Entries.Any())
@@ -180,10 +186,6 @@ namespace Gesetzesentwicklung.Git
                 var message = string.Join<string>(Environment.NewLine, validatorProtokoll.Entries.Select(e => e.Message));
                 throw new ArgumentException(message);
             }
-
-            result.Commits.Sort();
-
-            return result;
         }
 
         internal string DeriveBranchName(string fileSettingFilename, DirectoryInfoBase sourceDirInfo)
