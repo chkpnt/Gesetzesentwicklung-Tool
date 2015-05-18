@@ -47,7 +47,7 @@ Commits:
         }
 
         [Test]
-        public void Models_CommitSettings_Serialize()
+        public void Models_BranchSettings_Serialize()
         {
             var yaml = _yamlStringParser.ToYaml(_branchSettings);
 
@@ -55,7 +55,7 @@ Commits:
         }
 
         [Test]
-        public void Models_CommitSettings_Deserialize()
+        public void Models_BranchSettings_Deserialize()
         {
             var settings = _yamlStringParser.FromYaml<BranchSettings>(_serializedCommitSettings);
 
@@ -63,7 +63,7 @@ Commits:
         }
 
         [Test]
-        public void Models_CommitSettings_UebertrageFilename()
+        public void Models_BranchSettings_UebertrageFilename()
         {
             _branchSettings.FileSettingFilename = "bla";
 
@@ -71,13 +71,33 @@ Commits:
         }
 
         [Test]
-        public void Models_CommitSettings_UebertrageFilenameBeiExistierendemFilename()
+        public void Models_BranchSettings_UebertrageKeinenFilenameFallsSchonGesetzt()
         {
             _branchSettings.Commits.First().FileSettingFilename = "blub";
+
             _branchSettings.FileSettingFilename = "bla";
 
             Assert.That(_branchSettings.Commits.First().FileSettingFilename, Is.EqualTo("blub"));
             Assert.That(_branchSettings.Commits.Last().FileSettingFilename, Is.EqualTo("bla"));
+        }
+
+        [Test]
+        public void Models_BranchSettings_UebertrageBranch()
+        {
+            _branchSettings.Branch = "bla";
+
+            Assert.That(_branchSettings.Commits, Has.All.Matches<CommitSetting>(c => c.Branch == "bla"));
+        }
+
+        [Test]
+        public void Models_BranchSettings_UebertrageKeinenBranchFallsSchonGesetzt()
+        {
+            _branchSettings.Commits.First().Branch = "blub";
+
+            _branchSettings.Branch = "bla";
+
+            Assert.That(_branchSettings.Commits.First().Branch, Is.EqualTo("blub"));
+            Assert.That(_branchSettings.Commits.Last().Branch, Is.EqualTo("bla"));
         }
     }
 }

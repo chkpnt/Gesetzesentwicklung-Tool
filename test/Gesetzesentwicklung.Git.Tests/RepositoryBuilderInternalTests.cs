@@ -128,7 +128,7 @@ Commits:
         }
 
         [Test]
-        public void Git_RepositoryBuilder_ReadBranchSettings_CommitSettingsDateienKorrektEingelesen()
+        public void Git_RepositoryBuilder_ReadBranchSettings_DateienKorrektEingelesen()
         {
             var branchSettings = _classUnderTest.ReadBranchSettings(_sourceDirInfo);
 
@@ -139,16 +139,19 @@ Commits:
                 switch (branchSetting.FileSettingFilename)
                 {
                     case @"c:\data\GesetzesData\Gesetzesstand.yml":
+                        Assert.That(branchSetting.Branch, Is.EqualTo("Gesetzesstand"));
                         Assert.That(branchSetting.Commits.Count(), Is.EqualTo(1));
                         Assert.That(branchSetting.Commits.First()._Datum, Is.EqualTo("01.01.1980"));
                         Assert.That(branchSetting.Commits.First().Branch, Is.EqualTo("Gesetzesstand"));
                         break;
                     case @"c:\data\GesetzesData\Gesetze\GG\Bundesgesetzblatt.yml":
+                        Assert.That(branchSetting.Branch, Is.EqualTo("Gesetze/GG/Bundesgesetzblatt"));
                         Assert.That(branchSetting.Commits.Count(), Is.EqualTo(1));
                         Assert.That(branchSetting.Commits.First()._Datum, Is.EqualTo("01.01.1981"));
                         Assert.That(branchSetting.Commits.First().Branch, Is.EqualTo("Gesetze/GG/Bundesgesetzblatt"));
                         break;
                     case @"c:\data\GesetzesData\Gesetze\GG\Änderung-1.yml":
+                        Assert.That(branchSetting.Branch, Is.EqualTo("Gesetze/GG/Änderung-1"));
                         Assert.That(branchSetting.Commits.Count(), Is.EqualTo(2));
                         Assert.That(branchSetting.Commits.First()._Datum, Is.EqualTo("01.01.1982"));
                         Assert.That(branchSetting.Commits.First().Branch, Is.EqualTo("Gesetze/GG/Änderung-1"));

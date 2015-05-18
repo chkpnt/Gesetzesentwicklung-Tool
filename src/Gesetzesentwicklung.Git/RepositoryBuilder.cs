@@ -172,10 +172,10 @@ namespace Gesetzesentwicklung.Git
             foreach (var branchSettingsFile in yamlFiles)
             {
                 var branchSettings = yamlFileParser.FromYaml<BranchSettings>(branchSettingsFile.FullName);
+                branchSettings.Branch = DeriveBranchName(branchSettingsFile.FullName, sourceDirInfo);
                 branchSettings.Commits.Sort();
                 foreach (var commitSetting in branchSettings.Commits)
                 {
-                    commitSetting.Branch = DeriveBranchName(branchSettingsFile.FullName, sourceDirInfo);
                     validator.IsValid(commitSetting, branchSettingsFile.DirectoryName, ref validatorProtokoll);
                 }
                 yield return branchSettings;

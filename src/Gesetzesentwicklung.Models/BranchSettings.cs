@@ -26,6 +26,23 @@ namespace Gesetzesentwicklung.Models
             }
         }
 
+        private string _branch;
+
+        // Derzeit abgeleitet über den Dateinamen
+        [YamlIgnore]
+        public string Branch
+        {
+            get { return _branch; }
+            set
+            {
+                _branch = value;
+                foreach (var commit in Commits.Where(c => c.Branch == null))
+                {
+                    commit.Branch = _branch;
+                }
+            }
+        }
+
         [YamlMember(Order = 0)]
         public string AutoMergeInto { get; set; }
 
