@@ -1,3 +1,5 @@
+_Projekt ist derzeit leider eingeschlafen. :-(_
+
 # Gesetzesentwicklung-Tools 
 
 ## Über dieses Projekt 
